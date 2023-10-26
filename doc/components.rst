@@ -12,3 +12,5 @@ binds when game object is created.
     :members:
 .. autoclass:: engine.grid.GridBind
     :members: 
+.. autoclass:: engine.cursor_move.CursorMove
+    :members:
