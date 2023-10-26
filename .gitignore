@@ -1,0 +1,10 @@
+__pycache__
+doc/_build
+doc/_static
+doc/_templates
+doc/conf.py
+doc/make.bat
+doc/Makefile
+.vscode
+.pytest_cache
+access_token.txt
