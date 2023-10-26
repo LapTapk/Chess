@@ -8,3 +8,7 @@ binds when game object is created.
 
 .. autoclass:: engine.renderer.Renderer
     :members:
+.. autoclass:: engine.grid.Grid
+    :members:
+.. autoclass:: engine.grid.GridBind
+    :members: 
