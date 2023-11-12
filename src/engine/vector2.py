@@ -41,17 +41,17 @@ class Vector2:
     def __str__(self):
         return f"Vector2({self.x}, {self.y})"
 
-    def from_tuple(t):
-        '''
-        :param tuple[float, float] t: convertion tuple 
-        :rtype: Vector2
-        :return: Vector2 that converted from tuple
-        '''
-        return Vector2(t[0], t[1])
-
     def to_tuple(self):
         '''
         :rtype: tuple[float, float]
         :return: tuple that converted from Vector2
         '''
         return (self.x, self.y)
+
+def from_tuple(t):
+    '''
+    :param tuple[float, float] t: convertion tuple 
+    :rtype: Vector2
+    :return: Vector2 that converted from tuple
+    '''
+    return Vector2(t[0], t[1])

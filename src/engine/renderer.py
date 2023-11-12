@@ -1,4 +1,4 @@
-from vector2 import Vector2
+from vector2 import from_tuple
 import pygame
 
 
@@ -23,14 +23,9 @@ class Renderer:
         ``Component`` method.
         Displays sprite
         '''
-        self.screen.fill((0, 0, 0))
-
         self.__update_image()
 
-        offset = Vector2.from_tuple(self.img.get_rect().center)
-        pos = self.go.position - offset
-
-        self.screen.blit(self.img, pos.to_tuple())
+        self.screen.blit(self.img, (100, 100))
 
     def __update_image(self):
         '''
@@ -42,3 +37,12 @@ class Renderer:
 
         self.img = pygame.transform.scale_by(self.img, scale)
         self.img = pygame.transform.rotate(self.img, rot)
+
+    def get_rect(self):
+        img_rect = self.img.get_rect()
+        img_size = self.img.get_size()
+
+        pos = self.go.position
+
+        offset = pos - from_tuple(img_size) / 2
+        return img_rect.move(offset.to_tuple())

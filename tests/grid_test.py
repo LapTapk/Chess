@@ -27,6 +27,3 @@ class GridByCapacityTest(unittest.TestCase):
         actual = GridByCapacityTest.convert_to_tuple(grid.get_points())
         self.assertEqual(actual, right)
 
-
-if __name__ == "__main__":
-    unittest.main()

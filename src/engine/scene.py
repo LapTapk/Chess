@@ -1,3 +1,5 @@
+from renderer import Renderer
+
 class Scene:
     '''
     Scene stores objects that are currently present
@@ -17,3 +19,12 @@ class Scene:
         for obj in self.objects:
             for comp in obj.components:
                 comp.update()
+
+    def at_point(self, point):  
+        res = []
+        for obj in self.objects:
+            rect = obj.get_component(Renderer).get_rect()
+            if rect.collidepoint(point):
+                res.append(obj)
+
+        return res
