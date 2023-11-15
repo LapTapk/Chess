@@ -1,4 +1,4 @@
-from vector2 import from_tuple
+from vector2 import *
 import pygame
 
 
@@ -14,6 +14,7 @@ class Renderer:
         self.screen = screen
         '''Surface where sprite can be displayed'''
         self.img = img
+        self.tmp_img = img
         '''Surface of a sprite'''
         self.go = None
         '''Game object renderer is attached to'''
@@ -25,7 +26,7 @@ class Renderer:
         '''
         self.__update_image()
 
-        self.screen.blit(self.img, (100, 100))
+        self.screen.blit(self.tmp_img, self.get_rect())
 
     def __update_image(self):
         '''
@@ -35,12 +36,17 @@ class Renderer:
         scale = self.go.scale.to_tuple()
         rot = self.go.rotation
 
-        self.img = pygame.transform.scale_by(self.img, scale)
-        self.img = pygame.transform.rotate(self.img, rot)
+        self.tmp_img = pygame.transform.scale_by(self.img, scale)
+        self.tmp_img = pygame.transform.rotate(self.tmp_img, rot)
 
     def get_rect(self):
-        img_rect = self.img.get_rect()
-        img_size = self.img.get_size()
+        '''
+        :rtype: Vector2
+        :return: rect of the image corelated to ``game object`` renderer
+        is attached to
+        '''
+        img_rect = self.tmp_img.get_rect()
+        img_size = self.tmp_img.get_size()
 
         pos = self.go.position
 
