@@ -26,6 +26,8 @@ class GameObject:
         for comp in self.components:
             comp.go = self
 
+        self.scene = None
+
     def get_component(self, type):
         '''
         Method that returns first occurrence of ``component`` of certain *type*
@@ -49,9 +51,11 @@ class Scene:
     :param list[GameObject] objects: sets *objects* field
     '''
 
-    def __init__(self, objects):
+    def __init__(self, objects, screen):
         self.objects = objects
         '''List of objects that are present in scene'''
+        for go in self.objects:
+            go.scene = self
 
     def update(self):
         '''

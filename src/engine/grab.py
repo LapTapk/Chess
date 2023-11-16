@@ -5,6 +5,7 @@ from vector2 import *
 class Grabber:
     '''
     Entity that manages grabbing objects
+    TODO: add params
     '''
 
     def __init__(self, scene):
@@ -66,6 +67,7 @@ class Grabable:
     '''
     ``Component`` that indicates that this object can be 
     moved and moves it
+    TODO: add params
     '''
     def __init__(self):
         self.moving = False
