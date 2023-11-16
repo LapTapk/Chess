@@ -3,7 +3,7 @@ Components
 
 Components are entities that describe game object behaviour.
 Every component must have update() method. Update() method 
-invokes at start of every frame. Parent game objects
+invokes at start of every frame. Parent game object
 binds when game object is created.
 
 .. autoclass:: engine.renderer.Renderer
@@ -12,5 +12,5 @@ binds when game object is created.
     :members:
 .. autoclass:: engine.grid.GridBind
     :members: 
-.. autoclass:: engine.cursor_move.CursorMove
+.. automodule:: engine.grab
     :members:

@@ -14,13 +14,17 @@ class Scene:
 
     def update(self):
         '''
-        Method that invokes update of every game object's component
+        Method that invokes *update* of every game object's component
         '''
         for obj in self.objects:
             for comp in obj.components:
                 comp.update()
 
     def at_point(self, point):  
+        '''
+        :rtype: list[Renderer]
+        :return: All objects that appear under the mouse
+        '''
         res = []
         for obj in self.objects:
             rect = obj.get_component(Renderer).get_rect()
