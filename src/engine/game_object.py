@@ -51,7 +51,7 @@ class Scene:
     :param list[GameObject] objects: sets *objects* field
     '''
 
-    def __init__(self, objects, screen):
+    def __init__(self, objects):
         self.objects = objects
         '''List of objects that are present in scene'''
         for go in self.objects:

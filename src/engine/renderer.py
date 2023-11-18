@@ -1,4 +1,5 @@
 from vector2 import *
+from game import Game
 import pygame
 
 
@@ -10,9 +11,7 @@ class Renderer:
     :param pygame.Surface img: sets *img* field
     '''
 
-    def __init__(self, screen, img):
-        self.screen = screen
-        '''Surface where sprite can be displayed'''
+    def __init__(self, img):
         self.img = img
         self.tmp_img = img
         '''Surface of a sprite'''
@@ -26,7 +25,7 @@ class Renderer:
         '''
         self.__update_image()
 
-        self.screen.blit(self.tmp_img, self.get_rect())
+        Game.instance.screen.blit(self.tmp_img, self.get_rect())
 
     def __update_image(self):
         '''

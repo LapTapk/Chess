@@ -2,26 +2,42 @@ import pygame
 
 
 class Game:
-    def __init__(self, screen_size, fps, first_scene):
+    instance = None
+
+    def __init__(self, screen_size, fps):
+        if Game.instance != None:
+            raise Exception(
+                "More than one instance of Game is initialized (must be singleton)")
+
+        Game.instance = self
+
+        pygame.init()
+        self.screen = pygame.display.set_mode(screen_size)
+        self.clock = pygame.time.Clock()
+
         self.running = False
         self.screen_size = screen_size
         self.fps = fps
-        self.cur_scene = first_scene
+        self.cur_scene = None
 
     def run(self):
-        pygame.init()
+        self.running = True
 
-        screen = pygame.display.set_mode(self.screen_size)
-        clock = pygame.time.Clock()
+
+        #self.screen = pygame.display.set_mode(self.screen_size)
+        #self.clock = pygame.time.Clock()
 
         while self.running:
-            self.iteration(screen, clock)
+            self.iteration()
 
-    def iteration(self, screen, clock):
+    def iteration(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
 
-        screen.fill(0, 0, 0)
+        self.screen.fill((0, 0, 0))
+
         self.cur_scene.update()
-        clock.tick(self.data.fps)
+
+        pygame.display.update()
+        self.clock.tick(self.fps)
