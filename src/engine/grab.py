@@ -67,7 +67,9 @@ class Grabable:
     ``Component`` that indicates that this object can be 
     moved and moves it
     '''
-    def __init__(self):
+    def __init__(self, is_moveable=True):
+        self.is_moveable = is_moveable
+        '''Defines if object can be grabbed and moved'''
         self.moving = False
         '''Tells if object needs to move'''
         self.go = None
