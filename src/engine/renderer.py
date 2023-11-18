@@ -1,5 +1,5 @@
 from vector2 import *
-from game import Game
+import game
 import pygame
 
 
@@ -25,7 +25,7 @@ class Renderer:
         '''
         self.__update_image()
 
-        Game.instance.screen.blit(self.tmp_img, self.get_rect())
+        game.screen.blit(self.tmp_img, self.get_rect())
 
     def __update_image(self):
         '''

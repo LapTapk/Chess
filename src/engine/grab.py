@@ -69,6 +69,7 @@ class Grabable:
     moved and moves it
     TODO: add params
     '''
+
     def __init__(self, is_moveable=True):
         self.is_moveable = is_moveable
         '''Defines if object can be grabbed and moved'''

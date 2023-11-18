@@ -57,6 +57,8 @@ class Scene:
         for go in self.objects:
             go.scene = self
 
+        self.inputs = None
+
     def update(self):
         '''
         Method that invokes *update* of every game object's component

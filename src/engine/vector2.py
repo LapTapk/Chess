@@ -48,6 +48,7 @@ class Vector2:
         '''
         return (self.x, self.y)
 
+
 def from_tuple(t):
     '''
     :param tuple[float, float] t: convertion tuple 
