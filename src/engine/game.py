@@ -1,5 +1,8 @@
+import json 
 import pygame
 import input
+
+IMAGES_JSON_PATH = 'game_data.json'
 
 screen = None
 clock = None
@@ -8,6 +11,7 @@ screen_size = None
 fps = None
 __cur_scene = None
 is_init = False
+game_data = None
 
 
 def __exit_input_handler(event):
@@ -17,10 +21,12 @@ def __exit_input_handler(event):
 
 
 def init(scr_size, fps_in):
-    if is_init:
-        raise Exception("Game is already initialized")
     global screen, clock, running, is_init
     global fps, __cur_scene, screen_size
+    global game_data
+
+    if is_init:
+        raise Exception("Game is already initialized")
 
     pygame.init()
     screen = pygame.display.set_mode(scr_size)
@@ -34,6 +40,9 @@ def init(scr_size, fps_in):
     input.input_handlers |= {__exit_input_handler}
 
     is_init = True
+
+    with open(IMAGES_JSON_PATH) as f:
+        game_data = json.load(f)
 
 
 def get_cur_scene():

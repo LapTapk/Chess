@@ -1,6 +1,6 @@
 import game
-from scenes import create_test_scene
+from scenes import *
 
-game.init((500, 500), 60)
-game.set_cur_scene(create_test_scene())
+game.init((1000, 700), 60)
+game.set_cur_scene(create_chess_scene())
 game.run()

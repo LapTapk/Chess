@@ -41,6 +41,10 @@ class GameObject:
                 return comp
 
         return None
+    
+    def add_component(self, comp):
+        self.components.append(comp)
+        comp.go = self
 
 
 class Scene:
@@ -57,7 +61,7 @@ class Scene:
         for go in self.objects:
             go.scene = self
 
-        self.inputs = None
+        self.inputs = set()
 
     def update(self):
         '''
