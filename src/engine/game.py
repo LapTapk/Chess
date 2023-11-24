@@ -10,13 +10,15 @@ __cur_scene = None
 is_init = False
 
 
-def exit_input_handler(event):
+def __exit_input_handler(event):
     if event.type == pygame.QUIT:
         global running
         running = False
 
 
 def init(scr_size, fps_in):
+    if is_init:
+        raise Exception("Game is already initialized")
     global screen, clock, running, is_init
     global fps, __cur_scene, screen_size
 
@@ -29,7 +31,7 @@ def init(scr_size, fps_in):
     fps = fps_in
     __cur_scene = None
 
-    input.input_handlers |= {exit_input_handler}
+    input.input_handlers |= {__exit_input_handler}
 
     is_init = True
 
