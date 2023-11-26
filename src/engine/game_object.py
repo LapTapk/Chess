@@ -1,3 +1,4 @@
+import game
 from renderer import Renderer
 from vector2 import Vector2
 
@@ -18,7 +19,9 @@ class GameObject:
         '''Position of an object'''
         self.rotation = rot
         '''Rotation of an object'''
-        self.scale = scale
+        factor_x = game.screen_size[0] / game.game_data['default-screen-size'][0]
+        factor_y = game.screen_size[1] / game.game_data['default-screen-size'][1]
+        self.scale = Vector2(scale.x * factor_x, scale.y * factor_y)
         '''Scale of an object'''
 
         self.components = components

@@ -1,12 +1,10 @@
 import pygame
 import game
 import renderer
-import json
 from grab import *
 from game_object import *
 from vector2 import Vector2
 from grid import *
-
 
 def load_image(path):
     return pygame.image.load(path).convert_alpha()
@@ -20,7 +18,7 @@ def create_grab_input_handler(grabber):
 
 
 def create_test_scene():
-    penguin_img = load_image('assets/character.png')
+    penguin_img = load_image(game.game_data['character'])
 
     penguin_rend = renderer.Renderer(penguin_img)
     penguin_grab = Grabable()
@@ -37,32 +35,35 @@ def create_test_scene():
 
     return scene
 
-def __create_plane(is_light):
+def __create_plane(is_light, scale):
     img = None
     name = ('light' if is_light else 'black') + '-plane'
     img = load_image(game.game_data[name])
 
     rend = Renderer(img)
-    return GameObject(components=[rend])
+    return GameObject(scale=Vector2(scale, scale), components=[rend])
      
 
 def __create_board():
-    screen_size = game.screen.get_size()
-    size = Vector2(0, 0)
-    size.x = size.y = screen_size[1] * game.game_data['board-screen-ratio']
+    plane_scale = 1.2
+    plane_width = load_image(game.game_data['light-plane']).get_size()[0]
+    plane_size = Vector2(plane_scale, plane_scale) * plane_width
+    board_side = 8
+    size = plane_size * board_side
 
-    grid = Grid(size, Vector2(8, 8))
+    grid = Grid(size, Vector2(board_side, board_side))
+
     planes = []
     for i in range(8):
         for j in range(8):
             is_light = (i + j) % 2
-            plane = __create_plane(is_light)
+            plane = __create_plane(is_light, plane_scale)
             plane_bind = GridBind(grid, Vector2(i, j))
             plane.add_component(plane_bind)
             planes.append(plane)
 
     offset = Vector2(0, 0)
-    offset.x = offset.y = game.screen.get_size()[0] - size.x
+    offset.x = offset.y = game.screen.get_size()[0] / 10
     board = GameObject(pos=offset, components=[grid]) 
     return [board] + planes
 
