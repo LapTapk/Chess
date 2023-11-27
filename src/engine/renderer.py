@@ -44,10 +44,13 @@ class Renderer:
         :return: rect of the image corelated to ``game object`` renderer
         is attached to
         '''
-        img_rect = self.tmp_img.get_rect()
-        img_size = self.tmp_img.get_size()
+        scale = self.go.scale
+        img_rect = self.tmp_img.get_rect().scale_by(scale.x, scale.y)
+        img_size = Vector2(img_rect.w, img_rect.h)
 
         pos = self.go.position
 
-        offset = pos - from_tuple(img_size) / 2
-        return img_rect.move(offset.to_tuple())
+        offset = pos - img_size / 2
+        res = img_rect.move(offset.to_tuple())
+
+        return res

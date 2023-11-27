@@ -1,3 +1,5 @@
+import grab
+from grid import GridBind
 import pygame
 from vector2 import *
 
@@ -18,18 +20,7 @@ class Grabber:
         Grabbed object. None if no object if grabbed
         '''
 
-    def next_move(self):
-        '''
-        Decides what grabber can do next.
-        If something is grabbed grabber drops it.
-        If nothing is grabbed grabber tries to grab something
-        '''
-        if self.grabbed == None:
-            self.__try_grab()
-        else:
-            self.__drop()
-
-    def __try_grab(self):
+    def try_grab(self):
         '''
         Finds grabable objects under cursor anf tries to grab it
         '''
@@ -52,7 +43,7 @@ class Grabber:
         grabable.moving = True
         self.grabbed = grabable
 
-    def __drop(self):
+    def drop(self):
         '''
         If something is grabbed then drop it
         '''
@@ -91,3 +82,55 @@ class Grabable:
         '''
         mpos = pygame.mouse.get_pos()
         self.go.position = from_tuple(mpos)
+
+
+class FigureGrab:
+    def __init__(self, scene, board_grid, grabber):
+        self.scene = scene
+        self.board_grid = board_grid
+        self.grabber = grabber
+
+    def __find_closest(self, go):
+        pts = self.board_grid.get_points()
+        res = Vector2(0, 0)
+
+        for i in range(len(pts)):
+            for j in range(len(pts[0])):
+                new_point = pts[i][j]
+                cur_point = pts[res.x][res.y] 
+                cur = cur_point - go.position
+                new = new_point - go.position
+                if cur.length() > new.length():
+                    res = Vector2(i, j) 
+
+        return res
+
+    def try_bind(self):
+        grabbed = self.grabber.grabbed 
+        if grabbed == None:
+            return
+
+        binder = grabbed.go.get_component(GridBind)
+        binder.binded = False
+
+    def unbind(self):
+        grabbed = self.grabber.grabbed 
+        if grabbed == None:
+            return
+
+        closest = self.__find_closest(grabbed.go)
+
+        binder = grabbed.go.get_component(GridBind)
+        if binder != None:
+            binder.coord = closest
+            binder.binded = True
+
+
+    def try_grab(self):
+        self.grabber.try_grab()
+        self.try_bind()
+    
+
+    def drop(self):
+        self.unbind()
+        self.grabber.drop()

@@ -81,8 +81,16 @@ class Scene:
         '''
         res = []
         for obj in self.objects:
-            rect = obj.get_component(Renderer).get_rect()
+            rend = obj.get_component(Renderer)
+            if rend == None:
+                continue
+            rect = rend.get_rect()
             if rect.collidepoint(point):
                 res.append(obj)
 
         return res
+    
+
+    def add_object(self, go):
+        self.objects.append(go)
+        go.scene = self
