@@ -11,11 +11,11 @@ class Renderer:
     :param pygame.Surface img: sets *img* field
     '''
 
-    def __init__(self, img):
+    def init(self, go, img):
         self.img = img
         self.tmp_img = img
         '''Surface of a sprite'''
-        self.go = None
+        self.go = go
         '''Game object renderer is attached to'''
 
     def update(self):
@@ -44,13 +44,14 @@ class Renderer:
         :return: rect of the image corelated to ``game object`` renderer
         is attached to
         '''
-        scale = self.go.scale
-        img_rect = self.tmp_img.get_rect().scale_by(scale.x, scale.y)
-        img_size = Vector2(img_rect.w, img_rect.h)
+        self.__update_image()
+
+        img_rect = self.tmp_img.get_rect()
+        img_size = Vector2(img_rect.w, img_rect.w)
 
         pos = self.go.position
 
         offset = pos - img_size / 2
-        res = img_rect.move(offset.to_tuple())
+        res = img_rect.move(offset.x, offset.y)
 
         return res

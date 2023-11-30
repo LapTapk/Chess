@@ -6,103 +6,91 @@ from game_object import *
 from vector2 import Vector2
 from grid import *
 
+
 def __load_image(path):
     return pygame.image.load(path).convert_alpha()
 
 
-def __create_figure_grab_input_handler(grabber):
-    def grab_input_handler(event):
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if grabber.grabber.grabbed == None:
-                grabber.try_grab()
-            else:
-                grabber.drop()
-    return grab_input_handler
+def __create_plane(scene, is_light):
+    rend = Renderer()
+    go = GameObject()
 
-def __create_grab_input_handler(grabber):
-    def grab_input_handler(event):
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if grabber.grabbed == None:
-                grabber.try_grab()
-            else:
-                grabber.drop()
-    return grab_input_handler
-
-
-def create_test_scene():
-    penguin_img = __load_image(game.game_data['character'])
-
-    penguin_rend = renderer.Renderer(penguin_img)
-    penguin_grab = Grabable()
-    penguin_comps = [penguin_rend, penguin_grab]
-    penguin = GameObject(Vector2(100, 300), scale=Vector2(
-        0.5, 0.5), components=penguin_comps)
-
-    scene = Scene([penguin])
-
-    grabber = Grabber(scene)
-    inputs = {__create_grab_input_handler(grabber)}
-
-    scene.inputs = inputs
-
-    return scene
-
-def __create_plane(is_light, scale):
     img = None
     name = ('light' if is_light else 'black') + '-plane'
     img = __load_image(game.game_data[name])
 
-    rend = Renderer(img)
-    return GameObject(scale=Vector2(scale, scale), components=[rend])
-     
+    rend.init(go, img)
+    scale = 1.2
+    go.init(scene, scale=Vector2(scale, scale), components=[rend])
 
-def __create_board():
-    dummy_plane = __create_plane(True, 1.2)
+    return go
+
+def calc_plane_size():
+    dummy_plane = __create_plane(None, True)
     plane_rect = dummy_plane.get_component(Renderer).get_rect()
     plane_size = Vector2(plane_rect.w, plane_rect.h)
+    return plane_size
 
+def __create_board(scene):
+    board = GameObject()
+    grid = Grid()
+
+    plane_size = calc_plane_size()
     board_side = 8
     grid_size = plane_size * board_side
 
-    grid = Grid(grid_size, Vector2(board_side, board_side))
+    grid.init(board, grid_size, Vector2(board_side, board_side))
 
     planes = []
     for i in range(8):
         for j in range(8):
             is_light = (i + j) % 2
-            plane = __create_plane(is_light, 1.2)
-            plane_bind = GridBind(grid, Vector2(i, j))
-            plane.add_component(plane_bind)
+            plane = __create_plane(scene, is_light)
+
+            plane_bind = GridBind()
+            plane_bind.init(plane, grid, Vector2(i, j))
+            plane.components.append(plane_bind)
+
             planes.append(plane)
 
     offset = Vector2(0, 0)
     offset.x = offset.y = game.screen.get_size()[0] / 10
-    board = GameObject(pos=offset, components=[grid]) 
-    return [board] + planes
+    board.init(scene, pos=offset, components=[grid])
+    return board, planes
 
 
-def __create_test_figure(grid, scale):
+def __create_test_figure(scene, grid):
     img = __load_image(game.game_data['character'])
 
-    rend = Renderer(img)
-    binder = GridBind(grid, Vector2(0, 0))
+    go = GameObject()
+    rend = Renderer()
+    binder = GridBind()
     grabable = Grabable()
 
+    scale = 1/6
     comps = [binder, rend, grabable]
-    go = GameObject(scale=Vector2(scale, scale), components=comps)
+    go.init(scene, scale=Vector2(scale, scale), components=comps)
+    rend.init(go, img)
+    binder.init(go, grid, Vector2(0, 0))
+    grabable.init(go)
+
     return go
 
 
 def create_chess_scene():
-    board = __create_board()
-    scene = Scene(board) 
+    scene = Scene()
 
-    board_grid = board[0].get_component(Grid)
-    grab = FigureGrab(scene, board_grid, Grabber(scene))
-    scene.inputs = {__create_figure_grab_input_handler(grab)}
+    board, planes = __create_board(scene)
 
-    figure = __create_test_figure(board_grid, 1/4)
+    grabber_go = GameObject()
+    grid_grabber = GridGrab()
 
-    scene.add_object(figure)
+    board_grid = board.get_component(Grid)
+    figure = __create_test_figure(scene, board_grid)
+
+    scene.init(planes + [figure, board, grabber_go])
+    grabber_go.init(scene, components=[grid_grabber])
+    grid_grabber.init(grabber_go, board_grid)
+
 
     return scene

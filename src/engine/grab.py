@@ -1,4 +1,4 @@
-import grab
+import game
 from grid import GridBind
 import pygame
 from vector2 import *
@@ -10,8 +10,8 @@ class Grabber:
     TODO: add params
     '''
 
-    def __init__(self, scene):
-        self.scene = scene
+    def init(self, go):
+        self.go = go
         '''
         ``Scene`` where search for grabable object is being done
         '''
@@ -29,7 +29,7 @@ class Grabber:
 
         mouse_pos = pygame.mouse.get_pos()
 
-        gos = self.scene.at_point(mouse_pos)
+        gos = self.go.scene.at_point(mouse_pos)
 
         grabable = None
         for go in gos:
@@ -52,6 +52,14 @@ class Grabber:
 
         self.grabbed.moving = False
         self.grabbed = None
+    
+    def update(self):
+        for event in game.events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if self.grabbed == None:
+                    self.try_grab()
+                else:
+                    self.drop()
 
 
 class Grabable:
@@ -61,12 +69,12 @@ class Grabable:
     TODO: add params
     '''
 
-    def __init__(self, is_moveable=True):
+    def init(self, go, is_moveable=True):
         self.is_moveable = is_moveable
         '''Defines if object can be grabbed and moved'''
         self.moving = False
         '''Tells if object needs to move'''
-        self.go = None
+        self.go = go
         '''``GameObject`` this component is attached to'''
 
     def update(self):
@@ -84,11 +92,13 @@ class Grabable:
         self.go.position = from_tuple(mpos)
 
 
-class FigureGrab:
-    def __init__(self, scene, board_grid, grabber):
-        self.scene = scene
+class GridGrab:
+    def init(self, go, board_grid):
+        self.go = go
         self.board_grid = board_grid
-        self.grabber = grabber
+
+        self.grabber = Grabber()
+        self.grabber.init(go)
 
     def __find_closest(self, go):
         pts = self.board_grid.get_points()
@@ -105,7 +115,7 @@ class FigureGrab:
 
         return res
 
-    def try_bind(self):
+    def unbind(self):
         grabbed = self.grabber.grabbed 
         if grabbed == None:
             return
@@ -113,7 +123,7 @@ class FigureGrab:
         binder = grabbed.go.get_component(GridBind)
         binder.binded = False
 
-    def unbind(self):
+    def try_bind(self):
         grabbed = self.grabber.grabbed 
         if grabbed == None:
             return
@@ -128,9 +138,17 @@ class FigureGrab:
 
     def try_grab(self):
         self.grabber.try_grab()
-        self.try_bind()
+        self.unbind()
     
 
     def drop(self):
-        self.unbind()
+        self.try_bind()
         self.grabber.drop()
+
+    def update(self):
+        for event in game.events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if self.grabber.grabbed == None:
+                    self.try_grab()
+                else:
+                    self.drop()

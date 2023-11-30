@@ -11,8 +11,8 @@ class Grid:
     :param Vector2 capacity: sets *capacity* field
     '''
 
-    def __init__(self, size, capacity):
-        self.go = None
+    def init(self, go, size, capacity):
+        self.go = go
         '''Game object renderer is attached to'''
 
         check_size = size.x >= 0 and size.y >= 0
@@ -62,12 +62,12 @@ class GridBind:
     after creation of the ``grid bind's`` instance
     '''
 
-    def __init__(self, grid, coord, instant_bind=True):
+    def init(self, go, grid, coord, instant_bind=True):
         self.grid = grid
         '''``Grid`` which point will be anchor for ``game object``'''
         self.coord = coord
         '''Local coordinate of ``grid's`` point'''
-        self.go = None
+        self.go = go
         '''``Game object`` that ``component`` is attached to'''
         self.binded = instant_bind
         '''Tells if ``game object`` should be binded'''

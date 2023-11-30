@@ -1,6 +1,5 @@
 import json 
 import pygame
-import input
 
 IMAGES_JSON_PATH = 'game_data.json'
 
@@ -9,20 +8,15 @@ clock = None
 is_running = False
 screen_size = None
 fps = None
-__cur_scene = None
+cur_scene = None
 is_init = False
 game_data = None
-
-
-def __exit_input_handler(event):
-    if event.type == pygame.QUIT:
-        global running
-        running = False
+events = None
 
 
 def init(scr_size, fps_in):
     global screen, clock, running, is_init
-    global fps, __cur_scene, screen_size
+    global fps, cur_scene, screen_size
     global game_data
 
     if is_init:
@@ -35,28 +29,12 @@ def init(scr_size, fps_in):
     running = False
     screen_size = scr_size
     fps = fps_in
-    __cur_scene = None
-
-    input.input_handlers |= {__exit_input_handler}
+    cur_scene = None
 
     is_init = True
 
     with open(IMAGES_JSON_PATH) as f:
         game_data = json.load(f)
-
-
-def get_cur_scene():
-    return __cur_scene
-
-
-def set_cur_scene(new_scene):
-    global __cur_scene
-
-    if __cur_scene != None:
-        input.input_handlers -= __cur_scene.inputs
-
-    __cur_scene = new_scene
-    input.input_handlers |= new_scene.inputs
 
 
 def run():
@@ -70,12 +48,22 @@ def run():
         __iteration()
 
 
+def check_for_exit():
+    global running
+
+    for event in events:
+        if event.type == pygame.QUIT:
+            running = False
+
 def __iteration():
-    input.handle_inputs()
+    global events
+    events = pygame.event.get()    
+
+    check_for_exit()
 
     screen.fill((0, 0, 0))
 
-    __cur_scene.update()
+    cur_scene.update()
 
     pygame.display.update()
     clock.tick(fps)

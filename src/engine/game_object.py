@@ -14,7 +14,7 @@ class GameObject:
     :param list components: sets *components* field
     '''
 
-    def __init__(self, pos=Vector2(0, 0), rot=0, scale=Vector2(1, 1), components=[]):
+    def init(self, scene, pos=Vector2(0, 0), rot=0, scale=Vector2(1, 1), components=[]):
         self.position = pos
         '''Position of an object'''
         self.rotation = rot
@@ -26,10 +26,8 @@ class GameObject:
 
         self.components = components
         '''``Components`` of an object'''
-        for comp in self.components:
-            comp.go = self
+        self.scene = scene
 
-        self.scene = None
 
     def get_component(self, type):
         '''
@@ -58,13 +56,9 @@ class Scene:
     :param list[GameObject] objects: sets *objects* field
     '''
 
-    def __init__(self, objects):
+    def init(self, objects):
         self.objects = objects
         '''List of objects that are present in scene'''
-        for go in self.objects:
-            go.scene = self
-
-        self.inputs = set()
 
     def update(self):
         '''
