@@ -1,3 +1,4 @@
+from button import Button
 import pygame
 import game
 import renderer
@@ -26,7 +27,7 @@ def __create_plane(scene, is_light):
     return go
 
 
-def calc_plane_size():
+def __calc_plane_size():
     dummy_plane = __create_plane(None, True)
     plane_rect = dummy_plane.get_component(Renderer).get_rect()
     plane_size = Vector2(plane_rect.w, plane_rect.h)
@@ -36,7 +37,7 @@ def __create_board(scene):
     board = GameObject()
     grid = Grid()
 
-    plane_size = calc_plane_size()
+    plane_size = __calc_plane_size()
     board_side = 8
     grid_size = plane_size * board_side
 
@@ -94,4 +95,28 @@ def create_chess_scene():
     grid_grabber.init(grabber_go, board_grid)
 
 
+    return scene
+
+def __create_start_button(scene):
+    go = GameObject()
+    rend = Renderer()
+    button = Button()
+    
+    img = __load_image(game.game_data['light-plane'])
+
+    def change_scene():
+        game.cur_scene = create_chess_scene()
+    
+    pos = from_tuple(game.screen_size) / 2
+    go.init(scene, pos=pos, components=[rend, button])
+    rend.init(go, img)
+    button.init(go, change_scene)
+    return go
+
+
+def create_start_menu_scene():
+    scene = Scene()
+    button = __create_start_button(scene)
+
+    scene.init([button])
     return scene
