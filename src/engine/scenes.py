@@ -89,7 +89,7 @@ def create_chess_scene():
     board_grid = board.get_component(Grid)
     figure = __create_test_figure(scene, board_grid)
 
-    scene.init(planes + [figure, board, grabber_go])
+    scene.init(*planes, figure, board, grabber_go)
     grabber_go.init(scene, components=[grid_grabber])
     grid_grabber.init(grabber_go, board_grid)
 
