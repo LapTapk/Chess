@@ -25,6 +25,7 @@ def __create_plane(scene, is_light):
 
     return go
 
+
 def calc_plane_size():
     dummy_plane = __create_plane(None, True)
     plane_rect = dummy_plane.get_component(Renderer).get_rect()
