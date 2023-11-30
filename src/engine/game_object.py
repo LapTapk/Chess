@@ -29,7 +29,7 @@ class GameObject:
 
 
 class Scene:
-    def init(self, objects):
+    def init(self, *objects):
         self.objects = objects
 
     def update(self):

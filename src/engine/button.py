@@ -14,12 +14,10 @@ class Button:
 
         m_pos = pygame.mouse.get_pos()
         over_button = rect.collidepoint(m_pos)
-        mouse_down = False
-        for event in game.events:
-            mouse_down |= event.type == pygame.MOUSEBUTTONDOWN
-        
+        mouse_down = any(event.type == pygame.MOUSEBUTTONDOWN
+                         for event in game.events)
+
         return over_button and mouse_down
-         
 
     def update(self):
         if not self.is_clicked():
