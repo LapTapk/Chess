@@ -2,6 +2,7 @@
     "light-plane": "assets/light-plane.jpg",
     "black-plane": "assets/black-plane.jpg",
     "character": "assets/character.png",
+    "button": "assets/play_button.png",
     "board-screen-ratio": 0.5,
     "default-screen-size": [1280, 720]
 }
