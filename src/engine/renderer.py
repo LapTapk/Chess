@@ -25,7 +25,7 @@ class Renderer:
         self.__update_image()
 
         img_rect = self.tmp_img.get_rect()
-        img_size = Vector2(img_rect.w, img_rect.w)
+        img_size = Vector2(img_rect.w, img_rect.h)
 
         pos = self.go.position
 

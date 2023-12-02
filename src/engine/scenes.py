@@ -6,6 +6,7 @@ from game_object import *
 from vector2 import Vector2
 from grid import *
 
+azure = (23, 198, 130)
 
 def __load_image(path):
     return pygame.image.load(path).convert_alpha()
@@ -32,6 +33,7 @@ def __calc_plane_size():
     plane_size = Vector2(plane_rect.w, plane_rect.h)
     return plane_size
 
+
 def __create_board(scene):
     board = GameObject()
     grid = Grid()
@@ -56,8 +58,8 @@ def __create_board(scene):
 
     offset = Vector2(0, 0)
     offset.x = offset.y = game.screen.get_size()[0] / 10
-    board.init(scene, pos=offset, components=[grid])
-    return board, planes
+    board.init(scene, pos=offset, components=[grid], children=planes)
+    return board
 
 
 def __create_test_figure(scene, grid):
@@ -81,31 +83,50 @@ def __create_test_figure(scene, grid):
 def create_chess_scene():
     scene = Scene()
 
-    board, planes = __create_board(scene)
+    board = __create_board(scene)
 
     grabber_go = GameObject()
-    grid_grabber = GridGrab()
+    grid_grabber = FigureGrabber()
+    bkg = __create_bkg(scene, azure)
 
     board_grid = board.get_component(Grid)
     figure = __create_test_figure(scene, board_grid)
 
-    scene.init(*planes, figure, board, grabber_go)
+    scene.init(bkg, board, grabber_go, figure)
     grabber_go.init(scene, components=[grid_grabber])
-    grid_grabber.init(grabber_go, board_grid)
 
+    def valid(self, x, y): return y.x != 0 or y.y != 0
+    validator = type('', (object,), {"valid": valid})()
+    grid_grabber.init(grabber_go, board_grid, validator)
 
     return scene
+
+
+def __create_bkg(scene, color):
+    go = GameObject()
+    rend = Renderer()
+
+    size = game.game_data['default-screen-size']
+    img = pygame.Surface((size[0], size[1]))
+    img.fill(color)
+    
+    pos = from_tuple(game.screen_size) / 2
+
+    go.init(scene, pos=pos, components=[rend])
+    rend.init(go, img)
+    return go
+
 
 def __create_start_button(scene):
     go = GameObject()
     rend = Renderer()
     button = Button()
-    
-    img = __load_image(game.game_data['light-plane'])
+
+    img = __load_image(game.game_data['button'])
 
     def change_scene():
         game.cur_scene = create_chess_scene()
-    
+
     pos = from_tuple(game.screen_size) / 2
     go.init(scene, pos=pos, components=[rend, button])
     rend.init(go, img)
@@ -116,6 +137,7 @@ def __create_start_button(scene):
 def create_start_menu_scene():
     scene = Scene()
     button = __create_start_button(scene)
+    bkg = __create_bkg(scene, azure)
 
-    scene.init(button)
+    scene.init(bkg, button)
     return scene
