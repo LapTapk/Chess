@@ -4,9 +4,10 @@ from vector2 import Vector2
 
 
 class GameObject:
-    def init(self, scene, pos=Vector2(0, 0), rot=0, scale=Vector2(1, 1), components=[]):
+    def init(self, scene, pos=Vector2(0, 0), rot=0, scale=Vector2(1, 1), components=[], children=[]):
         self.position = pos
         self.rotation = rot
+
         factor_x = game.screen_size[0] / \
             game.game_data['default-screen-size'][0]
         factor_y = game.screen_size[1] / \
@@ -15,6 +16,7 @@ class GameObject:
 
         self.components = components
         self.scene = scene
+        self.children = children
 
     def get_component(self, type):
         for comp in self.components:
@@ -32,10 +34,16 @@ class Scene:
     def init(self, *objects):
         self.objects = objects
 
+    def __update_obj(self, obj):
+        for comp in obj.components:
+            comp.update()
+
+        for c_obj in obj.children:
+            self.__update_obj(c_obj)
+
     def update(self):
         for obj in self.objects:
-            for comp in obj.components:
-                comp.update()
+            self.__update_obj(obj)
 
     def at_point(self, point):
         res = []
