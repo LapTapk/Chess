@@ -4,13 +4,13 @@ import game
 
 
 class Button:
-    def init(self, go, *funcs):
+    def init(self, go, rend, *funcs):
         self.go = go
+        self.rend = rend
         self.funcs = funcs
 
     def is_clicked(self):
-        rend = self.go.get_component(renderer.Renderer)
-        rect = rend.get_rect()
+        rect = self.rend.get_rect()
 
         m_pos = pygame.mouse.get_pos()
         over_button = rect.collidepoint(m_pos)

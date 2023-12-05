@@ -49,8 +49,8 @@ class Grid:
 
 
 class GridBinder:
-    def init(self, go, grid, coord, instant_bind=True):
-        self.grid = grid
+    def init(self, go, grd, coord, instant_bind=True):
+        self.grd = grd
         self.coord = coord
         self.go = go
         self.binded = instant_bind
@@ -62,7 +62,7 @@ class GridBinder:
         self.__bind()
 
     def __bind(self):
-        points = self.grid.get_points()
+        points = self.grd.get_points()
         x, y = self.coord.to_tuple()
 
         self.go.position = points[x][y]

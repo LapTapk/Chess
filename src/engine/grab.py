@@ -3,6 +3,7 @@ from grid import GridBinder, find_closest
 import pygame
 from vector2 import *
 
+
 class Grabber:
     def init(self, go):
         self.go = go
@@ -61,10 +62,21 @@ class Grabable:
         self.go.position = from_tuple(mpos)
 
 
-class GridGrabber(Grabber):
-    def init(self, go, grid):
-        self.grid = grid
+class FigureGrabber(Grabber):
+    def init(self, go, grd, board, board_logic):
+        self.grd = grd
+        self.board = board
+        self.board_logic = board_logic
+        self.grabbed_coord = None
         super().init(go)
+
+    def __try_bind(self):
+        if self.grabbed == None:
+            return
+
+        binder = self.grabbed.go.get_component(GridBinder)
+        if binder != None:
+            binder.binded = True
 
     def __unbind(self):
         grabbed = self.grabbed
@@ -74,67 +86,35 @@ class GridGrabber(Grabber):
         binder = grabbed.go.get_component(GridBinder)
         binder.binded = False
 
-    def __try_bind(self, grid_pos):
+    def try_grab(self):
+        super().try_grab()
+
         if self.grabbed == None:
             return
 
         binder = self.grabbed.go.get_component(GridBinder)
-        if binder != None:
-            binder.coord = grid_pos
-            binder.binded = True
-
-    def try_grab(self):
-        super().try_grab()
+        self.grabbed_coord = binder.coord
         self.__unbind()
 
-    def drop(self, grid_pos):
-        self.__try_bind(grid_pos)
-        self.grabbed = None
-        super().drop()
-
-    def update(self):
-        for event in game.events:
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.grabber.grabbed == None:
-                    self.try_grab()
-                else:
-                    m_pos = pygame.mouse.get_pos()
-                    self.drop(find_closest(self.grid, m_pos))
-
-
-class FigureGrabber(GridGrabber):
-    def init(self, go, board_grid, board):
-        self.board = board
-        self.grabbed_coord = None
-        super().init(go, board_grid)
-
-    def try_grab(self):
-        super().try_grab() 
-
-        if self.grabbed == None:
-            return 
-
-        binder = self.grabbed.go.get_component(GridBinder)
-        self.grabbed_coord = binder.coord
-
-    def try_drop(self):
+    def drop(self):
         m_pos = from_tuple(pygame.mouse.get_pos())
-        to = find_closest(self.grid, m_pos)
+        to = find_closest(self.grd, m_pos)
         frm = self.grabbed_coord
 
-        can_drop = self.board.valid(frm, to)
+        can_drop = self.board_logic.valid(frm, to)
         if not can_drop:
-            return False, frm, to
-        
-        super().drop(to)
+            return False
+
+        self.__try_bind()
+        super().drop()
+        self.board.move(frm, to)
         self.grabbed_coord = None
-        return True, frm, to
-    
+        return True
+
     def update(self):
         for event in game.events:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if self.grabbed == None:
                     self.try_grab()
                 else:
-                    self.try_drop()
-            
+                    self.drop()

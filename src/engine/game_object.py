@@ -45,15 +45,24 @@ class Scene:
         for obj in self.objects:
             self.__update_obj(obj)
 
-    def at_point(self, point):
+    def __at_point_rec(self, obj, point):
         res = []
-        for obj in self.objects:
-            rend = obj.get_component(Renderer)
-            if rend == None:
-                continue
+
+        rend = obj.get_component(Renderer)
+        if rend != None:
             rect = rend.get_rect()
             if rect.collidepoint(point):
                 res.append(obj)
+
+        for child in obj.children:
+            res.extend(self.__at_point_rec(child, point))
+
+        return res
+
+    def at_point(self, point):
+        res = []
+        for obj in self.objects:
+            res.extend(self.__at_point_rec(obj, point))
 
         return res
 
