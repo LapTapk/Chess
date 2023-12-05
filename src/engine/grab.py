@@ -1,5 +1,5 @@
 import game
-from grid import GridBind
+from grid import GridBinder
 import pygame
 from vector2 import *
 
@@ -91,14 +91,14 @@ class GridGrabber:
         if grabbed == None:
             return
 
-        binder = grabbed.go.get_component(GridBind)
+        binder = grabbed.go.get_component(GridBinder)
         binder.binded = False
 
     def __try_bind(self, grid_pos):
         if self.grabbed == None:
             return
 
-        binder = self.grabbed.go.get_component(GridBind)
+        binder = self.grabbed.go.get_component(GridBinder)
         if binder != None:
             binder.coord = grid_pos
             binder.binded = True
@@ -140,7 +140,7 @@ class FigureGrabber:
         if self.grabbed == None:
             return 
 
-        binder = self.grabbed.go.get_component(GridBind)
+        binder = self.grabbed.go.get_component(GridBinder)
         self.grabbed_coord = binder.coord
 
     def try_drop(self):

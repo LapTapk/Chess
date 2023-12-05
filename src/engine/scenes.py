@@ -50,7 +50,7 @@ def __create_board(scene):
             is_light = (i + j) % 2
             plane = __create_plane(scene, is_light)
 
-            plane_bind = GridBind()
+            plane_bind = GridBinder()
             plane_bind.init(plane, grid, Vector2(i, j))
             plane.components.append(plane_bind)
 
@@ -67,7 +67,7 @@ def __create_test_figure(scene, grid):
 
     go = GameObject()
     rend = Renderer()
-    binder = GridBind()
+    binder = GridBinder()
     grabable = Grabable()
 
     scale = 1/6

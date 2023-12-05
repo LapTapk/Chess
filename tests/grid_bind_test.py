@@ -1,5 +1,5 @@
 import unittest
-from engine.grid import GridBind, Grid
+from engine.grid import GridBinder, Grid
 from engine.game_object import GameObject
 from engine.vector2 import Vector2
 
@@ -9,7 +9,7 @@ class GridBindTest(unittest.TestCase):
     go = GameObject(Vector2(10, 20), components=[grid])
 
     def test_bind_1(self):
-        binder = GridBind(GridBindTest.grid, Vector2(3, 5))
+        binder = GridBinder(GridBindTest.grid, Vector2(3, 5))
         go = GameObject(components=[binder])
 
         binder.update()
@@ -19,7 +19,7 @@ class GridBindTest(unittest.TestCase):
         self.assertEqual(actual, right)
 
     def test_bind_2(self):
-        binder = GridBind(GridBindTest.grid, Vector2(5, 6))
+        binder = GridBinder(GridBindTest.grid, Vector2(5, 6))
         go = GameObject(components=[binder])
 
         binder.update()

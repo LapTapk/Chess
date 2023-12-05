@@ -32,7 +32,7 @@ class Grid:
         return points
 
 
-class GridBind:
+class GridBinder:
     def init(self, go, grid, coord, instant_bind=True):
         self.grid = grid
         self.coord = coord
@@ -43,9 +43,9 @@ class GridBind:
         if not self.binded:
             return
 
-        self.bind()
+        self.__bind()
 
-    def bind(self):
+    def __bind(self):
         points = self.grid.get_points()
         x, y = self.coord.to_tuple()
 
