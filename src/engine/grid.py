@@ -1,6 +1,22 @@
 from vector2 import Vector2
 
 
+def find_closest(grid, point):
+    pts = grid.get_points()
+    res = Vector2(0, 0)
+
+    for i in range(len(pts)):
+        for j in range(len(pts[0])):
+            new_point = pts[i][j]
+            cur_point = pts[res.x][res.y]
+            cur = cur_point - point
+            new = new_point - point
+            if cur.length() > new.length():
+                res = Vector2(i, j)
+
+    return res
+
+
 class Grid:
     def init(self, go, size, capacity):
         self.go = go

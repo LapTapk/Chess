@@ -1,5 +1,5 @@
 import game
-from grid import GridBinder
+from grid import GridBinder, find_closest
 import pygame
 from vector2 import *
 
@@ -61,33 +61,13 @@ class Grabable:
         self.go.position = from_tuple(mpos)
 
 
-def find_closest(grid, point):
-    pts = grid.get_points()
-    res = Vector2(0, 0)
-
-    for i in range(len(pts)):
-        for j in range(len(pts[0])):
-            new_point = pts[i][j]
-            cur_point = pts[res.x][res.y]
-            cur = cur_point - point
-            new = new_point - point
-            if cur.length() > new.length():
-                res = Vector2(i, j)
-
-    return res
-
-
-class GridGrabber:
+class GridGrabber(Grabber):
     def init(self, go, grid):
-        self.go = go
         self.grid = grid
-        self.grabbed = None
-
-        self.grabber = Grabber()
-        self.grabber.init(go)
+        super().init(go)
 
     def __unbind(self):
-        grabbed = self.grabber.grabbed
+        grabbed = self.grabbed
         if grabbed == None:
             return
 
@@ -104,14 +84,13 @@ class GridGrabber:
             binder.binded = True
 
     def try_grab(self):
-        self.grabber.try_grab()
-        self.grabbed = self.grabber.grabbed
+        super().try_grab()
         self.__unbind()
 
     def drop(self, grid_pos):
         self.__try_bind(grid_pos)
         self.grabbed = None
-        self.grabber.drop()
+        super().drop()
 
     def update(self):
         for event in game.events:
@@ -123,19 +102,14 @@ class GridGrabber:
                     self.drop(find_closest(self.grid, m_pos))
 
 
-class FigureGrabber:
+class FigureGrabber(GridGrabber):
     def init(self, go, board_grid, board):
-        self.go = go
-        self.grabber = GridGrabber()
         self.board = board
         self.grabbed_coord = None
-        self.grabbed = None
-
-        self.grabber.init(go, board_grid)
+        super().init(go, board_grid)
 
     def try_grab(self):
-        self.grabber.try_grab()
-        self.grabbed = self.grabber.grabbed
+        super().try_grab() 
 
         if self.grabbed == None:
             return 
@@ -145,22 +119,21 @@ class FigureGrabber:
 
     def try_drop(self):
         m_pos = from_tuple(pygame.mouse.get_pos())
-        to = find_closest(self.grabber.grid, m_pos)
+        to = find_closest(self.grid, m_pos)
         frm = self.grabbed_coord
 
         can_drop = self.board.valid(frm, to)
         if not can_drop:
             return False, frm, to
         
-        self.grabber.drop(to)
-        self.grabbed = None
+        super().drop(to)
         self.grabbed_coord = None
         return True, frm, to
     
     def update(self):
         for event in game.events:
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.grabber.grabber.grabbed == None:
+                if self.grabbed == None:
                     self.try_grab()
                 else:
                     self.try_drop()
