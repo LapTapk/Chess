@@ -37,14 +37,14 @@ class Rook:
 
 class Knight:
     name = 'knight'
-    user_poses = (from_tuple(i) for i in ((1, 7), (6, 7)))
-    enemy_poses = (from_tuple(i) for i in ((1, 0), (6, 0)))
+    user_poses = (from_tuple(i) for i in ((2, 7), (5, 7)))
+    enemy_poses = (from_tuple(i) for i in ((2, 0), (5, 0)))
 
 
 class Bishop:
     name = 'bishop'
-    user_poses = (from_tuple(i) for i in ((2, 7), (5, 7)))
-    enemy_poses = (from_tuple(i) for i in ((2, 0), (5, 0)))
+    user_poses = (from_tuple(i) for i in ((1, 7), (6, 7)))
+    enemy_poses = (from_tuple(i) for i in ((1, 0), (6, 0)))
 
 
 class Queen:
