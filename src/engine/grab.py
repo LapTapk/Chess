@@ -23,26 +23,18 @@ class Grabber:
             if grabable != None:
                 break
 
-        if grabable == None:
+        if grabable == None or not grabable.is_moveable:
             return
 
         grabable.moving = True
         self.grabbed = grabable
 
-    def drop(self):
+    def try_drop(self):
         if self.grabbed == None:
             return
 
         self.grabbed.moving = False
         self.grabbed = None
-
-    def update(self):
-        for event in game.events:
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.grabbed == None:
-                    self.try_grab()
-                else:
-                    self.drop()
 
 
 class Grabable:
@@ -52,7 +44,7 @@ class Grabable:
         self.go = go
 
     def update(self):
-        if not self.moving:
+        if not self.moving or not self.is_moveable:
             return
 
         self.move_to_mouse()
@@ -63,9 +55,9 @@ class Grabable:
 
 
 class FigureGrabber(Grabber):
-    def init(self, go, grd, board, board_logic):
+    def init(self, go, grd, brd, board_logic):
         self.grd = grd
-        self.board = board
+        self.brd = brd
         self.board_logic = board_logic
         self.grabbed_coord = None
         super().init(go)
@@ -96,7 +88,7 @@ class FigureGrabber(Grabber):
         self.grabbed_coord = binder.coord
         self.__unbind()
 
-    def drop(self):
+    def try_drop(self):
         m_pos = from_tuple(pygame.mouse.get_pos())
         to = find_closest(self.grd, m_pos)
         frm = self.grabbed_coord
@@ -106,15 +98,7 @@ class FigureGrabber(Grabber):
             return False
 
         self.__try_bind()
-        super().drop()
-        self.board.move(frm, to)
+        super().try_drop()
+        self.brd.move(frm, to)
         self.grabbed_coord = None
         return True
-
-    def update(self):
-        for event in game.events:
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if self.grabbed == None:
-                    self.try_grab()
-                else:
-                    self.drop()

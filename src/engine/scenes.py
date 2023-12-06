@@ -22,9 +22,8 @@ def create_chess_scene(white_user):
     board = create_board(scene, white_user)
 
     grd = board.get_component(Grid)
-    grabber = create_figure_grabber(scene, grd, board,
-                                    type('', (object,), {"valid": lambda x, y: True}))
+    board_logic = type('', (object,), {"valid": lambda x, y: True})
+    machine = create_chess_state_machine(scene, grd, board, board_logic)
 
-
-    scene.init(board, grabber)
+    scene.init(board, machine)
     return scene

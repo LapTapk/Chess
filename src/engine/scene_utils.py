@@ -1,5 +1,6 @@
 import pygame
 import board
+from chess_state_machine import *
 import game
 import game_object
 import renderer
@@ -41,36 +42,42 @@ def create_start_button(scene, *funcs):
     return go
 
 
-def create_figure(scene, grd, coord, color, name):
+def create_figure(scene, grd, coord, color, name, owned_by_user):
     go = game_object.GameObject()
     rend = renderer.Renderer()
     grabable = grab.Grabable()
     binder = grid.GridBinder()
+    figure_data = board.FigureData()
 
     img = load_image(game.data[color][name])
     rend.init(go, img)
     grabable.init(go, False)
     binder.init(go, grd, coord)
-    go.init(scene, components=[rend, grabable, binder])
+    figure_data.init(go, owned_by_user, binder)
+    go.init(scene, components=[rend, grabable, binder, figure_data])
     return go
 
 
 def create_figures(scene, grd, white_user):
-    tfigures = [Pawn, Knight, Rook, Bishop, Queen, King]
+    tfigures = ['pawn', 'rook', 'bishop', 'knight', 'queen', 'king']
 
     user_color = 'white' if white_user else 'black'
     enemy_color = 'black' if white_user else 'white'
 
     figures = []
     for tfigure in tfigures:
-        for pos in tfigure.user_poses:
+        poses = game.data['positions'][tfigure]['user']
+        for pos in poses:
+            pos = from_tuple(pos)
             user_figure = create_figure(scene, grd, pos,
-                                         user_color, tfigure.name)
+                                         user_color, tfigure, True)
             figures.append(user_figure)
-
-        for pos in tfigure.enemy_poses:
+        
+        poses = game.data['positions'][tfigure]['enemy']
+        for pos in poses:
+            pos = from_tuple(pos)
             enemy_figure = create_figure(scene, grd, pos,
-                                          enemy_color, tfigure.name)
+                                          enemy_color, tfigure, False)
             figures.append(enemy_figure)
 
     return figures
@@ -120,14 +127,20 @@ def create_board(scene, white_user):
     return go
 
 
-def create_figure_grabber(scene, grd, board_go, board_logic):
-    go = game_object.GameObject()
+def create_figure_grabber(go, grd, board_go, board_logic):
     grabber = grab.FigureGrabber()
-
     brd = board_go.get_component(Board)
-
     grabber.init(go, grd, brd, board_logic)
-    go.init(scene, components=[grabber])
+    return grabber
+
+def create_chess_state_machine(scene, grd, brd, board_logic):
+    go = game_object.GameObject()
+    machine = ChessStateMachine()
+    user_turn_state = UserTurnState()
+    grabber = create_figure_grabber(go, grd, brd, board_logic)
+
+    user_turn_state.init(machine, grabber)
+    machine.init(go, user_turn_state)
+    go.init(scene, components=[machine])
     return go
-
-
+    
