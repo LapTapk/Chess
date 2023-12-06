@@ -95,10 +95,10 @@ class FigureGrabber(Grabber):
 
         can_drop = self.board_logic.valid(frm, to)
         if not can_drop:
-            return False
+            return (False, None, None)
 
         self.__try_bind()
         super().try_drop()
         self.brd.move(frm, to)
         self.grabbed_coord = None
-        return True
+        return True, frm, to

@@ -22,6 +22,7 @@ class UserTurnState:
     def init(self, machine, grabber):
         self.machine = machine
         self.grabber = grabber
+        self.move = None
 
     def on_start(self):
         self.grabber.brd.set_freedom_user(True)
@@ -38,15 +39,20 @@ class UserTurnState:
             if grabber.grabbed == None:
                 grabber.try_grab()
             else:
-                success = grabber.try_drop()
+                success, frm, to = grabber.try_drop()
                 if success:
-                    self.machine.change_state(EnemyTurnState())
+                    self.move = (frm.to_tuple(), to.to_tuple())
+                    enemys_turn = EnemyTurnState()
+                    self.machine.change_state(enemys_turn)
 
     def update(self):
         self.handle_input()
 
 
 class EnemyTurnState:
+    def init(self, machine):
+        self.machine = machine
+
     def on_start(self):
         pass
 
