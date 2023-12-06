@@ -32,7 +32,7 @@ def create_start_button(scene, *funcs):
     rend = renderer.Renderer()
     btn = button.Button()
 
-    img = load_image(game.game_data['play-button'])
+    img = load_image(game.data['play-button'])
     rend.init(go, img)
     btn.init(go, rend, *funcs)
 
@@ -47,7 +47,7 @@ def create_figure(scene, grd, coord, color, name):
     grabable = grab.Grabable()
     binder = grid.GridBinder()
 
-    img = load_image(game.game_data[color][name])
+    img = load_image(game.data[color][name])
     rend.init(go, img)
     grabable.init(go, False)
     binder.init(go, grd, coord)
@@ -82,7 +82,7 @@ def create_plane(scene, is_light, grd, coord):
     binder = grid.GridBinder()
 
     color = 'light' if is_light else 'black'
-    img = load_image(game.game_data[f'{color}-plane'])
+    img = load_image(game.data[f'{color}-plane'])
     rend.init(go, img)
     binder.init(go, grd, coord)
     go.init(scene, components=[binder, rend])

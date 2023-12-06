@@ -9,9 +9,9 @@ class GameObject:
         self.rotation = rot
 
         factor_x = game.screen_size[0] / \
-            game.game_data['default-screen-size'][0]
+            game.data['default-screen-size'][0]
         factor_y = game.screen_size[1] / \
-            game.game_data['default-screen-size'][1]
+            game.data['default-screen-size'][1]
         self.scale = Vector2(scale.x * factor_x, scale.y * factor_y)
 
         self.components = components

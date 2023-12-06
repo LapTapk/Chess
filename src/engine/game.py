@@ -10,14 +10,14 @@ screen_size = None
 fps = None
 cur_scene = None
 is_init = False
-game_data = None
+data = None
 events = None
 
 
 def init(scr_size, fps_in):
     global screen, clock, running, is_init
     global fps, cur_scene, screen_size
-    global game_data
+    global data
 
     if is_init:
         raise Exception("Game is already initialized")
@@ -34,7 +34,7 @@ def init(scr_size, fps_in):
     is_init = True
 
     with open(IMAGES_JSON_PATH) as f:
-        game_data = json.load(f)
+        data = json.load(f)
 
 
 def run():
