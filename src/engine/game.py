@@ -1,7 +1,7 @@
 import json 
 import pygame
 
-IMAGES_JSON_PATH = 'game_data.json'
+DATA_JSON_PATH = 'game_data.json'
 
 screen = None
 clock = None
@@ -33,7 +33,7 @@ def init(scr_size, fps_in):
 
     is_init = True
 
-    with open(IMAGES_JSON_PATH) as f:
+    with open(DATA_JSON_PATH) as f:
         data = json.load(f)
 
 
