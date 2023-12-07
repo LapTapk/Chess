@@ -7,10 +7,17 @@ class Board:
     def init(self, go, figures):
         self.go = go
         self.figures = [[None] * 8 for _ in range(8)]
-        for figure in figures:
+        
+
+        '''for figure in figures:
             figure_data = figure.get_component(FigureData)
             coord = figure_data.binder.coord
-            self.figures[coord.x][coord.y] = figure_data
+            self.figures[coord.x][coord.y] = figure_data'''
+
+    def init_figures(self):
+        tfigures = ['pawn', 'rook', 'bishop', 'knight', 'queen', 'king']
+        for tfigure in tfigures:
+
 
     def update(self):
         pass
@@ -31,7 +38,6 @@ class Board:
 
                 grabable = figure.go.get_component(Grabable)
                 grabable.is_moveable = is_free
-
 
 class FigureData:
     def init(self, go, owned_by_user, binder):
