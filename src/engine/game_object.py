@@ -23,7 +23,6 @@ class GameObject:
             if isinstance(comp, type):
                 return comp
 
-        return None
 
     def add_component(self, comp):
         self.components.append(comp)

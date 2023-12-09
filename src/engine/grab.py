@@ -61,14 +61,6 @@ class FigureGrabber(Grabber):
         self.grabbed_coord = None
         super().init(go)
 
-    def __try_bind(self):
-        if self.grabbed == None:
-            return
-
-        binder = self.grabbed.go.get_component(GridBinder)
-        if binder != None:
-            binder.binded = True
-
     def __unbind(self):
         grabbed = self.grabbed
         if grabbed == None:
@@ -92,12 +84,5 @@ class FigureGrabber(Grabber):
         to = find_closest(self.grd, m_pos)
         frm = self.grabbed_coord
 
-        can_drop = self.board_logic.valid(frm, to)
-        if not can_drop:
-            return (False, None, None)
-
-        self.__try_bind()
-        super().try_drop()
-        self.brd.move(frm, to)
-        self.grabbed_coord = None
-        return True, frm, to
+        can_drop = self.board_logic.is_legal(frm, to)
+        return can_drop, frm, to

@@ -1,9 +1,10 @@
 import pygame
 from . import game_object, renderer, game, \
-    button, grid, board, grab 
+    button, grid, board, grab
 from .vector2 import *
 from .board import BoardUpdater
 from .chess_state_machine import *
+
 
 def load_image(path):
     return pygame.image.load(path).convert_alpha()
@@ -36,7 +37,6 @@ def create_start_button(scene, *funcs):
     return go
 
 
-
 def create_plane(scene, is_light, grd, coord):
     go = game_object.GameObject()
     rend = renderer.Renderer()
@@ -56,6 +56,7 @@ def __calc_plane_size():
     plane_size = Vector2(plane_rect.w, plane_rect.h)
     return plane_size
 
+
 def create_planes(scene):
     go = game_object.GameObject()
     grd = grid.Grid()
@@ -70,7 +71,7 @@ def create_planes(scene):
             plane = create_plane(scene, is_light, grd,
                                  Vector2(i, j))
             planes.append(plane)
-    go.init(scene, pos=plane_size, children=planes)
+    go.init(scene, pos=plane_size, components=[grd], children=planes)
     return go
 
 
@@ -90,6 +91,7 @@ def create_figure_grabber(go, grd, board_go, board_logic):
     grabber.init(go, grd, brd, board_logic)
     return grabber
 
+
 def create_chess_state_machine(scene, grd, brd, board_logic, is_white):
     go = game_object.GameObject()
     machine = ChessStateMachine()
@@ -100,4 +102,3 @@ def create_chess_state_machine(scene, grd, brd, board_logic, is_white):
     machine.init(go, user_turn_state)
     go.init(scene, components=[machine])
     return go
-    

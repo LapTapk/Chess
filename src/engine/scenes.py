@@ -1,7 +1,8 @@
 from . import game_object, game
 from .grid import Grid
 from .scene_utils import *
-from chessLogic import Board    
+from chessLogic import Board
+
 
 def create_start_scene():
     scene = game_object.Scene()
@@ -21,11 +22,12 @@ def create_chess_scene(is_white):
 
     planes = create_planes(scene)
     grd = planes.get_component(Grid)
-    board = create_board(scene)
+    board = create_board(scene, grd)
 
     grd = board.get_component(Grid)
     board_logic = Board.Board()
-    machine = create_chess_state_machine(scene, grd, board, board_logic, is_white)
+    machine = create_chess_state_machine(
+        scene, grd, board, board_logic, is_white)
 
-    scene.init(board, machine)
+    scene.init(planes, board, machine)
     return scene
