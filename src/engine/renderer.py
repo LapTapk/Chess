@@ -1,5 +1,5 @@
-from vector2 import *
-import game
+from .vector2 import *
+from . import game
 import pygame
 
 

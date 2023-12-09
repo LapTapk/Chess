@@ -1,6 +1,6 @@
 import unittest
-import engine.renderer as renderer
-from engine.game_object import GameObject
+import src.engine.renderer as renderer
+from src.engine.game_object import GameObject
 
 
 class GameObjectTest(unittest.TestCase):

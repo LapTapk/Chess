@@ -1,49 +1,65 @@
-from vector2 import *
-from grid import GridBinder
-from grab import Grabable
+from . import game_object, renderer, grab, grid, game
+from .vector2 import *
+from chessLogic.Board import Board
+import pygame
 
 
-class Board:
-    def init(self, go, figures):
+def load_image(path):
+    return pygame.image.load(path).convert_alpha()
+
+
+class BoardUpdater:
+    def init(self, go, grd):
         self.go = go
-        self.figures = [[None] * 8 for _ in range(8)]
-        
+        self.grd = grd
 
-        '''for figure in figures:
-            figure_data = figure.get_component(FigureData)
-            coord = figure_data.binder.coord
-            self.figures[coord.x][coord.y] = figure_data'''
+    def create_figure(self, scene, coord,
+                      name, owned_by_user, is_user_free):
+        go = game_object.GameObject()
+        rend = renderer.Renderer()
+        grabable = grab.Grabable()
+        binder = grid.GridBinder()
+        figure_data = FigureData()
 
-    def init_figures(self):
-        tfigures = ['pawn', 'rook', 'bishop', 'knight', 'queen', 'king']
-        for tfigure in tfigures:
+        img = load_image(game.data[name])
+        rend.init(go, img)
+        grabable.init(go, owned_by_user and is_user_free)
+        binder.init(go, self.grd, coord)
+        figure_data.init(go, binder)
+        go.init(scene, components=[rend, grabable, binder, figure_data])
+        return go
 
+    def create_figures(self, board, user_color, is_user_free):
+        res = []
+        for i in range(Board.lenght):
+            for j in range(Board.lenght):
+                figure = board.board[i][j]
+                if figure.name == '.':
+                    continue
+
+                coord = Vector2(i, j)
+                if user_color == 'white':
+                    coord.y = Board.lenght - coord.y - 1
+
+                scene = self.go.scene
+                owned_by_user = user_color == figure.color
+                figure_go = self.create_figure(scene, coord, figure.name,
+                                               owned_by_user, is_user_free)
+                res.append(figure_go)
+        return res
+
+    def update_board(self, board, user_color, is_user_free):
+        figures = self.create_figures(board, user_color, is_user_free)
+        self.go.children = figures
 
     def update(self):
         pass
 
-    def move(self, frm, to):
-        figure = self.figures[frm.x][frm.y]
-
-        figure.binder.coord = to
-
-        self.figures[frm.x][frm.y] = None
-        self.figures[to.x][to.y] = figure
-    
-    def set_freedom_user(self, is_free):
-        for figures_row in self.figures:
-            for figure in figures_row:
-                if figure == None or not figure.owned_by_user:
-                    continue
-
-                grabable = figure.go.get_component(Grabable)
-                grabable.is_moveable = is_free
 
 class FigureData:
-    def init(self, go, owned_by_user, binder):
+    def init(self, go, binder):
         self.go = go
-        self.owned_by_user = owned_by_user
         self.binder = binder
-    
+
     def update(self):
         pass

@@ -1,6 +1,6 @@
-import game
-from renderer import Renderer
-from vector2 import Vector2
+from . import game
+from .renderer import Renderer
+from .vector2 import Vector2
 
 
 class GameObject:
@@ -23,7 +23,6 @@ class GameObject:
             if isinstance(comp, type):
                 return comp
 
-        return None
 
     def add_component(self, comp):
         self.components.append(comp)

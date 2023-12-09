@@ -1,6 +1,5 @@
 import pygame
-import renderer
-import game
+from . import game
 
 
 class Button:

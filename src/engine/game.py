@@ -1,4 +1,4 @@
-import json 
+import json
 import pygame
 
 DATA_JSON_PATH = 'game_data.json'
@@ -55,9 +55,10 @@ def check_for_exit():
         if event.type == pygame.QUIT:
             running = False
 
+
 def __iteration():
     global events
-    events = pygame.event.get()    
+    events = pygame.event.get()
 
     check_for_exit()
 

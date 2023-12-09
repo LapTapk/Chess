@@ -1,5 +1,5 @@
 import pygame
-import game
+from . import game
 
 
 class ChessStateMachine:
@@ -19,16 +19,19 @@ class ChessStateMachine:
 
 
 class UserTurnState:
-    def init(self, machine, grabber):
+    def init(self, machine, grabber, board_logic, is_white):
         self.machine = machine
         self.grabber = grabber
+        self.board_logic = board_logic
+        self.is_white = is_white
         self.move = None
 
     def on_start(self):
-        self.grabber.brd.set_freedom_user(True)
+        color = 'white' if self.is_white else 'black'
+        self.grabber.brd.update_board(self.board_logic, color, True)
 
     def on_exit(self):
-        self.grabber.brd.set_freedom_user(False)
+        pass
 
     def handle_input(self):
         for event in game.events:
