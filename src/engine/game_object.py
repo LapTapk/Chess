@@ -1,6 +1,6 @@
-import game
-from renderer import Renderer
-from vector2 import Vector2
+from . import game
+from .renderer import Renderer
+from .vector2 import Vector2
 
 
 class GameObject:

@@ -8,3 +8,6 @@ doc/Makefile
 .vscode
 .pytest_cache
 access_token.txt
+build
+dist
+*.egg-info

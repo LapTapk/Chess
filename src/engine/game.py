@@ -22,6 +22,7 @@ def init(scr_size, fps_in):
     if is_init:
         raise Exception("Game is already initialized")
 
+
     pygame.init()
     screen = pygame.display.set_mode(scr_size)
     clock = pygame.time.Clock()

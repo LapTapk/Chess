@@ -1,4 +1,4 @@
-from vector2 import Vector2
+from .vector2 import Vector2
 
 
 def find_closest(grid, point):
