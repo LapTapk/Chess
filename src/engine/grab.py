@@ -54,9 +54,8 @@ class Grabable:
 
 
 class FigureGrabber(Grabber):
-    def init(self, go, grd, brd, board_logic):
+    def init(self, go, grd, board_logic):
         self.grd = grd
-        self.brd = brd
         self.board_logic = board_logic
         self.grabbed_coord = None
         super().init(go)
@@ -79,10 +78,9 @@ class FigureGrabber(Grabber):
         self.grabbed_coord = binder.coord
         self.__unbind()
 
-    def try_drop(self):
+    def get_move(self):
         m_pos = from_tuple(pygame.mouse.get_pos())
         to = find_closest(self.grd, m_pos)
         frm = self.grabbed_coord
 
-        can_drop = self.board_logic.is_legal(frm, to)
-        return can_drop, frm, to
+        return frm, to

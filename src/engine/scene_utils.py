@@ -92,13 +92,11 @@ def create_figure_grabber(go, grd, board_go, board_logic):
     return grabber
 
 
-def create_chess_state_machine(scene, grd, brd, board_logic, is_white):
+def create_chess_state_machine(scene, grd, brd):
     go = game_object.GameObject()
     machine = ChessStateMachine()
-    user_turn_state = UserTurnState()
-    grabber = create_figure_grabber(go, grd, brd, board_logic)
+    grabber = create_figure_grabber(go, grd)
 
-    user_turn_state.init(machine, grabber, board_logic, is_white)
-    machine.init(go, user_turn_state)
+    machine.init(go, grabber, brd)
     go.init(scene, components=[machine])
     return go

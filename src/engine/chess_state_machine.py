@@ -3,14 +3,14 @@ from . import game
 
 
 class ChessStateMachine:
-    def init(self, go, first_state):
+    def init(self, go, grabber, brd_updater):
         self.go = go
         self.cur_state = None
-        self.change_state(first_state)
+        self.user_turn_state = UserTurnState(self, grabber, brd_updater)
+        self.enemy_turn_state = EnemyTurnState(self, brd_updater)
+        self.change_state(self.user_turn_state)
 
     def change_state(self, new_state):
-        if self.cur_state != None:
-            self.cur_state.on_exit()
         self.cur_state = new_state
         self.cur_state.on_start()
 
@@ -19,19 +19,14 @@ class ChessStateMachine:
 
 
 class UserTurnState:
-    def init(self, machine, grabber, board_logic, is_white):
+    def __init__(self, machine, grabber, brd_updater):
         self.machine = machine
         self.grabber = grabber
-        self.board_logic = board_logic
-        self.is_white = is_white
-        self.move = None
+        self.brd_updater = brd_updater
 
     def on_start(self):
-        color = 'white' if self.is_white else 'black'
-        self.grabber.brd.update_board(self.board_logic, color, True)
-
-    def on_exit(self):
-        pass
+        brd = game.client.try_get_board()
+        self.brd_updater.update_board(brd, True, game.client.is_white)
 
     def handle_input(self):
         for event in game.events:
@@ -42,25 +37,33 @@ class UserTurnState:
             if grabber.grabbed == None:
                 grabber.try_grab()
             else:
-                success, frm, to = grabber.try_drop()
+                frm, to = grabber.get_move()
+                success = game.client.send_move(frm, to)
                 if success:
-                    self.move = (frm.to_tuple(), to.to_tuple())
-                    enemys_turn = EnemyTurnState()
-                    self.machine.change_state(enemys_turn)
+                    self.machine.change_state(self.machine.enemy_turn_state)
 
     def update(self):
         self.handle_input()
 
 
 class EnemyTurnState:
-    def init(self, machine):
+    def __init__(self, machine, brd_updater):
         self.machine = machine
+        self.clock = pygame.time.Clock()
+        self.request_interval = game.data['request-interval']
+        self.brd_update = brd_updater
 
     def on_start(self):
-        pass
-
-    def on_exit(self):
-        pass
+        brd = game.client.try_get_board()
+        self.brd_updater.update_board(brd, game.client.is_white, False)
 
     def update(self):
-        pass
+        delta_time = self.clock.tick()
+        if delta_time < self.request_interval:
+            return 
+
+        has_moved = game.client.has_moved()
+        if has_moved:
+            return
+
+        self.machine.change_state(self.machine.user_turn_state)
