@@ -57,7 +57,8 @@ class Board(object):
         return self.board
 
     def __init__(self):
-        self.board = [[Figure.Figure() for j in range(self.lenght)] for i in range(self.lenght)]
+        self.board = [[Figure.Figure() for j in range(self.lenght)]
+                      for i in range(self.lenght)]
         self.board = self.startPosition()
 
     def showBoardConsole(self):
@@ -68,3 +69,13 @@ class Board(object):
 
     def is_legal(self, frm, to):
         return self.board[to.x][to.y].name == '.'
+
+    def move(self, frm, to):
+        pass
+
+    def try_move(self, frm, to):
+        if not self.is_legal(frm, to):
+            return False
+
+        self.move(frm, to)
+        return True
