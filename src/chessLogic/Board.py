@@ -15,45 +15,45 @@ class Board(object):
             for j in range(self.lenght):
                 """создание пешек"""
                 if i == 1:
-                    self.board[j][i] = Figure.Pawn("white", (i, j))
+                    self.board[j][i] = Figure.Pawn("white", (j, i))
                     continue
                 if i == 6:
-                    self.board[j][i] = Figure.Pawn("black", (i, j))
+                    self.board[j][i] = Figure.Pawn("black", (j, i))
                     continue
 
                 if i == 0:
                     """создание ладей"""
                     if j == 0 or j == 7:
-                        self.board[j][i] = Figure.Rock("white", (i, j))
+                        self.board[j][i] = Figure.Rock("white", (j, i))
                     """создание коней"""
                     if j == 1 or j == 6:
-                        self.board[j][i] = Figure.Knight("white", (i, j))
+                        self.board[j][i] = Figure.Knight("white", (j, i))
                     """создание слонов"""
                     if j == 2 or j == 5:
-                        self.board[j][i] = Figure.Bishop("white", (i, j))
+                        self.board[j][i] = Figure.Bishop("white", (j, i))
                     """создание королевы"""
                     if j == 4:
-                        self.board[j][i] = Figure.Queen("white", (i, j))
+                        self.board[j][i] = Figure.Queen("white", (j, i))
                     """создание короля"""
                     if j == 3:
-                        self.board[j][i] = Figure.King("white", (i, j))
+                        self.board[j][i] = Figure.King("white", (j, i))
 
                 if i == 7:
                     """создание ладей"""
                     if j == 0 or j == 7:
-                        self.board[j][i] = Figure.Rock("black", (i, j))
+                        self.board[j][i] = Figure.Rock("black", (j, i))
                     """создание коней"""
                     if j == 1 or j == 6:
-                        self.board[j][i] = Figure.Knight("black", (i, j))
+                        self.board[j][i] = Figure.Knight("black", (j, i))
                     """создание слонов"""
                     if j == 2 or j == 5:
-                        self.board[j][i] = Figure.Bishop("black", (i, j))
+                        self.board[j][i] = Figure.Bishop("black", (j, i))
                     """создание королевы"""
                     if j == 4:
-                        self.board[j][i] = Figure.Queen("black", (i, j))
+                        self.board[j][i] = Figure.Queen("black", (j, i))
                     """создание короля"""
                     if j == 3:
-                        self.board[j][i] = Figure.King("black", (i, j))
+                        self.board[j][i] = Figure.King("black", (j, i))
         return self.board
 
     def __init__(self):
