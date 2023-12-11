@@ -7,14 +7,6 @@ class Client:
         self.is_white = is_white
         self.local_moves_cnt = 0
 
-    def connect(self):
-        self.connetion.connect()
-
-        self.connection.request('GET', '/is_chess')
-        response = self.connection.getresponse()
-        response_msg = response.read().decode() 
-        return response.getcode() == '200' and response_msg == "YES"
-
     def send_move(self, frm, to):
         self.connection.request('POST', '', body=' '.join(frm + to))
 

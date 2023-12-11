@@ -25,8 +25,8 @@ class UserTurnState:
         self.brd_updater = brd_updater
 
     def on_start(self):
-        brd = game.client.try_get_board()
-        self.brd_updater.update_board(brd, True, game.client.is_white)
+        brd = game.clnt.try_get_board()
+        self.brd_updater.update_board(brd, True, game.clnt.is_white)
 
     def handle_input(self):
         for event in game.events:
@@ -38,7 +38,7 @@ class UserTurnState:
                 grabber.try_grab()
             else:
                 frm, to = grabber.get_move()
-                success = game.client.send_move(frm, to)
+                success = game.clnt.send_move(frm, to)
                 if success:
                     self.machine.change_state(self.machine.enemy_turn_state)
 
@@ -54,15 +54,15 @@ class EnemyTurnState:
         self.brd_update = brd_updater
 
     def on_start(self):
-        brd = game.client.try_get_board()
-        self.brd_updater.update_board(brd, game.client.is_white, False)
+        brd = game.clnt.try_get_board()
+        self.brd_updater.update_board(brd, game.clnt.is_white, False)
 
     def update(self):
         delta_time = self.clock.tick()
         if delta_time < self.request_interval:
             return 
 
-        has_moved = game.client.has_moved()
+        has_moved = game.clnt.has_moved()
         if has_moved:
             return
 

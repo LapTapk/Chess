@@ -26,7 +26,7 @@ def create_chess_scene():
 
     grd = board.get_component(Grid)
     machine = create_chess_state_machine(
-        scene, grd, board, game.client.is_white)
+        scene, grd, board.get_component(BoardUpdater))
 
     scene.init(planes, board, machine)
     return scene

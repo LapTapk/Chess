@@ -1,13 +1,12 @@
 import pygame
 import socket
-import re
 from . import game_object, input_box, renderer, game, \
     button, grid, board, grab
 from .vector2 import *
 from .board import BoardUpdater
 from .chess_state_machine import *
 import server, client
-import asyncio
+import threading
 
 
 def load_image(path):
@@ -18,7 +17,7 @@ def create_mono_bkg(scene, color):
     go = game_object.GameObject()
     rend = renderer.Renderer()
 
-    img = pygame.Surface(game.screen_size)
+    img = pygame.Surface(game.data['default-screen-size'])
     pygame.draw.rect(img, color, img.get_rect())
     rend.init(go, img)
 
@@ -42,20 +41,15 @@ def create_button(scene, pos, img_path, *funcs):
 
 def create_connect_button(scene, inpb, create_chess_scene):
     def try_connect():
-        pat = '.+ .+'
-        success = re.match(pat, inpb.text)
-        if not success:
-            return
-
         host = inpb.text
-
         try:
             game.clnt = client.Client(host, 1234, False)
-            game.clnt.connect()
-        except:
+            game.clnt.is_white = False
+        except Exception as e:
+            print(e)
             return
 
-        game.cur_scene = create_chess_scene(False)
+        game.cur_scene = create_chess_scene()
 
     pos = from_tuple(game.screen_size) / 2 - Vector2(100, 0)
     btn_go = create_button(scene, pos, 'play-button', try_connect)
@@ -63,19 +57,26 @@ def create_connect_button(scene, inpb, create_chess_scene):
 
 
 def create_host_button(scene, create_chess_scene, connect_btn):
-    async def host():
+    def wait_untill_connection():
+        server.wait_until_connection()
+        game.cur_scene = create_chess_scene()
+
+    def host():
+        if server.is_init:
+            return 
         name = socket.gethostname()
         address = socket.gethostbyname(name)
-        server.init(address)
+        server.init((address, 1234))
 
         game.clnt = client.Client(address, 1234, True)
-        game.client.connect(address, 1234)
-
-        connect_btn.enabled = False
         game.clnt.is_white = True
 
-        await asyncio.run(server.wait_until_connection)
-        game.cur_scene = create_chess_scene(True)
+        connect_btn.enabled = False
+
+        thr = threading.Thread(target=wait_untill_connection)
+        thr.daemon = True
+        thr.start()
+
 
     pos = from_tuple(game.screen_size) / 2 + Vector2(100, 0)
     btn_go = create_button(scene, pos, 'play-button', host)
@@ -130,10 +131,9 @@ def create_board(scene, grd):
     return go
 
 
-def create_figure_grabber(go, grd, board_go, board_logic):
+def create_figure_grabber(go, grd):
     grabber = grab.FigureGrabber()
-    brd = board_go.get_component(BoardUpdater)
-    grabber.init(go, grd, brd, board_logic)
+    grabber.init(go, grd)
     return grabber
 
 

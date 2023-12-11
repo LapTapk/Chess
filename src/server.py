@@ -1,23 +1,34 @@
 import http.server
-import asyncio
+import threading
 from chessLogic.Board import Board
 import re
 
 server = None
 waiting = True
+is_init = False
 
-async def init(address):
-    global server
-    new_brd = Board()
-    server = Server(address, ReqauestHandler, new_brd)
-
+def __start_server():
     try:
-        await asyncio.run(server.serve_forever)
+        server.serve_forever()
     except:
         server.server_close()
         exit()
 
+def init(address):
+    global server, is_init
+    if is_init:
+        raise Exception('Server s already initialized') 
+
+    is_init = True 
+    new_brd = Board()
+    server = Server(address, ReqauestHandler, new_brd)
+    server_thr = threading.Thread(target=__start_server)
+    server_thr.daemon = True
+    server_thr.start()
+
+
 def wait_until_connection():
+    global waiting
     waiting = True
     while waiting:
         pass
@@ -25,21 +36,21 @@ def wait_until_connection():
 
 class Server(http.server.HTTPServer):
     def __init__(self, server_address, handler, brd):
-        super.__init__(server_address, handler)
+        super().__init__(server_address, handler)
         self.brd = brd
         self.moves_cnt = 0
 
 
 class ReqauestHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
-        self.send_response(200)
+        self.send_response('200')
 
         if self.path == '/moves_cnt':
             self.wfile.write(str(self.server.moves_cnt).encode())
         elif self.path == '/board':
             self.wfile.write(self.server.brd.serialize())
         elif self.path == '/is_chess':
-            self.wfile.write('YES')
+            self.wfile.write('YES'.encode())
             
 
     def do_POST(self):
@@ -61,6 +72,7 @@ class ReqauestHandler(http.server.BaseHTTPRequestHandler):
         self.send_response(200)
         
     def do_CONNECT(self):
+        print('hola')
         global waiting
         waiting = False
         self.send_response(200)

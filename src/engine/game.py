@@ -1,4 +1,5 @@
 import json
+import threading
 import pygame
 
 DATA_JSON_PATH = 'game_data.json'
