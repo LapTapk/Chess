@@ -4,10 +4,6 @@ from chessLogic.Board import Board
 import pygame
 
 
-def load_image(path):
-    return pygame.image.load(path).convert_alpha()
-
-
 class BoardUpdater:
     def init(self, go, grd):
         self.go = go
@@ -20,8 +16,7 @@ class BoardUpdater:
         grabable = grab.Grabable()
         binder = grid.GridBinder()
         figure_data = FigureData()
-
-        img = load_image(game.data[name])
+        img = pygame.image.load(game.data[name]).convert_alpha()
         rend.init(go, img)
         grabable.init(go, owned_by_user and is_user_free)
         binder.init(go, self.grd, coord)

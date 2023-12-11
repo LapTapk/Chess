@@ -19,5 +19,6 @@
     "N": "assets/white_knight.png",
     "B": "assets/white_bishop.png",
     "Q": "assets/white_queen.png",
-    "K": "assets/white_king.png"
+    "K": "assets/white_king.png",
+    "request-interval": 500
 }
