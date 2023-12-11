@@ -12,6 +12,7 @@ cur_scene = None
 is_init = False
 data = None
 events = None
+clnt = None
 
 
 def init(scr_size, fps_in):
@@ -35,7 +36,6 @@ def init(scr_size, fps_in):
 
     with open(DATA_JSON_PATH) as f:
         data = json.load(f)
-
 
 def run():
     global running

@@ -17,6 +17,7 @@ class GameObject:
         self.components = components
         self.scene = scene
         self.children = children
+        self.enabled = True
 
     def get_component(self, type):
         for comp in self.components:
@@ -34,6 +35,9 @@ class Scene:
         self.objects = objects
 
     def __update_obj(self, obj):
+        if not obj.enabled:
+            return 
+
         for comp in obj.components:
             comp.update()
 

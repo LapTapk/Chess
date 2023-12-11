@@ -1,9 +1,13 @@
 import pygame
-from . import game_object, renderer, game, \
+import socket
+import re
+from . import game_object, input_box, renderer, game, \
     button, grid, board, grab
 from .vector2 import *
 from .board import BoardUpdater
 from .chess_state_machine import *
+import server, client
+import asyncio
 
 
 def load_image(path):
@@ -23,18 +27,59 @@ def create_mono_bkg(scene, color):
     return go
 
 
-def create_start_button(scene, *funcs):
+def create_button(scene, pos, img_path, *funcs):
     go = game_object.GameObject()
     rend = renderer.Renderer()
     btn = button.Button()
 
-    img = load_image(game.data['play-button'])
+    img = load_image(game.data[img_path])
     rend.init(go, img)
     btn.init(go, rend, *funcs)
 
-    pos = from_tuple(game.screen_size) / 2
     go.init(scene, pos=pos, components=[rend, btn])
     return go
+
+
+def create_connect_button(scene, inpb, create_chess_scene):
+    def try_connect():
+        pat = '.+ .+'
+        success = re.match(pat, inpb.text)
+        if not success:
+            return
+
+        host = inpb.text
+
+        try:
+            game.clnt = client.Client(host, 1234, False)
+            game.clnt.connect()
+        except:
+            return
+
+        game.cur_scene = create_chess_scene(False)
+
+    pos = from_tuple(game.screen_size) / 2 - Vector2(100, 0)
+    btn_go = create_button(scene, pos, 'play-button', try_connect)
+    return btn_go
+
+
+def create_host_button(scene, create_chess_scene, connect_btn):
+    async def host():
+        name = socket.gethostname()
+        address = socket.gethostbyname(name)
+        server.init(address)
+
+        game.clnt = client.Client(address, 1234, True)
+        game.client.connect(address, 1234)
+
+        connect_btn.enabled = False
+        game.clnt.is_white = True
+
+        await asyncio.run(server.wait_until_connection)
+        game.cur_scene = create_chess_scene(True)
+
+    pos = from_tuple(game.screen_size) / 2 + Vector2(100, 0)
+    btn_go = create_button(scene, pos, 'play-button', host)
+    return btn_go
 
 
 def create_plane(scene, is_light, grd, coord):
@@ -99,4 +144,15 @@ def create_chess_state_machine(scene, grd, brd):
 
     machine.init(go, grabber, brd)
     go.init(scene, components=[machine])
+    return go
+
+
+def create_input_box(scene, font_size, invitation):
+    go = game_object.GameObject()
+    inpb = input_box.InputBox()
+
+    inpb.init(go, font_size, invitation)
+
+    pos = from_tuple(game.screen_size) / 2 - Vector2(0, 200)
+    go.init(scene, pos=pos, components=[inpb])
     return go

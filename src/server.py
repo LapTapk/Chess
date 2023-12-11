@@ -3,9 +3,13 @@ import asyncio
 from chessLogic.Board import Board
 import re
 
-async def init(adress):
+server = None
+waiting = True
+
+async def init(address):
+    global server
     new_brd = Board()
-    server = Server(adress, ReqauestHandler, new_brd)
+    server = Server(address, ReqauestHandler, new_brd)
 
     try:
         await asyncio.run(server.serve_forever)
@@ -13,9 +17,15 @@ async def init(adress):
         server.server_close()
         exit()
 
+def wait_until_connection():
+    waiting = True
+    while waiting:
+        pass
+
+
 class Server(http.server.HTTPServer):
-    def __init__(self, server_adress, handler, brd):
-        super.__init__(server_adress, handler)
+    def __init__(self, server_address, handler, brd):
+        super.__init__(server_address, handler)
         self.brd = brd
         self.moves_cnt = 0
 
@@ -28,6 +38,9 @@ class ReqauestHandler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(str(self.server.moves_cnt).encode())
         elif self.path == '/board':
             self.wfile.write(self.server.brd.serialize())
+        elif self.path == '/is_chess':
+            self.wfile.write('YES')
+            
 
     def do_POST(self):
         move = self.rfile.read().decode()
@@ -45,5 +58,10 @@ class ReqauestHandler(http.server.BaseHTTPRequestHandler):
             self.send_error(403)
 
         self.server.moves_cnt += 1
+        self.send_response(200)
+        
+    def do_CONNECT(self):
+        global waiting
+        waiting = False
         self.send_response(200)
         
