@@ -78,7 +78,6 @@ class Board(object):
             return False
 
         # проверка на возможность хода пешкой
-        '''реализовать превращение пешки в другие фигуры, если она дошла до последнего рядя'''
         if self.board[frm[0]][frm[1]].name in ('p', 'P'):
             if self.is_legal_p(frm, to):
                 if to[1] in (0, 7):
@@ -86,6 +85,14 @@ class Board(object):
                 return True
             else:
                 return False
+
+        # проверка на возмжность хода конём
+        if self.board[frm[0]][frm[1]].name in ('n', 'N'):
+            if self.is_legal_n(frm, to):
+                return True
+            else:
+                return False
+
 
 
 
@@ -137,6 +144,16 @@ class Board(object):
             if self.board[to[0]][to[1]].name in ('k', 'K'):
                 return False
             return True
+
+    def is_legal_n(self, frm, to):
+        if to[0] < 0 or to[0] > 7 or to[1] < 0 or to[1] > 7:
+            return False
+        if (abs(frm[0] - to[0]) == 1 and abs(frm[1] - to[1]) == 2) or \
+                (abs(frm[0] - to[0]) == 2 and abs(frm[1] - to[1]) == 1):
+            return True
+        else:
+            return False
+
 
     def move(self, frm, to):
         self.board[frm[0]][frm[1]].position = to
