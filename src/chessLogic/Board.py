@@ -93,7 +93,12 @@ class Board(object):
             else:
                 return False
 
-
+        # проверка на возможность хода ладьёй
+        if self.board[frm[0]][frm[1]].name in ('r', 'R'):
+            if self.is_legal_r(frm, to):
+                return True
+            else:
+                return False
 
 
 
@@ -148,11 +153,33 @@ class Board(object):
     def is_legal_n(self, frm, to):
         if to[0] < 0 or to[0] > 7 or to[1] < 0 or to[1] > 7:
             return False
+        if self.board[to[0]][to[1]].name in ('k', 'K') or \
+            self.board[to[0]][to[1]].color == self.board[frm[0]][frm[1]].color:
+            return False
         if (abs(frm[0] - to[0]) == 1 and abs(frm[1] - to[1]) == 2) or \
                 (abs(frm[0] - to[0]) == 2 and abs(frm[1] - to[1]) == 1):
             return True
         else:
             return False
+
+    def is_legal_r(self, frm, to):
+        if to[0] < 0 or to[0] > 7 or to[1] < 0 or to[1] > 7:
+            return False
+        if self.board[to[0]][to[1]].name in ('k', 'K') or \
+                self.board[to[0]][to[1]].color == self.board[frm[0]][frm[1]].color:
+            return False
+        if frm[0] != to[0] and frm[1] != to[1]:
+            return False
+        if frm[0] == to[0]:
+            for i in range(min(frm[1], to[1]) + 1, max(frm[1], to[1])):
+                if self.board[frm[0]][i].name != '.':
+                    return False
+            return True
+        if frm[1] == to[1]:
+            for i in range(min(frm[0], to[0]) + 1, max(frm[0], to[0])):
+                if self.board[i][frm[1]].name != '.':
+                    return False
+            return True
 
 
     def move(self, frm, to):
