@@ -25,7 +25,7 @@ class UserTurnState:
         self.brd_updater = brd_updater
 
     def on_start(self):
-        brd = game.clnt.try_get_board()
+        brd = game.clnt.get_board()
         self.brd_updater.update_board(brd, True, game.clnt.is_white)
 
     def handle_input(self):
@@ -54,7 +54,7 @@ class EnemyTurnState:
         self.brd_update = brd_updater
 
     def on_start(self):
-        brd = game.clnt.try_get_board()
+        brd = game.clnt.get_board()
         self.brd_updater.update_board(brd, game.clnt.is_white, False)
 
     def update(self):

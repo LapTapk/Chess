@@ -1,4 +1,6 @@
 import http.client
+import json
+from chessLogic.Board import Board
 
 
 class Client:
@@ -8,13 +10,24 @@ class Client:
         self.local_moves_cnt = 0
 
     def send_move(self, frm, to):
-        self.connection.request('POST', '', body=' '.join(frm + to))
+        msg = ' '.join(frm + to)
+        self.connection.request('POST', '', body=msg)
 
         response = self.connection.getresponse()
-        return response.getcode() == '200'
+        return response.getcode() == 200
     
-    def try_get_board(self):
-        pass
+    def get_board(self):
+        self.connection.request('GET', '/board')
+        response = self.connection.getresponse()
+        b_data = json.loads(response.read().decode())
+        
+        self.connection.request('GET', '/moves_cnt')
+        response = self.connection.getresponse()
+        moves_cnt = int(response.read().decode())
+        self.local_moves_cnt = moves_cnt
+        
+        return Board.deserialize(b_data)
+        
 
     def has_moved(self):
         self.connection.request('GET', '/moves_cnt')

@@ -22,6 +22,8 @@ def init(address):
     is_init = True 
     new_brd = Board()
     server = Server(address, ReqauestHandler, new_brd)
+    print(address)
+
     server_thr = threading.Thread(target=__start_server)
     server_thr.daemon = True
     server_thr.start()
@@ -42,13 +44,18 @@ class Server(http.server.HTTPServer):
 
 
 class ReqauestHandler(http.server.BaseHTTPRequestHandler):
+    def __send_headers(self):
+        self.send_header('Content-type', 'text/html')
+        self.end_headers()
+
     def do_GET(self):
-        self.send_response('200')
+        self.send_response(200)
+        self.__send_headers()
 
         if self.path == '/moves_cnt':
             self.wfile.write(str(self.server.moves_cnt).encode())
         elif self.path == '/board':
-            self.wfile.write(self.server.brd.serialize())
+            self.wfile.write(self.server.brd.serialize().encode())
         elif self.path == '/is_chess':
             self.wfile.write('YES'.encode())
             
@@ -69,11 +76,13 @@ class ReqauestHandler(http.server.BaseHTTPRequestHandler):
             self.send_error(403)
 
         self.server.moves_cnt += 1
+        self.__send_headers()
         self.send_response(200)
         
     def do_CONNECT(self):
         print('hola')
         global waiting
         waiting = False
+        self.__send_headers()
         self.send_response(200)
         
