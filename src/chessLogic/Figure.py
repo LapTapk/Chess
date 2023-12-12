@@ -103,3 +103,8 @@ class Pawn(Figure):
         """вывод фигуры в консоль -
         белые в верхнем регистре, чёрные в нижнем"""
         return self.name
+
+    def transformation(self, board):
+        # пока всегда превращяется в ферзя
+        board[self.position[0]][self.position[1]] = Queen(self.color, self.position)
+        pass

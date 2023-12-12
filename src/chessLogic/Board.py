@@ -57,25 +57,104 @@ class Board(object):
         return self.board
 
     def __init__(self):
+        self.lastMovefrm = (0, 0)
+        self.lastMoveto = (0, 0)
         self.board = [[Figure.Figure() for j in range(self.lenght)]
                       for i in range(self.lenght)]
         self.board = self.startPosition()
+        self.colorMove = 'white'
+
 
     def showBoardConsole(self):
         for i in range(len(self.board)):
             for j in range(len(self.board[i])):
                 print(self.board[i][j].showFigureConsole(), end='')
             print()
+        print("###########################")
 
     def is_legal(self, frm, to):
-        return self.board[to.x][to.y].name == '.'
+        # проверка на правильный цвет выбраннй фигуры
+        if self.colorMove != self.board[frm[0]][frm[1]].color:
+            return False
+
+        # проверка на возможность хода пешкой
+        '''реализовать превращение пешки в другие фигуры, если она дошла до последнего рядя'''
+        if self.board[frm[0]][frm[1]].name in ('p', 'P'):
+            if self.is_legal_p(frm, to):
+                if to[1] in (0, 7):
+                    self.board[frm[0]][frm[1]].transformation(self.board)
+                return True
+            else:
+                return False
+
+
+
+
+        pass
+
+        # return self.board[to.x][to.y].name == '.'
+
+    def is_legal_p(self, frm, to):
+        if abs(frm[1] - to[1]) > 2 or abs(frm[1] - to[1]) < 1 or \
+                (abs(frm[1] - to[1]) == 2 and (frm[1] not in (1, 6))) or \
+                abs(frm[0] - to[0]) > 1:
+            return False
+        # проверка на правильность направления хода
+        if self.colorMove == 'white' and frm[1] >= to[1]:
+            return False
+        if self.colorMove == 'black' and frm[1] <= to[1]:
+            return False
+
+        # пешка идёт вперёд
+        if frm[0] == to[0]:
+            if abs(frm[1] - to[1]) == 1 and self.board[to[0]][to[1]].name == '.':
+                return True
+            if self.colorMove == 'white':
+                if abs(frm[1] - to[1]) == 2 and self.board[to[0]][to[1]].name == '.' and \
+                        self.board[to[0]][to[1] - 1].name == '.':
+                    return True
+            elif abs(frm[1] - to[1]) == 2 and self.board[to[0]][to[1]].name == '.' and \
+                    self.board[to[0]][to[1] + 1].name == '.':
+                return True
+            else:
+                return False
+        # пешка бьёт другую фигуру
+        else:
+            # есть фигуры своего цвета нельзя
+            if self.board[to[0]][to[1]].color == self.board[frm[0]][frm[1]]:
+                return False
+            # проверка на взятие на проходе (убирает взятую на проходе пешку в проверке на ход)
+            if self.board[to[0]][to[1]].name == '.':
+                if self.board[to[0]][frm[1]].name in ('p' or 'P') and \
+                        self.board[to[0]][frm[1]].color != self.board[frm[0]][frm[1]].color and \
+                        self.lastMoveto == (to[0], frm[1]) and \
+                        abs(self.lastMovefrm[1] - self.lastMoveto[1]) == 2:
+                    self.board[to[0]][frm[1]] = Figure.Figure()
+                    #self.lastMoveto == to and self.lastMovefrm == frm
+                    return True
+                else:
+                    return False
+            if self.board[to[0]][to[1]].name in ('k', 'K'):
+                return False
+            return True
 
     def move(self, frm, to):
-        pass
+        self.board[frm[0]][frm[1]].position = to
+        self.board[to[0]][to[1]] = self.board[frm[0]][frm[1]]
+        self.board[frm[0]][frm[1]] = Figure.Figure()
 
     def try_move(self, frm, to):
         if not self.is_legal(frm, to):
+            print("ILLLEGAL MOVE")
             return False
 
+        self.lastMovefrm = frm
+        self.lastMoveto = to
         self.move(frm, to)
+        if self.colorMove == 'white':
+            self.colorMove = 'black'
+        else:
+            self.colorMove = 'white'
+
+        print("Move done!!!!!!!!!!!")
         return True
