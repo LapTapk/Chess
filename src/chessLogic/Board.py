@@ -68,10 +68,12 @@ class Board(object):
             print()
 
     def is_legal(self, frm, to):
-        return self.board[to.x][to.y].name == '.'
+        return self.board[to[0]][to[1]].name == '.'
 
     def move(self, frm, to):
-        pass
+        figure = self.board[to[0]][to[1]] = self.board[frm[0]][frm[1]]
+        figure.position = to
+        self.board[frm[0]][frm[1]] = Figure.Figure(position=frm)
 
     def try_move(self, frm, to):
         if not self.is_legal(frm, to):
@@ -91,7 +93,6 @@ class Board(object):
                 
             res += ']' + (',' if i != 7 else '')
         res += ']}'
-        print(res)
         return res
     
     def deserialize(data):

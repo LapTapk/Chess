@@ -1,6 +1,7 @@
 from .grid import GridBinder, find_closest
 import pygame
 from .vector2 import *
+from . import game
 
 
 class Grabber:

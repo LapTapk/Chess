@@ -24,7 +24,8 @@ class BoardUpdater:
         go.init(scene, components=[rend, grabable, binder, figure_data])
         return go
 
-    def create_figures(self, board, user_color, is_user_free):
+    def create_figures(self, board, is_white, is_user_free):
+        user_color = 'white' if is_white else 'black'
         res = []
         for i in range(Board.lenght):
             for j in range(Board.lenght):
@@ -34,7 +35,7 @@ class BoardUpdater:
 
                 coord = Vector2(i, j)
                 if user_color == 'white':
-                    coord.y = Board.lenght - coord.y - 1
+                    coord = Vector2(Board.lenght - 1, Board.lenght - 1) - coord
 
                 scene = self.go.scene
                 owned_by_user = user_color == figure.color

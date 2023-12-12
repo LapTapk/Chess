@@ -1,7 +1,7 @@
 import pygame
 import socket
 from . import game_object, input_box, renderer, game, \
-    button, grid, board, grab
+    button, grid, board, grab, connection_checker
 from .vector2 import *
 from .board import BoardUpdater
 from .chess_state_machine import *
@@ -44,23 +44,16 @@ def create_connect_button(scene, inpb, create_chess_scene):
         host = inpb.text
         try:
             game.clnt = client.Client(host, 1234, False)
-            game.clnt.is_white = False
         except Exception as e:
             print(e)
             return
-
-        game.cur_scene = create_chess_scene()
 
     pos = from_tuple(game.screen_size) / 2 - Vector2(100, 0)
     btn_go = create_button(scene, pos, 'play-button', try_connect)
     return btn_go
 
 
-def create_host_button(scene, create_chess_scene, connect_btn):
-    def wait_untill_connection():
-        server.wait_until_connection()
-        game.cur_scene = create_chess_scene()
-
+def create_host_button(scene, connect_btn):
     def host():
         if server.is_init:
             return 
@@ -69,17 +62,13 @@ def create_host_button(scene, create_chess_scene, connect_btn):
         server.init((address, 1234))
 
         game.clnt = client.Client(address, 1234, True)
-        game.clnt.is_white = True
 
         connect_btn.enabled = False
-
-        thr = threading.Thread(target=wait_untill_connection)
-        thr.daemon = True
-        thr.start()
 
 
     pos = from_tuple(game.screen_size) / 2 + Vector2(100, 0)
     btn_go = create_button(scene, pos, 'play-button', host)
+
     return btn_go
 
 
@@ -155,4 +144,11 @@ def create_input_box(scene, font_size, invitation):
 
     pos = from_tuple(game.screen_size) / 2 - Vector2(0, 200)
     go.init(scene, pos=pos, components=[inpb])
+    return go
+
+def create_con_checker(scene):
+    go = game_object.GameObject()
+    con_checker = connection_checker.ConnectionChecker()
+
+    go.init(scene, components=[con_checker])
     return go
