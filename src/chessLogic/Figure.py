@@ -104,7 +104,16 @@ class Pawn(Figure):
         белые в верхнем регистре, чёрные в нижнем"""
         return self.name
 
-    def transformation(self, board):
+    def transformation(self, board, figure='q'):
         # пока всегда превращяется в ферзя
-        board[self.position[0]][self.position[1]] = Queen(self.color, self.position)
-        pass
+        if figure in ('q', 'Q'):
+            board[self.position[0]][self.position[1]] = Queen(self.color, self.position)
+        if figure in ('k', 'K'):
+            board[self.position[0]][self.position[1]] = King(self.color, self.position)
+        if figure in ('b', 'B'):
+            board[self.position[0]][self.position[1]] = Bishop(self.color, self.position)
+        if figure in ('n', 'N'):
+            board[self.position[0]][self.position[1]] = Knight(self.color, self.position)
+        if figure in ('r', 'R'):
+            board[self.position[0]][self.position[1]] = Rock(self.color, self.position)
+
