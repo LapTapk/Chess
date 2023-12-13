@@ -2,8 +2,6 @@ import json
 import threading
 import pygame
 
-DATA_JSON_PATH = 'game_data.json'
-
 screen = None
 clock = None
 is_running = False
@@ -16,7 +14,7 @@ events = None
 clnt = None
 
 
-def init(scr_size, fps_in):
+def init(scr_size, fps_in, data_json_path):
     global screen, clock, running, is_init
     global fps, cur_scene, screen_size
     global data
@@ -35,7 +33,7 @@ def init(scr_size, fps_in):
 
     is_init = True
 
-    with open(DATA_JSON_PATH) as f:
+    with open(data_json_path) as f:
         data = json.load(f)
 
 def run():
