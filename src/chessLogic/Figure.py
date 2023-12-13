@@ -3,7 +3,7 @@ class Figure():
 
     name = '.'
 
-    def __init__(self, color='white', position=(0, 0)):
+    def __init__(self, color='neutral', position=(0, 0)):
         self.color = color
         self.position = position
 
