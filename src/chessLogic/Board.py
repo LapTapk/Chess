@@ -63,6 +63,8 @@ class Board(object):
                       for i in range(self.lenght)]
         self.board = self.startPosition()
         self.colorMove = 'white'
+        self.whiteKingPos = (3, 0)
+        self.blackKingPos = (3, 7)
 
 
     def showBoardConsole(self):
@@ -73,6 +75,14 @@ class Board(object):
         print("###########################")
 
     def is_legal(self, frm, to):
+        # проверка на края доски
+        if to[0] < 0 or to[0] > 7 or to[1] < 0 or to[1] > 7:
+            return False
+        # проверка на съедение короля и фигур своего цвета
+        if self.board[to[0]][to[1]].name in ('k', 'K') or \
+            self.board[to[0]][to[1]].color == self.board[frm[0]][frm[1]].color:
+            return False
+
         # проверка на правильный цвет выбраннй фигуры
         if self.colorMove != self.board[frm[0]][frm[1]].color:
             return False
@@ -99,10 +109,22 @@ class Board(object):
                 return True
             else:
                 return False
+        # проверка на возможность хода слоном
+        if self.board[frm[0]][frm[1]].name in ('b', 'B'):
+            if self.is_legal_b(frm, to):
+                return True
+            else:
+                return False
 
+        # проверка на возможность хода ферзём
+        if self.board[frm[0]][frm[1]].name in ('q', 'Q'):
+            if self.is_legal_q(frm, to):
+                return True
+            else:
+                return False
 
-
-        pass
+        if self.board[frm[0]][frm[1]].name in ('k', 'K'):
+            pass
 
         # return self.board[to.x][to.y].name == '.'
 
@@ -151,23 +173,27 @@ class Board(object):
             return True
 
     def is_legal_n(self, frm, to):
-        if to[0] < 0 or to[0] > 7 or to[1] < 0 or to[1] > 7:
-            return False
-        if self.board[to[0]][to[1]].name in ('k', 'K') or \
-            self.board[to[0]][to[1]].color == self.board[frm[0]][frm[1]].color:
-            return False
         if (abs(frm[0] - to[0]) == 1 and abs(frm[1] - to[1]) == 2) or \
                 (abs(frm[0] - to[0]) == 2 and abs(frm[1] - to[1]) == 1):
             return True
         else:
             return False
 
+    def is_legal_b(self, frm, to):
+        if abs(frm[0] - to[0]) != abs(frm[1] - to[1]):
+            return False
+        i_plus = 1 if frm[0] < to[0] else -1
+        j_plus = 1 if frm[1] < to[0] else -1
+        i = frm[0] + i_plus
+        j = frm[1] + j_plus
+        while i != to[0] and j != to[1]:
+            if self.board[i][j].name != '.':
+                return False
+            i += i_plus
+            j += j_plus
+        return True
+
     def is_legal_r(self, frm, to):
-        if to[0] < 0 or to[0] > 7 or to[1] < 0 or to[1] > 7:
-            return False
-        if self.board[to[0]][to[1]].name in ('k', 'K') or \
-                self.board[to[0]][to[1]].color == self.board[frm[0]][frm[1]].color:
-            return False
         if frm[0] != to[0] and frm[1] != to[1]:
             return False
         if frm[0] == to[0]:
@@ -181,24 +207,135 @@ class Board(object):
                     return False
             return True
 
+    def is_legal_q(self, frm, to):
+        # проверка равна проверке хода ладьи или слона
+        if self.is_legal_r(frm, to) or self.is_legal_b(frm, to):
+            return True
+        else:
+            return False
+
+    def is_legal_k(self, frm, to):
+        # проверка на шах
+        # проверка на рокировку (добавить поле у короля на возможность рокировки)
+        pass
+
+    def is_checked_on_pos(self, pos, king_color):           #нужна проверка на вскрытый шах после отхода своей фигуры!!
+        # проверка на короля противника, около клетки pos
+        around = [(0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1)]
+        for i, j in around:
+            if (0 <= pos[0] + i <= 7) and (0 <= pos[1] + j <= 7) and \
+                    self.board[pos[0] + i][pos[1] + j].name in ('k', 'K') and \
+                    self.board[pos[0] + i][pos[1] + j].color != king_color:
+                return True
+
+        # проверка на шах по j
+        for j in range(pos[1] - 1, -1, -1):
+            if self.board[pos[0]][j].name == '.':
+                continue
+            if self.board[pos[0]][j].color == king_color:
+                break
+            else:
+                if self.board[pos[0]][j].name in ('q', 'Q', 'r', 'R'):
+                    return True
+                if self.board[pos[0]][j].name in ('n', 'N', 'b', 'B', 'p', 'P', 'k', 'K'):
+                    break
+
+        for j in range(pos[1] + 1, 8):
+            if self.board[pos[0]][j].name == '.':
+                continue
+            if self.board[pos[0]][j].color == king_color:
+                break
+            else:
+                if self.board[pos[0]][j].name in ('q', 'Q', 'r', 'R'):
+                    return True
+                if self.board[pos[0]][j].name in ('n', 'N', 'b', 'B', 'p', 'P', 'k', 'K'):
+                    break
+
+        # проверка на шах по i
+        for i in range(pos[0] - 1, -1, -1):
+            if self.board[i][pos[1]].name == '.':
+                continue
+            if self.board[i][pos[1]].color == king_color:
+                break
+            else:
+                if self.board[i][pos[1]].name in ('q', 'Q', 'r', 'R'):
+                    return True
+                if self.board[i][pos[1]].name in ('n', 'N', 'b', 'B', 'p', 'P', 'k', 'K'):
+                    break
+                '''
+                if self.board[i][pos[1]].name in ('k', 'K') and i == pos[0] - 1:
+                    return True
+                else:
+                    break
+                    '''
+
+        for i in range(pos[0] + 1, 8):
+            if self.board[i][pos[1]].name == '.':
+                continue
+            if self.board[i][pos[1]].color == king_color:
+                break
+            else:
+                if self.board[i][pos[1]].name in ('q', 'Q', 'r', 'R'):
+                    return True
+                if self.board[i][pos[1]].name in ('n', 'N', 'b', 'B', 'p', 'P', 'k', 'K'):
+                    break
+
+        # проверка на шах по диагоналям
+        diag = [(1, 1), (-1, 1), (-1, -1), (1, -1)]
+        for i_plus, j_plus in diag:
+            i = pos[0] + i_plus
+            j = pos[1] + j_plus
+
+            # проверка на шах от пешек
+            if (0 <= i <= 7) and (0 <= j <= 7) and \
+                    j_plus == 1 and king_color == 'white' and self.board[i][j].name == 'p':
+                return True
+            if (0 <= i <= 7) and (0 <= j <= 7) and \
+                    j_plus == -1 and king_color == 'black' and self.board[i][j].name == 'P':
+                return True
+
+            while (0 <= i <= 7) and (0 <= j <= 7):
+                if self.board[i][j].name == '.':
+                    i += i_plus
+                    j += j_plus
+                    continue
+                if self.board[i][j].color == king_color:
+                    break
+                else:
+                    if self.board[i][j].name in ('q', 'Q', 'b', 'B'):
+                        return True
+                    if self.board[i][j].name in ('n', 'N', 'r', 'R', 'p', 'P'):
+                        break
+
+        # проверка на шах от коней
+        directions = [(-2, -1), (-1, -2), (1, -2), (2, -1), (2, 1), (1, 2), (-1, 2), (-2, 1)]
+        knight_name = 'n' if king_color == 'white' else 'N'
+        for i, j in directions:
+            if (0 <= pos[0] + i <= 7) and (0 <= pos[1] + j <= 7) and \
+                    self.board[pos[0] + i][pos[1] + j].name == knight_name:
+                return True
+
+        # прошли все проверки на шах - нет шаха
+        return False
+
 
     def move(self, frm, to):
         self.board[frm[0]][frm[1]].position = to
         self.board[to[0]][to[1]] = self.board[frm[0]][frm[1]]
         self.board[frm[0]][frm[1]] = Figure.Figure()
+        self.lastMovefrm = frm
+        self.lastMoveto = to
+        if self.colorMove == 'white':
+            self.colorMove = 'black'
+        else:
+            self.colorMove = 'white'
 
     def try_move(self, frm, to):
         if not self.is_legal(frm, to):
             print("ILLLEGAL MOVE")
             return False
 
-        self.lastMovefrm = frm
-        self.lastMoveto = to
-        self.move(frm, to)
-        if self.colorMove == 'white':
-            self.colorMove = 'black'
-        else:
-            self.colorMove = 'white'
 
+        self.move(frm, to)
         print("Move done!!!!!!!!!!!")
         return True
