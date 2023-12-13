@@ -27,6 +27,7 @@ class King(Figure):
     def __init__(self, color, position):
         super().__init__(color, position)
         self.name = self.registerFromColor()
+        self.did_move = False
 
     def showFigureConsole(self):
         """вывод фигуры в консоль -
@@ -56,6 +57,7 @@ class Rock(Figure):
     def __init__(self, color, position):
         super().__init__(color, position)
         self.name = self.registerFromColor()
+        self.did_move = False
 
     def showFigureConsole(self):
         """вывод фигуры в консоль -
