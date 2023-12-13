@@ -1,6 +1,6 @@
 from . import Figure
 
-
+# проверить на что-то влияло-ли начальное поле короля????????????????
 class Board(object):
     lenght = 8
 
@@ -32,10 +32,10 @@ class Board(object):
                     if j == 2 or j == 5:
                         self.board[j][i] = Figure.Bishop("white", (j, i))
                     """создание королевы"""
-                    if j == 4:
+                    if j == 3:
                         self.board[j][i] = Figure.Queen("white", (j, i))
                     """создание короля"""
-                    if j == 3:
+                    if j == 4:
                         self.board[j][i] = Figure.King("white", (j, i))
 
                 if i == 7:
@@ -49,10 +49,10 @@ class Board(object):
                     if j == 2 or j == 5:
                         self.board[j][i] = Figure.Bishop("black", (j, i))
                     """создание королевы"""
-                    if j == 4:
+                    if j == 3:
                         self.board[j][i] = Figure.Queen("black", (j, i))
                     """создание короля"""
-                    if j == 3:
+                    if j == 4:
                         self.board[j][i] = Figure.King("black", (j, i))
         return self.board
 
@@ -75,6 +75,9 @@ class Board(object):
         print("###########################")
 
     def is_legal(self, frm, to):
+        # проверка на отсутсвие хода
+        if frm[0] == to[0] and frm[1] == to[1]:
+            return False
         # проверка на края доски
         if to[0] < 0 or to[0] > 7 or to[1] < 0 or to[1] > 7:
             return False
@@ -124,9 +127,10 @@ class Board(object):
                 return False
 
         if self.board[frm[0]][frm[1]].name in ('k', 'K'):
-            pass
-
-        # return self.board[to.x][to.y].name == '.'
+            if self.is_legal_k(frm, to):
+                return True
+            else:
+                return False
 
     def is_legal_p(self, frm, to):
         if abs(frm[1] - to[1]) > 2 or abs(frm[1] - to[1]) < 1 or \
@@ -215,9 +219,15 @@ class Board(object):
             return False
 
     def is_legal_k(self, frm, to):
-        # проверка на шах
+        # проверка на шах при ходе на 1 клетку
+        if abs(frm[0] - to[0]) < 2 and abs(frm[1] - to[1]) < 2 and \
+                not self.is_checked_on_pos(to, self.board[frm[0]][frm[1]].color):
+            return True
         # проверка на рокировку (добавить поле у короля на возможность рокировки)
-        pass
+        if abs(frm[0] - to[0]) == 2 and self.is_castling_legal(frm, to):
+            return True
+        else:
+            return False
 
     def is_checked_on_pos(self, pos, king_color):           #нужна проверка на вскрытый шах после отхода своей фигуры!!
         # проверка на короля противника, около клетки pos
@@ -315,12 +325,61 @@ class Board(object):
                     self.board[pos[0] + i][pos[1] + j].name == knight_name:
                 return True
 
-        # прошли все проверки на шах - нет шаха
+        # прошли все проверки на шах -> нет шаха
         return False
+
+    def is_castling_legal(self, frm, to):
+        if self.board[frm[0]][frm[1]].did_move:
+            return False
+        if self.board[frm[0]][frm[1]].color == 'white':
+            if frm[0] != 4 and frm[1] != 0:
+                return False
+            # (7, 0), (0, 0) - координаты ладей
+            if to[0] == 6 and to[1] == 0 and self.board[7][0].name == 'R' and \
+                not self.board[7][0].did_move and self.board[5][0].name == '.' and \
+                    self.board[6][0].name == '.' and not self.is_checked_on_pos((5, 0), 'white') and \
+                    not self.is_checked_on_pos((6, 0), 'white'):
+                # рокировка будет сделана, поэтому переместим ладью сразу из проверки
+                self.move((7, 0), (5, 0))
+                return True
+            if to[0] == 2 and to[1] == 0 and self.board[0][0].name == 'R' and \
+                not self.board[0][0].did_move and self.board[3][0].name == '.' and \
+                    self.board[2][0].name == '.' and self.board[1][0].name == '.' and \
+                    not self.is_checked_on_pos((3, 0), 'white') and \
+                    not self.is_checked_on_pos((2, 0), 'white') and \
+                    not self.is_checked_on_pos((1, 0), 'white'):
+                # рокировка будет сделана, поэтому переместим ладью сразу из проверки
+                self.move((0, 0), (3, 0))
+                return True
+            return False
+        else:
+            if frm[0] != 4 and frm[1] != 7:
+                return False
+            # (7, 7), (0, 7) - координаты ладей
+            if to[0] == 6 and to[1] == 7 and self.board[7][7].name == 'r' and \
+                not self.board[7][7].did_move and self.board[5][7].name == '.' and \
+                    self.board[6][7].name == '.' and not self.is_checked_on_pos((5, 7), 'black') and \
+                    not self.is_checked_on_pos((6, 7), 'black'):
+                # рокировка будет сделана, поэтому переместим ладью сразу из проверки
+                self.move((7, 7), (5, 7))
+                return True
+            if to[0] == 2 and to[0] == 7 and self.board[0][7].name == 'r' and \
+                not self.board[0][7].did_move and self.board[3][7].name == '.' and \
+                    self.board[2][7].name == '.' and self.board[1][7].name == '.' and \
+                    not self.is_checked_on_pos((3, 7), 'black') and \
+                    not self.is_checked_on_pos((2, 7), 'black') and \
+                    not self.is_checked_on_pos((1, 7), 'black'):
+                # рокировка будет сделана, поэтому переместим ладью сразу из проверки
+                self.move((0, 7), (3, 7))
+                return True
+            return False
+
 
 
     def move(self, frm, to):
         self.board[frm[0]][frm[1]].position = to
+        if self.board[frm[0]][frm[1]].name in ('k', 'K', 'r', 'R') and not self.board[frm[0]][frm[1]].did_move:
+            self.board[frm[0]][frm[1]].did_move = True
         self.board[to[0]][to[1]] = self.board[frm[0]][frm[1]]
         self.board[frm[0]][frm[1]] = Figure.Figure()
         self.lastMovefrm = frm
@@ -329,6 +388,7 @@ class Board(object):
             self.colorMove = 'black'
         else:
             self.colorMove = 'white'
+
 
     def try_move(self, frm, to):
         if not self.is_legal(frm, to):
