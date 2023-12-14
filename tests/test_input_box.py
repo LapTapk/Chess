@@ -35,23 +35,21 @@ def test_text_input():
 
     event = mock.Mock()
     event.type = pygame.KEYDOWN
-    event.unicode = 'W'
+    event.unicode = '1'
     game.events = [event]
 
     ib.update()
 
-    event = mock.Mock()
     event.type = pygame.KEYDOWN
-    event.unicode = 'o'
+    event.unicode = '.'
     game.events = [event]
 
     ib.update()
 
-    event = mock.Mock()
     event.type = pygame.KEYDOWN
-    event.unicode = '⏎'
+    event.unicode = 'g'
     game.events = [event]
 
     ib.update()
 
-    assert ib.text == 'Wo'
+    assert ib.text == '1.'
