@@ -398,4 +398,28 @@ class Board(object):
 
         self.move(frm, to)
         print("Move done!!!!!!!!!!!")
-        return True
+        return True    
+
+
+    def serialize(self):
+        res = '{"board": ['
+        for i in range(Board.lenght):
+            res += '['
+            for j in range(Board.lenght):
+                ser = self.board[i][j].serialize()
+                res += ser + (',' if j != 7 else '')
+                
+            res += ']' + (',' if i != 7 else '')
+        res += ']}'
+        return res
+    
+    def deserialize(data):
+        board = data['board']
+        res = Board()
+
+        for i in range(Board.lenght):
+            for j in range(Board.lenght):
+                figure = Figure.Figure.deserialize(board[i][j])
+                res.board[i][j] = figure
+        
+        return res

@@ -1,32 +1,58 @@
 import http.client
+import json
+from chessLogic.Board import Board
 
 
 class Client:
     def __init__(self, host, port, is_white):
-        self.connection = http.client.HTTPConnection(host, port)
+        self.address = (host, port)
         self.is_white = is_white
         self.local_moves_cnt = 0
 
-    def connect(self):
-        self.connetion.connect()
-
-        self.connection.request('GET', '/is_chess')
-        response = self.connection.getresponse()
-        response_msg = response.read().decode() 
-        return response.getcode() == '200' and response_msg == "YES"
+        conn = http.client.HTTPConnection(host, port)
+        conn.request('POST', '/conn')
+        conn.close()
 
     def send_move(self, frm, to):
-        self.connection.request('POST', '', body=' '.join(frm + to))
+        if self.is_white:
+            frm = (7 - frm[0], 7 - frm[1])
+            to = (7 - to[0], 7 - to[1])
 
-        response = self.connection.getresponse()
-        return response.getcode() == '200'
-    
-    def try_get_board(self):
-        pass
+        msg = ' '.join(map(str, frm + to))
+        host, port = self.address
+        conn = http.client.HTTPConnection(host, port)
+        conn.request('POST', '/move', body=msg,
+                     headers={'Content-Type': 'text/plain', 'Content-Length': '7'})
+
+        response = conn.getresponse()
+        return response.getcode() == 200
+
+    def get_board(self):
+        host, port = self.address
+        conn = http.client.HTTPConnection(host, port)
+        conn.request('GET', '/board')
+        response = conn.getresponse()
+        b_data = json.loads(response.read().decode())
+
+        moves_cnt = self.get_moves()
+        self.local_moves_cnt = moves_cnt
+
+        return Board.deserialize(b_data)
+
+    def get_moves(self):
+        host, port = self.address
+        conn = http.client.HTTPConnection(host, port)
+        conn.request('GET', '/moves_cnt')
+        response = conn.getresponse()
+        return int(response.read().decode())
 
     def has_moved(self):
-        self.connection.request('GET', '/moves_cnt')
-        response = self.connection.getresponse()
-        server_moves_cnt = int(response.read().decode())
-
-        return self.local_moves_cnt == server_moves_cnt
+        server_moves_cnt = self.get_moves()
+        return self.local_moves_cnt != server_moves_cnt
+    
+    def get_conn(self):
+        host, port = self.address
+        conn = http.client.HTTPConnection(host, port)
+        conn.request('GET', '/conn')
+        response = conn.getresponse()
+        return int(response.read().decode())

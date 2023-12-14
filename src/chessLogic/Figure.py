@@ -1,3 +1,6 @@
+import json
+
+
 class Figure():
     """класс фигуры"""
 
@@ -17,6 +20,24 @@ class Figure():
             return self.name.upper()
         else:
             return self.name.lower()
+    
+    def serialize(self):
+        res = json.dumps(self, default=lambda o: o.__dict__, 
+                sort_keys=True, indent=4)
+        res = f'{{"type": "{type(self).__name__}",\n' + res[1:]
+        return res
+
+    
+    def deserialize(data):
+        figure_types = {'Figure': Figure, 'Pawn': Pawn, 
+                        'Rock': Rock, 'Bishop': Bishop, 
+                        'Knight': Knight, 'Queen': Queen,
+                        'King': King}
+        cur_type = figure_types[data['type']]
+        color = data['color']
+        pos = data['position']
+        return cur_type(color, pos)
+        
 
 
 class King(Figure):

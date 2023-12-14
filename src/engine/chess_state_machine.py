@@ -8,7 +8,8 @@ class ChessStateMachine:
         self.cur_state = None
         self.user_turn_state = UserTurnState(self, grabber, brd_updater)
         self.enemy_turn_state = EnemyTurnState(self, brd_updater)
-        self.change_state(self.user_turn_state)
+        first_state = self.user_turn_state if game.clnt.is_white else self.enemy_turn_state
+        self.change_state(first_state)
 
     def change_state(self, new_state):
         self.cur_state = new_state
@@ -25,8 +26,8 @@ class UserTurnState:
         self.brd_updater = brd_updater
 
     def on_start(self):
-        brd = game.client.try_get_board()
-        self.brd_updater.update_board(brd, True, game.client.is_white)
+        brd = game.clnt.get_board()
+        self.brd_updater.update_board(brd, game.clnt.is_white, True)
 
     def handle_input(self):
         for event in game.events:
@@ -37,10 +38,11 @@ class UserTurnState:
             if grabber.grabbed == None:
                 grabber.try_grab()
             else:
-                frm, to = grabber.get_move()
-                success = game.client.send_move(frm, to)
+                frm, to = map(lambda x: x.to_tuple(), grabber.get_move())
+                success = game.clnt.send_move(frm, to)
                 if success:
                     self.machine.change_state(self.machine.enemy_turn_state)
+                    grabber.grabbed = None
 
     def update(self):
         self.handle_input()
@@ -51,19 +53,22 @@ class EnemyTurnState:
         self.machine = machine
         self.clock = pygame.time.Clock()
         self.request_interval = game.data['request-interval']
-        self.brd_update = brd_updater
+        self.brd_updater = brd_updater
+        self.last_check_time = 0
 
     def on_start(self):
-        brd = game.client.try_get_board()
-        self.brd_updater.update_board(brd, game.client.is_white, False)
+        brd = game.clnt.get_board()
+        self.brd_updater.update_board(brd, game.clnt.is_white, False)
 
     def update(self):
-        delta_time = self.clock.tick()
-        if delta_time < self.request_interval:
+        time = pygame.time.get_ticks()
+        if  self.last_check_time + self.request_interval > time:
             return 
 
-        has_moved = game.client.has_moved()
-        if has_moved:
+        self.last_check_time = time
+
+        has_moved = game.clnt.has_moved()
+        if not has_moved:
             return
 
         self.machine.change_state(self.machine.user_turn_state)

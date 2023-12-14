@@ -1,6 +1,7 @@
 from .grid import GridBinder, find_closest
 import pygame
 from .vector2 import *
+from . import game
 
 
 class Grabber:
@@ -54,9 +55,8 @@ class Grabable:
 
 
 class FigureGrabber(Grabber):
-    def init(self, go, grd, board_logic):
+    def init(self, go, grd):
         self.grd = grd
-        self.board_logic = board_logic
         self.grabbed_coord = None
         super().init(go)
 
