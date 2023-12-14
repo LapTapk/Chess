@@ -10,7 +10,7 @@ def create_start_scene():
     inpb_go = create_input_box(scene, 32, 'Input host ip')
     inpb = inpb_go.get_component(input_box.InputBox)
 
-    con_button = create_connect_button(scene, inpb, create_chess_scene)
+    con_button = create_connect_button(scene, inpb)
     host_button = create_host_button(scene, con_button)
     con_checker = create_con_checker(scene)
 

@@ -16,12 +16,12 @@ def load_image(path):
 def create_mono_bkg(scene, color):
     go = game_object.GameObject()
     rend = renderer.Renderer()
-
-    img = pygame.Surface(game.data['default-screen-size'])
+    def_scr_size = game.data['default-screen-size']
+    img = pygame.Surface(def_scr_size)
     pygame.draw.rect(img, color, img.get_rect())
     rend.init(go, img)
 
-    pos = from_tuple(game.screen_size) / 2
+    pos = from_tuple(def_scr_size) / 2
     go.init(scene, pos=pos, components=[rend])
     return go
 
@@ -39,7 +39,7 @@ def create_button(scene, pos, img_path, *funcs):
     return go
 
 
-def create_connect_button(scene, inpb, create_chess_scene):
+def create_connect_button(scene, inpb):
     def try_connect():
         host = inpb.text
         try:
@@ -48,7 +48,9 @@ def create_connect_button(scene, inpb, create_chess_scene):
             print(e)
             return
 
-    pos = from_tuple(game.screen_size) / 2 - Vector2(100, 0)
+    def_scr_size = game.data['default-screen-size']
+
+    pos = from_tuple(def_scr_size) / 2 - Vector2(200, 0)
     btn_go = create_button(scene, pos, 'play-button', try_connect)
     return btn_go
 
@@ -66,7 +68,8 @@ def create_host_button(scene, connect_btn):
         connect_btn.enabled = False
 
 
-    pos = from_tuple(game.screen_size) / 2 + Vector2(100, 0)
+    def_scr_size = game.data['default-screen-size']
+    pos = from_tuple(def_scr_size) / 2 + Vector2(200, 0)
     btn_go = create_button(scene, pos, 'play-button', host)
 
     return btn_go
@@ -142,7 +145,8 @@ def create_input_box(scene, font_size, invitation):
 
     inpb.init(go, font_size, invitation)
 
-    pos = from_tuple(game.screen_size) / 2 - Vector2(0, 200)
+    def_scr_size = game.data['default-screen-size']
+    pos = from_tuple(def_scr_size) / 2 + Vector2(0, 200)
     go.init(scene, pos=pos, components=[inpb])
     return go
 
