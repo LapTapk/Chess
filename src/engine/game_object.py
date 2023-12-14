@@ -32,7 +32,7 @@ class GameObject:
 
 class Scene:
     def init(self, *objects):
-        self.objects = objects
+        self.objects = list(objects)
 
     def __update_obj(self, obj):
         if not obj.enabled:
