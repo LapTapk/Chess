@@ -16,10 +16,12 @@ class InputBox:
         if text_is_invitation:
             self.text = ''
 
+        char = event.unicode
+
         if event.key == pygame.K_BACKSPACE:
             if not text_is_invitation:
                 self.text = self.text[:-1]
-        elif event.unicode.isalpha():
+        elif char.isdigit() or char == '.':
             self.text += event.unicode
 
     def handle_activation(self):
