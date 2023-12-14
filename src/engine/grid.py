@@ -36,8 +36,8 @@ class Grid:
         cap = self.capacity
         pos = self.go.position
 
-        distX = size.x / cap.x
-        distY = size.y / cap.y
+        distX = size.x / (cap.x -1 )
+        distY = size.y / (cap.y - 1)
 
         points = [[0] * cap.y for _ in range(cap.x)]
         for i in range(cap.x):

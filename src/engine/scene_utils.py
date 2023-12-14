@@ -99,7 +99,8 @@ def create_planes(scene):
 
     board_side = 8
     plane_size = __calc_plane_size()
-    grd.init(go, plane_size * board_side, Vector2(1, 1) * board_side)
+    grd_size = plane_size * board_side - plane_size
+    grd.init(go, grd_size, Vector2(1, 1) * board_side)
     planes = []
     for i in range(board_side):
         for j in range(board_side):
