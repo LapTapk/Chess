@@ -41,6 +41,9 @@ class Vector2:
     def __str__(self):
         return f"Vector2({self.x}, {self.y})"
 
+    def __eq__(self, v):
+        return self.x == v.x and self.y == v.y
+
     def length(self):
         return (self.x ** 2 + self.y ** 2) ** (1/2)
 
