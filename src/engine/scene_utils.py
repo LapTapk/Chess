@@ -3,10 +3,8 @@ import socket
 from . import game_object, input_box, renderer, game, \
     button, grid, board, grab, connection_checker
 from .vector2 import *
-from .board import BoardUpdater
 from .chess_state_machine import *
 import server, client
-import threading
 
 
 def load_image(path):
@@ -51,7 +49,7 @@ def create_connect_button(scene, inpb):
     def_scr_size = game.data['default-screen-size']
 
     pos = from_tuple(def_scr_size) / 2 - Vector2(200, 0)
-    btn_go = create_button(scene, pos, 'play-button', try_connect)
+    btn_go = create_button(scene, pos, 'connect-btn', try_connect)
     return btn_go
 
 
@@ -70,7 +68,7 @@ def create_host_button(scene, connect_btn):
 
     def_scr_size = game.data['default-screen-size']
     pos = from_tuple(def_scr_size) / 2 + Vector2(200, 0)
-    btn_go = create_button(scene, pos, 'play-button', host)
+    btn_go = create_button(scene, pos, 'host-btn', host)
 
     return btn_go
 
@@ -146,7 +144,7 @@ def create_input_box(scene, font_size, invitation):
     inpb.init(go, font_size, invitation)
 
     def_scr_size = game.data['default-screen-size']
-    pos = from_tuple(def_scr_size) / 2 + Vector2(0, 200)
+    pos = from_tuple(def_scr_size) / 2 + Vector2(-320, 200)
     go.init(scene, pos=pos, components=[inpb])
     return go
 
