@@ -2,9 +2,9 @@ import pygame
 from src.engine import game
 
 
-def game_pseudoinit(scr_size=(1280, 720), fps=60):
+def game_pseudoinit():
     if game.is_init:
         return
 
     pygame.display.set_mode = lambda x: pygame.surface.Surface(x)
-    game.init(scr_size, fps, 'game_data.json')
+    game.init((1280, 720), 60, 'game_data.json')
