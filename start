@@ -1,0 +1,6 @@
+cd $(dirname $0)
+python -m virtualenv .venv
+source .venv/bin/activate
+python src/setup.py install
+ 
+python src/testing_main.py
