@@ -3,8 +3,9 @@ import pygame
 from src.engine.renderer import Renderer
 from src.engine.vector2 import Vector2
 import utils
- 
+
 utils.game_pseudoinit()
+
 
 def test_update():
     scene = Scene()
@@ -23,6 +24,7 @@ def test_update():
     scene.update()
     assert updates == ['go1', rend2]
 
+
 def test_add_object():
     scene = Scene()
     go1 = GameObject()
@@ -35,6 +37,7 @@ def test_add_object():
     scene.add_object(go1)
     scene.add_object(go2)
     assert scene.objects == [go1, go2]
+
 
 def test_at_point_overlay():
     scene = Scene()
@@ -56,6 +59,7 @@ def test_at_point_overlay():
     print(rend1.get_rect(), rend2.get_rect())
     ap = scene.at_point((44, 72))
     assert ap == [go1, go2]
+
 
 def test_at_point_children():
     scene = Scene()
