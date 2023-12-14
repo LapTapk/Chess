@@ -8,35 +8,43 @@ class InputBox:
         self.text = ''
         self.font_size = font_size
         self.invitation = invitation
+        self.active = False
+        self.surface = None
 
+    def handle_text_input(self, event):
+        text_is_invitation = self.text == self.invitation
+        if text_is_invitation:
+            self.text = ''
+
+        if event.key == pygame.K_BACKSPACE:
+            if not text_is_invitation:
+                self.text = self.text[:-1]
+        elif event.unicode.isalpha():
+            self.text += event.unicode
+
+    def handle_activation(self):
+        m_pos = pygame.mouse.get_pos()
+        go_pos = self.go.position
+        rect = self.surface.get_rect().move(go_pos.x, go_pos.y)
+
+        self.active = rect.collidepoint(m_pos)
 
     def handle_input(self):
         for event in game.events:
-            if event.type != pygame.KEYDOWN:
-                continue
-            
-            text_is_invitation = self.text == self.invitation
-            if text_is_invitation:
-                self.text = ''
-
-            if event.key == pygame.K_BACKSPACE:
-                if not text_is_invitation:
-                    self.text = self.text[:-1]
-                continue
-
-            self.text += event.unicode
-
+            if self.active and event.type == pygame.KEYDOWN:
+                self.handle_text_input(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                self.handle_activation()
 
     def show_text(self):
         base_font = pygame.font.Font(None, self.font_size)
-        text_surface = base_font.render(self.text, True, (0, 0, 0))
+        self.surface = base_font.render(self.text, True, (0, 0, 0))
         gopos = self.go.position.to_tuple()
-        game.screen.blit(text_surface, gopos)
+        game.screen.blit(self.surface, gopos)
 
-    
     def update(self):
         if self.text == '':
             self.text = self.invitation
 
-        self.handle_input()
         self.show_text()
+        self.handle_input()
