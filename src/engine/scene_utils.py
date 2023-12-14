@@ -103,7 +103,7 @@ def create_planes(scene):
     planes = []
     for i in range(board_side):
         for j in range(board_side):
-            is_light = (i + j) % 2
+            is_light = (i + j + 1) % 2
             plane = create_plane(scene, is_light, grd,
                                  Vector2(i, j))
             planes.append(plane)
