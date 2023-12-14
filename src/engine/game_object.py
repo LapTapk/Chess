@@ -5,7 +5,6 @@ from .vector2 import Vector2
 
 class GameObject:
     def init(self, scene, pos=Vector2(0, 0), rot=0, scale=Vector2(1, 1), components=[], children=[]):
-        self.position = pos
         self.rotation = rot
 
         factor_x = game.screen_size[0] / \
@@ -13,6 +12,7 @@ class GameObject:
         factor_y = game.screen_size[1] / \
             game.data['default-screen-size'][1]
         self.scale = Vector2(scale.x * factor_x, scale.y * factor_y)
+        self.position = Vector2(pos.x * factor_x, pos.y * factor_y)
 
         self.components = components
         self.scene = scene
