@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+          "DTD/xhtml1-strict.dtd">
+<html>
+  
+
+  <head>
+    
+    <title>src.engine.game_object.Scene</title>
+    <meta name="generator" content="pydoctor 23.9.0"> 
+        
+    </meta>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="apidocs.css" />
+    <link rel="stylesheet" type="text/css" href="extra.css" />
+</head>
+
+  <body>
+
+    
+
+    <nav class="navbar navbar-default mainnavbar">
+      
+  
+  <div class="container-fluid">
+
+
+    <div class="navbar-header">
+      
+      <div class="navlinks">
+        <span class="navbar-brand">
+          src <a href="index.html">API Documentation</a>
+        </span>
+
+        <a href="moduleIndex.html">
+          Modules
+        </a>
+
+        <a href="classIndex.html">
+          Classes
+        </a>
+
+        <a href="nameIndex.html">
+          Names
+        </a>
+
+        <div id="search-box-container">
+          <div class="input-group">
+            <input id="search-box" type="search" name="search-query" placeholder="Search..." aria-label="Search" minlength="2" class="form-control" autocomplete="off" />
+            
+            <span class="input-group-btn">
+              <a style="display: none;" class="btn btn-default" id="search-clear-button" title="Clear" onclick="clearSearch()"><img src="fonts/x-circle.svg" alt="Clear" /></a>
+              <a class="btn btn-default" id="search-help-button" title="Help" onclick="toggleSearchHelpText()"><img src="fonts/info.svg" alt="Help" /></a>
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="search-results-container" style="display: none;">
+        
+        <div id="search-buttons">
+          <span class="label label-default" id="search-docstrings-button">
+          <label class="checkbox-inline">
+            <input type="checkbox" id="toggle-search-in-docstrings-checkbox" value="false" onclick="toggleSearchInDocstrings()">
+              search in docstrings
+            </input>
+          </label>
+          </span>
+          
+        </div>
+        
+        <noscript>
+            <h1>Cannot search: JavaScript is not supported/enabled in your browser.</h1>
+        </noscript>
+
+        <div class="hint" id="search-help-box">
+          <p class="rst-last">
+      
+            Search bar offers the following options:
+            <ul>   
+                <li>
+                  <strong>Term presence.</strong> The below example searches for documents that 
+                    must contain “foo”, might contain “bar” and must not contain “baz”: <code>+foo bar -baz</code>
+                </li> 
+
+                <li>
+                  <strong>Wildcards.</strong> The below example searches for documents with words beginning with “foo”: <code>foo*</code>
+                </li> 
+
+                <li>
+                  <strong>Search in specific fields.</strong> The following search matches all objects 
+                  in "twisted.mail" that matches “search”: <code>+qname:twisted.mail.* +search</code>
+
+                  <p>
+                    Possible fields: 'name', 'qname' (fully qualified name), 'docstring', and 'kind'.
+                    Last two fields are only applicable if "search in docstrings" is enabled.
+                  </p>
+                </li>
+
+                <li>
+                  <strong>Fuzzy matches.</strong> The following search matches all documents 
+                  that have a word within 1 edit distance of “foo”: <code>foo~1</code>
+                </li>
+            </ul>
+
+          </p>
+        </div>
+
+        <div id="search-status"> </div>
+
+        <div class="warning" id="search-warn-box" style="display: none;">
+          <p class="rst-last"><span id="search-warn"></span></p>
+        </div>
+
+        <table id="search-results">
+          <!-- Filled dynamically by JS -->
+        </table>
+        
+        <div style="margin-top: 8px;">
+          <p>Results provided by <a href="https://lunrjs.com">Lunr.js</a></p>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</nav>
+    
+    <div class="container-fluid">
+
+      <!-- Side navigation -->
+      <div class="sidebarcontainer" style="display: none;">
+        
+        <div class="sidebar"><nav class="sidebar">
+  
+
+  <div>
+
+      <div class="thingTitle">
+        <span>Class</span>
+        <code class="thisobject"><a href="src.engine.game_object.Scene.html" class="internal-link" title="This class"><wbr></wbr>Scene</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        
+        
+
+        <div class="childrenKindTitle">Methods</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#add_object" class="internal-link" title="src.engine.game_object.Scene.add_object">add<wbr></wbr>_object</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#at_point" class="internal-link" title="src.engine.game_object.Scene.at_point">at<wbr></wbr>_point</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#init" class="internal-link" title="src.engine.game_object.Scene.init">init</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#update" class="internal-link" title="src.engine.game_object.Scene.update">update</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__at_point_rec" class="internal-link" title="src.engine.game_object.Scene.__at_point_rec">__at<wbr></wbr>_point<wbr></wbr>_rec</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__update_obj" class="internal-link" title="src.engine.game_object.Scene.__update_obj">__update<wbr></wbr>_obj</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+
+        <div class="childrenKindTitle">Attributes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#objects" class="internal-link" title="src.engine.game_object.Scene.objects">objects</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
+
+        
+         
+        
+      </div>
+  </div><div>
+
+      <div class="thingTitle">
+        <span>Module</span>
+        <code><a href="src.engine.game_object.html" class="internal-link" title="The parent of this class">game<wbr></wbr>_object</a></code> 
+      </div>
+      
+      <div>
+        
+
+        
+         
+
+        <div class="childrenKindTitle">Classes</div>
+        <ul>
+    
+    <li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject"><wbr></wbr>Game<wbr></wbr>Object</a></code>
+            </div>
+        
+
+    </li><li class=" thisobject">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.engine.game_object.Scene.html" class="internal-link" title="src.engine.game_object.Scene"><wbr></wbr>Scene</a></code>
+            </div>
+        
+
+    </li>
+</ul>
+
+        
+         
+
+        
+         
+
+        
+         
+
+        
+         
+        
+      </div>
+  </div>
+
+</nav>
+        </div>
+        <div id="collapseSideBar">
+          <a class="btn btn-link" onclick="toggleSideBarCollapse()" title="Toggle Sidebar Collapse">
+          </a>
+        </div> 
+        <script src="sidebartoggle.js" type="text/javascript"></script>
+       
+      </div>
+
+      <div id="main" class="">
+        
+
+        
+
+        <div class="page-header">
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">src</a></code><wbr></wbr>.<code><a href="src.engine.html" class="internal-link" title="src.engine">engine</a></code><wbr></wbr>.<code><a href="src.engine.game_object.html" class="internal-link" title="src.engine.game_object">game_object</a></code><wbr></wbr>.<code><a href="src.engine.game_object.Scene.html" class="internal-link" title="src.engine.game_object.Scene">Scene</a></code></code></h1>
+          <div id="showPrivate">
+            <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
+          </div>
+        </div>
+
+        <div class="categoryHeader">
+          class documentation
+        </div>
+
+        <div class="extrasDocstring">
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">Scene</span>:</code></p>
+          <p><a href="classIndex.html#src.engine.game_object.Scene">View In Hierarchy</a></p>
+        </div>
+
+        <div class="moduleDocstring">
+          <div><p>Сущность, являющаяся совокупностью всех элементарных частиц <tt class="rst-docutils literal">GameObject</tt>.</p></div>
+        </div>
+
+        <div id="splitTables">
+          <table class="children sortable" id="id35">
+  
+  
+  <tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#add_object" class="internal-link" title="src.engine.game_object.Scene.add_object">add<wbr></wbr>_object</a></code></td>
+    <td>Метод, добавляющий <tt class="rst-docutils literal">GameObject</tt> в <tt class="rst-docutils literal">Scene</tt>.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#at_point" class="internal-link" title="src.engine.game_object.Scene.at_point">at<wbr></wbr>_point</a></code></td>
+    <td>Метод, находящий все объекты, которые пересекают данную точку рисунком <tt class="rst-docutils literal">Renderer</tt>.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#init" class="internal-link" title="src.engine.game_object.Scene.init">init</a></code></td>
+    <td>Инициализатор. Аналогичен __init__. Все параметры метода соответствуют полям класса.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#update" class="internal-link" title="src.engine.game_object.Scene.update">update</a></code></td>
+    <td>Метод, вызывающий метод update для каждого компонента каждого объекта данной <tt class="rst-docutils literal">Scene</tt>.</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#objects" class="internal-link" title="src.engine.game_object.Scene.objects">objects</a></code></td>
+    <td>Список объектов, принадлежащих текущей <tt class="rst-docutils literal">Scene</tt></td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#__at_point_rec" class="internal-link" title="src.engine.game_object.Scene.__at_point_rec">__at<wbr></wbr>_point<wbr></wbr>_rec</a></code></td>
+    <td>Служебный метод, выполняющий ту же функцию, что и <em>at_point</em>.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#__update_obj" class="internal-link" title="src.engine.game_object.Scene.__update_obj">__update<wbr></wbr>_obj</a></code></td>
+    <td>Служебный метод, выполняющий ту же функцию, что и <em>update</em>.</td>
+  </tr>
+</table>
+          
+
+            
+        </div>
+
+        <div id="childList">
+          <div class="basemethod">
+  
+  
+  <a name="src.engine.game_object.Scene.add_object">
+    
+  </a>
+  <a name="add_object">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">add_object</span><span class="function-signature">(self, go)</span>:
+    
+    <a class="headerLink" href="#add_object" title="src.engine.game_object.Scene.add_object">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Метод, добавляющий <tt class="rst-docutils literal">GameObject</tt> в <tt class="rst-docutils literal">Scene</tt>.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.engine.game_object.Scene.at_point">
+    
+  </a>
+  <a name="at_point">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">at_point</span><span class="function-signature">(self, point: <code>Tuple[<wbr></wbr>int, <wbr></wbr>int]</code>) -&gt; <code>List[<wbr></wbr>Any]</code></span>:
+    
+    <a class="headerLink" href="#at_point" title="src.engine.game_object.Scene.at_point">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Метод, находящий все объекты, которые пересекают данную точку
+рисунком <tt class="rst-docutils literal">Renderer</tt>.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.engine.game_object.Scene.init">
+    
+  </a>
+  <a name="init">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, *objects)</span>:
+    
+    <a class="headerLink" href="#init" title="src.engine.game_object.Scene.init">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Инициализатор. Аналогичен __init__.
+Все параметры метода соответствуют полям класса.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.engine.game_object.Scene.update">
+    
+  </a>
+  <a name="update">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">update</span><span class="function-signature">(self)</span>:
+    
+    <a class="headerLink" href="#update" title="src.engine.game_object.Scene.update">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Метод, вызывающий метод update
+для каждого компонента каждого объекта данной <tt class="rst-docutils literal">Scene</tt>.</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.engine.game_object.Scene.objects">
+    
+  </a>
+  <a name="objects">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">objects</span>: <code>List[<wbr></wbr><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject">GameObject</a>]</code> =
+    
+    <a class="headerLink" href="#objects" title="src.engine.game_object.Scene.objects">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Список объектов, принадлежащих текущей <tt class="rst-docutils literal">Scene</tt></p></div>
+    
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="src.engine.game_object.Scene.__at_point_rec">
+    
+  </a>
+  <a name="__at_point_rec">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__at_point_rec</span><span class="function-signature">(self, obj, point: <code>Tuple[<wbr></wbr>int, <wbr></wbr>int]</code>) -&gt; <code>List[<wbr></wbr>Any]</code></span>:
+    
+    <a class="headerLink" href="#__at_point_rec" title="src.engine.game_object.Scene.__at_point_rec">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Служебный метод, выполняющий ту же функцию, что и <em>at_point</em>.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">obj</span></td><td class="fieldArgDesc"><tt class="rst-docutils literal">GameObject</tt>, для которого необходимо выполнить проверку на пересечение с точкой <em>point</em>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">point:</span><code>Tuple[<wbr></wbr>int, <wbr></wbr>int]</code></td><td class="fieldArgDesc">точка, в которой осуществляется поиск <tt class="rst-docutils literal">GameObject</tt>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>Any]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
+  </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="src.engine.game_object.Scene.__update_obj">
+    
+  </a>
+  <a name="__update_obj">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__update_obj</span><span class="function-signature">(self, obj)</span>:
+    
+    <a class="headerLink" href="#__update_obj" title="src.engine.game_object.Scene.__update_obj">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Служебный метод, выполняющий ту же функцию, что и <em>update</em>.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">obj</span></td><td class="fieldArgDesc"><tt class="rst-docutils literal">GameObject</tt>, у которого нужно вызвать update.</td></tr></table></div>
+  </div>
+</div>
+        </div>
+      
+      </div>
+    </div>
+
+    <footer class="navbar navbar-default">
+
+  
+  <div class="container">
+    <a href="index.html">API Documentation</a> for src,
+  generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
+    23.9.0 at 2023-12-15 20:39:45.
+  </div>
+
+  <!-- Search related scripts needs to be loaded at the end of HTML 
+    parsing not to introduce overhead and display HTML data asap -->
+  <script src="ajax.js" type="text/javascript"></script>
+  <script src="searchlib.js" type="text/javascript"></script>
+  <script src="search.js" type="text/javascript"></script>
+
+</footer>
+  
+    <script src="pydoctor.js" type="text/javascript"></script>
+
+  </body>
+</html>
