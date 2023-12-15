@@ -1,4 +1,5 @@
 from . import Figure
+import copy
 
 # проверить на что-то влияло-ли начальное поле короля????????????????
 class Board(object):
@@ -63,8 +64,8 @@ class Board(object):
                       for i in range(self.lenght)]
         self.board = self.startPosition()
         self.colorMove = 'white'
-        self.whiteKingPos = (3, 0)
-        self.blackKingPos = (3, 7)
+        self.whiteKingPos = (4, 0)
+        self.blackKingPos = (4, 7)
 
 
     def showBoardConsole(self):
@@ -77,6 +78,7 @@ class Board(object):
     def is_legal(self, frm, to):
         # проверка на отсутсвие хода
         if frm[0] == to[0] and frm[1] == to[1]:
+            self.returning_figure(frm)
             return False
         # проверка на края доски
         if to[0] < 0 or to[0] > 7 or to[1] < 0 or to[1] > 7:
@@ -92,7 +94,8 @@ class Board(object):
 
         # проверка на возможность хода пешкой
         if self.board[frm[0]][frm[1]].name in ('p', 'P'):
-            if self.is_legal_p(frm, to):
+            color = self.colorMove
+            if self.is_legal_p(frm, to) and self.is_opened_check(frm, to, color):
                 if to[1] in (0, 7):
                     self.board[frm[0]][frm[1]].transformation(self.board)
                 return True
@@ -101,27 +104,31 @@ class Board(object):
 
         # проверка на возмжность хода конём
         if self.board[frm[0]][frm[1]].name in ('n', 'N'):
-            if self.is_legal_n(frm, to):
+            color = self.colorMove
+            if self.is_legal_n(frm, to) and self.is_opened_check(frm, to, color):
                 return True
             else:
                 return False
 
         # проверка на возможность хода ладьёй
         if self.board[frm[0]][frm[1]].name in ('r', 'R'):
-            if self.is_legal_r(frm, to):
+            color = self.colorMove
+            if self.is_legal_r(frm, to) and self.is_opened_check(frm, to, color):
                 return True
             else:
                 return False
         # проверка на возможность хода слоном
         if self.board[frm[0]][frm[1]].name in ('b', 'B'):
-            if self.is_legal_b(frm, to):
+            color = self.colorMove
+            if self.is_legal_b(frm, to) and self.is_opened_check(frm, to, color):
                 return True
             else:
                 return False
 
         # проверка на возможность хода ферзём
         if self.board[frm[0]][frm[1]].name in ('q', 'Q'):
-            if self.is_legal_q(frm, to):
+            color = self.colorMove
+            if self.is_legal_q(frm, to) and self.is_opened_check(frm, to, color):
                 return True
             else:
                 return False
@@ -131,6 +138,15 @@ class Board(object):
                 return True
             else:
                 return False
+
+    def is_opened_check(self, frm, to, color):
+        board = copy.deepcopy(self)
+        board.move(frm, to)
+        kingPos = self.whiteKingPos if color == 'white' else self.blackKingPos
+        if board.is_checked_on_pos(kingPos, color):
+            return False
+        else:
+            return True
 
     def is_legal_p(self, frm, to):
         if abs(frm[1] - to[1]) > 2 or abs(frm[1] - to[1]) < 1 or \
@@ -225,11 +241,12 @@ class Board(object):
             return True
         # проверка на рокировку (добавить поле у короля на возможность рокировки)
         if abs(frm[0] - to[0]) == 2 and self.is_castling_legal(frm, to):
+            self.colorMove = 'white'
             return True
         else:
             return False
 
-    def is_checked_on_pos(self, pos, king_color):           #нужна проверка на вскрытый шах после отхода своей фигуры!!
+    def is_checked_on_pos(self, pos, king_color):
         # проверка на короля противника, около клетки pos
         around = [(0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1)]
         for i, j in around:
@@ -329,6 +346,9 @@ class Board(object):
         return False
 
     def is_castling_legal(self, frm, to):
+        kingColor = self.colorMove
+        if self.is_checked_on_pos(frm, kingColor):
+            return False
         if self.board[frm[0]][frm[1]].did_move:
             return False
         if self.board[frm[0]][frm[1]].color == 'white':
@@ -374,12 +394,17 @@ class Board(object):
                 return True
             return False
 
-
+    def returning_figure(self, frm):
+        self.board[frm[0]][frm[1]] = self.board[frm[0]][frm[1]]
 
     def move(self, frm, to):
         self.board[frm[0]][frm[1]].position = to
         if self.board[frm[0]][frm[1]].name in ('k', 'K', 'r', 'R') and not self.board[frm[0]][frm[1]].did_move:
             self.board[frm[0]][frm[1]].did_move = True
+        if self.board[frm[0]][frm[1]].name == 'K':
+            self.whiteKingPos = to
+        if self.board[frm[0]][frm[1]].name == 'k':
+            self.blackKingPos = to
         self.board[to[0]][to[1]] = self.board[frm[0]][frm[1]]
         self.board[frm[0]][frm[1]] = Figure.Figure()
         self.lastMovefrm = frm
