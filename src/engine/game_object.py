@@ -22,6 +22,7 @@ class Scene:
         Служебный метод, выполняющий ту же функцию, что и *update*.
 
         :param obj: ``GameObject``, у которого нужно вызвать update.
+        :type obj: GameObject
         '''
         if not obj.enabled:
             return
@@ -45,6 +46,7 @@ class Scene:
         Служебный метод, выполняющий ту же функцию, что и *at_point*.
 
         :param obj: ``GameObject``, для которого необходимо выполнить проверку на пересечение с точкой *point*.
+        :type obj: GameObject
         :param point: точка, в которой осуществляется поиск ``GameObject``.
         '''
         res = []
@@ -71,9 +73,12 @@ class Scene:
 
         return res
 
-    def add_object(self, go):
+    def add_object(self, go) -> None:
         '''
         Метод, добавляющий ``GameObject`` в ``Scene``.
+         
+        :param go: добавляемый ``GameObject``.
+        :type go: GameObject
         '''
         self.objects.append(go)
         go.scene = self
