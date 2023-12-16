@@ -62,7 +62,7 @@ class Board(object):
         self.lastMoveto = (0, 0)
         self.board = [[Figure.Figure() for j in range(self.lenght)]
                       for i in range(self.lenght)]
-        self.board = self.startPosition()
+        #self.board = self.startPosition()
         self.colorMove = 'white'
         self.whiteKingPos = (4, 0)
         self.blackKingPos = (4, 7)
