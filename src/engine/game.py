@@ -1,6 +1,6 @@
 import json
 from . import game_object
-import src.client as client
+from chess_server import client
 import pygame
 from typing import *
 

@@ -4,7 +4,7 @@ from . import game_object, input_box, renderer, game, \
     button, grid, board, grab, connection_checker
 from .vector2 import *
 from .chess_state_machine import *
-import server, client
+from chess_server import server, client
 
 
 def load_image(path):
