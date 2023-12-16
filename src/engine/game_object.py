@@ -48,6 +48,7 @@ class Scene:
         :param obj: ``GameObject``, для которого необходимо выполнить проверку на пересечение с точкой *point*.
         :type obj: GameObject
         :param point: точка, в которой осуществляется поиск ``GameObject``.
+        :return: список ``GameObject``, располагающихся под заданной точкой.
         '''
         res = []
 
@@ -64,8 +65,9 @@ class Scene:
 
     def at_point(self, point: Tuple[int, int]) -> List[Any]:
         '''
-        Метод, находящий все объекты, которые пересекают данную точку
+        Метод, находящий все ``GameObject``, которые пересекают данную точку
         рисунком ``Renderer``.
+        :return: список ``GameObject``, располагающихся под заданной точкой.
         '''
         res = []
         for obj in self.objects:
