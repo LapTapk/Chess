@@ -13,7 +13,8 @@ def create_settings_scene():
 def create_start_scene():
     scene = game_object.Scene()
     bkg = create_mono_bkg(scene, (255, 255, 255))
-    inpb_go = create_input_box(scene, 32, 'Input host IP for connection')
+    inpb_go = create_input_box(
+        scene, 32, 'Input host IP for connection', lambda x: x.isdigit() or x == '.')
     inpb = inpb_go.get_component(input_box.InputBox)
 
     con_button = create_connect_button(scene, inpb)

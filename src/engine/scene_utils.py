@@ -138,11 +138,11 @@ def create_chess_state_machine(scene, grd, brd):
     return go
 
 
-def create_input_box(scene, font_size, invitation):
+def create_input_box(scene, font_size, invitation, is_valid):
     go = game_object.GameObject()
     inpb = input_box.InputBox()
 
-    inpb.init(go, font_size, invitation)
+    inpb.init(go, font_size, invitation, is_valid)
 
     def_scr_size = game.data['default-screen-size']
     pos = from_tuple(def_scr_size) / 2 + Vector2(-320, 200)
