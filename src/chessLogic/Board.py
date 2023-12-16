@@ -395,6 +395,8 @@ class Board(object):
 
     def mate_check(self, color):
         kingPos = self.whiteKingPos if color == 'white' else self.blackKingPos
+        if not self.is_checked_on_pos(kingPos, color):
+            return False
         for i in range(8):
             for j in range(8):
                 if not self.board[i][j].color == color:
