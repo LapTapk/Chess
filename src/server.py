@@ -22,6 +22,7 @@ def init(address):
 
     is_init = True
     new_brd = Board()
+    new_brd.startPosition()
     server = Server(address, ReqauestHandler, new_brd)
     print(address)
 
