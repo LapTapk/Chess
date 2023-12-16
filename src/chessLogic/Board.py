@@ -94,7 +94,7 @@ class Board(object):
         # проверка на возможность хода пешкой
         if self.board[frm[0]][frm[1]].name in ('p', 'P'):
             color = self.colorMove
-            if self.is_legal_p(frm, to) and self.is_opened_check(frm, to, color):
+            if self.is_legal_p(frm, to) and not self.is_opened_check(frm, to, color):
                 if to[1] in (0, 7):
                     self.board[frm[0]][frm[1]].transformation(self.board)
                 return True
@@ -104,7 +104,7 @@ class Board(object):
         # проверка на возмжность хода конём
         if self.board[frm[0]][frm[1]].name in ('n', 'N'):
             color = self.colorMove
-            if self.is_legal_n(frm, to) and self.is_opened_check(frm, to, color):
+            if self.is_legal_n(frm, to) and not self.is_opened_check(frm, to, color):
                 return True
             else:
                 return False
@@ -112,14 +112,14 @@ class Board(object):
         # проверка на возможность хода ладьёй
         if self.board[frm[0]][frm[1]].name in ('r', 'R'):
             color = self.colorMove
-            if self.is_legal_r(frm, to) and self.is_opened_check(frm, to, color):
+            if self.is_legal_r(frm, to) and not self.is_opened_check(frm, to, color):
                 return True
             else:
                 return False
         # проверка на возможность хода слоном
         if self.board[frm[0]][frm[1]].name in ('b', 'B'):
             color = self.colorMove
-            if self.is_legal_b(frm, to) and self.is_opened_check(frm, to, color):
+            if self.is_legal_b(frm, to) and not self.is_opened_check(frm, to, color):
                 return True
             else:
                 return False
@@ -127,7 +127,7 @@ class Board(object):
         # проверка на возможность хода ферзём
         if self.board[frm[0]][frm[1]].name in ('q', 'Q'):
             color = self.colorMove
-            if self.is_legal_q(frm, to) and self.is_opened_check(frm, to, color):
+            if self.is_legal_q(frm, to) and not self.is_opened_check(frm, to, color):
                 return True
             else:
                 return False
@@ -193,7 +193,7 @@ class Board(object):
         if abs(frm[0] - to[0]) != abs(frm[1] - to[1]):
             return False
         i_plus = 1 if frm[0] < to[0] else -1
-        j_plus = 1 if frm[1] < to[0] else -1
+        j_plus = 1 if frm[1] < to[1] else -1
         i = frm[0] + i_plus
         j = frm[1] + j_plus
         while i != to[0] and j != to[1]:
@@ -339,7 +339,7 @@ class Board(object):
         board = copy.deepcopy(self)
         board.move(frm, to)
         kingPos = self.whiteKingPos if color == 'white' else self.blackKingPos
-        if board.is_checked_on_pos(kingPos, color):
+        if not board.is_checked_on_pos(kingPos, color):
             return False
         else:
             return True
@@ -444,7 +444,7 @@ class Board(object):
                                 if self.is_legal((i, j), (i_, j_)):
                                     return False
                                 i_ += i_plus
-                                j += j_plus
+                                j_ += j_plus
                     # проверка короля на возможность ходить
                     if self.board[i][j].name in ('k', 'K'):
                         around = [(0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1)]
@@ -477,11 +477,30 @@ class Board(object):
         else:
             self.colorMove = 'white'
 
+        '''
+        if self.is_game_over(self.colorMove):
+            return self.colorMove
+        else:
+            return 'neutral'
+            '''
+
     def try_move(self, frm, to):
+
         if not self.is_legal(frm, to):
             print("ILLLEGAL MOVE")
             return False
 
+        #game_over = self.move(frm, to)
         self.move(frm, to)
+
+        # возвращет 'neutral' если партия не закончена, и (checkmate/stalemate, color), где color - проигравшая сторона
+        color = self.colorMove
+        moveResult = self.is_game_over(color)
+        if moveResult:
+            return (moveResult, color)
+        else:
+            return 'neutral'
+
+
         print("Move done!!!!!!!!!!!")
         return True
