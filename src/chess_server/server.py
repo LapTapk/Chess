@@ -2,6 +2,7 @@ import http.server
 import threading
 from chessLogic.Board import Board
 import re
+import json
 
 server = None
 is_init = False
@@ -23,7 +24,6 @@ def init(address):
     is_init = True
     new_brd = Board()
     server = Server(address, ReqauestHandler, new_brd)
-    print(address)
 
     server_thr = threading.Thread(target=__start_server)
     server_thr.daemon = True
@@ -36,6 +36,8 @@ class Server(http.server.HTTPServer):
         self.brd = brd
         self.moves_cnt = 0
         self.connected = 0
+        self.msg_black = None
+        self.msg_white = None
 
 
 class ReqauestHandler(http.server.BaseHTTPRequestHandler):
@@ -55,6 +57,12 @@ class ReqauestHandler(http.server.BaseHTTPRequestHandler):
             self.wfile.write('YES'.encode())
         elif self.path == '/conn':
             self.wfile.write(str(self.server.connected).encode())
+        elif self.path == '/msg/white':
+            data = json.dump(self.server.msg_white)
+            self.wfile.write(data)
+        elif self.path == '/msg/black':
+            data = json.dump(self.server.msg_black)
+            self.wfile.write(data)
 
     def do_POST(self):
         if self.path == '/conn':
@@ -68,7 +76,6 @@ class ReqauestHandler(http.server.BaseHTTPRequestHandler):
             coords_pat = r'\d \d \d \d'
             mtch = re.match(coords_pat, move)
             if not mtch:
-                print(400)
                 self.send_response(400, message="Bad format")
                 self.end_headers()
                 return
@@ -77,11 +84,42 @@ class ReqauestHandler(http.server.BaseHTTPRequestHandler):
             frm, to = (nums[0], nums[1]), (nums[2], nums[3])
             moved = self.server.brd.try_move(frm, to)
             if not moved:
-                print(403)
                 self.send_response(403)
                 self.end_headers()
                 return
 
             self.server.moves_cnt += 1
+            self.send_response(200)
+            self.end_headers()
+        elif self.path == '/msg/black':
+            length = int(self.headers['Content-Length'])
+            msg = self.rfile.read(length)
+            data = json.dump(msg)
+
+            is_illegal1 = data['response'] and (
+                self.server.msg_white == None or self.msg_white['response'])
+            is_illegal2 = not data['reponse'] and not self.msg_white['response']
+            if is_illegal1 or is_illegal2:
+                self.send_response(403)
+                self.end_headers()
+                return
+
+            self.server.msg_black = data
+            self.send_response(200)
+            self.end_headers()
+        elif self.path == '/msg/white':
+            length = int(self.headers['Content-Length'])
+            msg = self.rfile.read(length)
+            data = json.dump(msg)
+
+            is_illegal1 = data['response'] and (
+                self.server.msg_black == None or self.server.msg_black['response'])
+            is_illegal2 = not data['reponse'] and not self.server.msg_black['response']
+            if is_illegal1 or is_illegal2:
+                self.send_response(403)
+                self.end_headers()
+                return
+
+            self.server.msg_white = data
             self.send_response(200)
             self.end_headers()

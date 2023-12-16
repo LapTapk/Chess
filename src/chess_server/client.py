@@ -1,6 +1,7 @@
 import http.client
 import json
 from chessLogic.Board import Board
+from engine import message_communication
 
 
 class Client:
@@ -49,10 +50,36 @@ class Client:
     def has_moved(self):
         server_moves_cnt = self.get_moves()
         return self.local_moves_cnt != server_moves_cnt
-    
+
     def get_conn(self):
         host, port = self.address
         conn = http.client.HTTPConnection(host, port)
         conn.request('GET', '/conn')
         response = conn.getresponse()
         return int(response.read().decode())
+
+    def get_msg(self):
+        host, port = self.address
+        conn = http.client.HTTPConnection(host, port)
+        color = 'white' if self.is_white else 'black'
+        conn.request('GET', '/msg/' + color)
+        response = conn.getresponse()
+        data = response.read()
+
+        if data == b'':
+            return None
+
+        data = json.load(data)
+        return data
+
+    def send_msg(self, text, is_response):
+        host, port = self.address
+        conn = http.client.HTTPConnection(host, port)
+        color = 'black' if self.is_white else 'white'
+        msg = {'response': is_response, 'text': text}
+        data = json.dumps(msg)
+        conn.request('POST', '/msg/' + color, body=data,
+                     headers={'Content-Type': 'text/plain', 'Content-Length': str(len(data))})
+
+        response = conn.getresponse()
+        return response.getcode == 200 
