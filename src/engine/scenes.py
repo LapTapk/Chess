@@ -7,12 +7,20 @@ from .board import BoardUpdater
 
 def create_settings_scene():
     scene = game_object.Scene()
-    bkg = create_mono_bkg(scene, pygame.color.THECOLORS['WHITE'])
+    bkg = create_mono_bkg(scene, pygame.color.THECOLORS['white'])
+
+    resolution_ib = create_resolution_input_box(scene)
+    apply_btn = create_apply_button(scene, resolution_ib.get_component(input_box.InputBox))
+    
+    start_menu_btn = create_start_menu_button(scene, create_start_scene)
+    
+    scene.init(bkg, resolution_ib, apply_btn, start_menu_btn)
+    return scene
 
 
 def create_start_scene():
     scene = game_object.Scene()
-    bkg = create_mono_bkg(scene, (255, 255, 255))
+    bkg = create_mono_bkg(scene, pygame.color.THECOLORS['white'])
     inpb_go = create_input_box(
         scene, 32, 'Input host IP for connection', lambda x: x.isdigit() or x == '.')
     inpb = inpb_go.get_component(input_box.InputBox)
@@ -21,7 +29,9 @@ def create_start_scene():
     host_button = create_host_button(scene, con_button)
     con_checker = create_con_checker(scene)
 
-    scene.init(bkg, con_button, host_button, inpb_go, con_checker)
+    setting_button = create_settings_button(scene, create_settings_scene)
+
+    scene.init(bkg, setting_button, con_button, host_button, inpb_go, con_checker)
     return scene
 
 

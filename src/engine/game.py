@@ -64,6 +64,10 @@ def run() -> None:
     while running:
         __iteration()
 
+def change_screen_size(size):
+    global screen, screen_size
+    screen_size = size
+    screen = pygame.display.set_mode(size)
 
 def check_for_exit() -> None:
     '''

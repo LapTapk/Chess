@@ -17,29 +17,15 @@ class Scene:
         self.objects: List[GameObject] = list(objects)
         '''Список объектов, принадлежащих текущей ``Scene``'''
 
-    def __update_obj(self, obj) -> None:
-        '''
-        Служебный метод, выполняющий ту же функцию, что и *update*.
-
-        :param obj: ``GameObject``, у которого нужно вызвать update.
-        :type obj: GameObject
-        '''
-        if not obj.enabled:
-            return
-
-        for comp in obj.components:
-            comp.update()
-
-        for c_obj in obj.children:
-            self.__update_obj(c_obj)
-
     def update(self) -> None:
         '''
         Метод, вызывающий метод update 
         для каждого компонента каждого объекта данной ``Scene``.
         '''
         for obj in self.objects:
-            self.__update_obj(obj)
+            if not obj.enabled:
+                continue
+            obj.update()
 
     def __at_point_rec(self, obj, point: Tuple[int, int]) -> List[Any]:
         '''
@@ -78,7 +64,7 @@ class Scene:
     def add_object(self, go) -> None:
         '''
         Метод, добавляющий ``GameObject`` в ``Scene``.
-         
+
         :param go: добавляемый ``GameObject``.
         :type go: GameObject
         '''
@@ -97,16 +83,15 @@ class GameObject:
         Инициализатор. Аналогична __init__. Каждый параметр функции
         соотносится с параметром класса.
         '''
+
+        self.nonscaled_scale = scale
+        self.nonscaled_position = pos
+
         self.rotation: int = rot
         '''Угол поворота ``GameObject`` в градусах.'''
-
-        factor_x = game.screen_size[0] / \
-            game.data['default-screen-size'][0]
-        factor_y = game.screen_size[1] / \
-            game.data['default-screen-size'][1]
-        self.scale: Vector2 = Vector2(scale.x * factor_x, scale.y * factor_y)
+        self.scale: Vector2 = scale
         '''Коэффициент при размере ``GameObject``.'''
-        self.position: Vector2 = Vector2(pos.x * factor_x, pos.y * factor_y)
+        self.position: Vector2 = pos
         '''Расположение ``GameObject`` на сцене.'''
 
         self.components: List[Any] = components
@@ -117,6 +102,20 @@ class GameObject:
         '''Дочерние ``GameObject``.'''
         self.enabled: bool = True
         '''Принимает ли участие данный ``GameObject`` в сцене'''
+
+    def scale_characteristics(self):
+        factor_x = game.screen_size[0] / \
+            game.data['default-screen-size'][0]
+        factor_y = game.screen_size[1] / \
+            game.data['default-screen-size'][1]
+
+        scale = self.nonscaled_scale
+        pos = self.nonscaled_position
+
+        self.scale: Vector2 = Vector2(scale.x * factor_x, scale.y * factor_y)
+        '''Коэффициент при размере ``GameObject``.'''
+        self.position: Vector2 = Vector2(pos.x * factor_x, pos.y * factor_y)
+        '''Расположение ``GameObject`` на сцене.'''
 
     def get_component(self, type: Any) -> type:
         '''
@@ -136,3 +135,21 @@ class GameObject:
         '''
         self.components.append(comp)
         comp.go = self
+
+    def __update_rec(self, obj) -> None:
+        '''
+        Служебный метод, выполняющий ту же функцию, что и *update*.
+
+        :param obj: ``GameObject``, у которого нужно вызвать update.
+        :type obj: GameObject
+        '''
+        for comp in obj.components:
+            comp.update()
+
+        for c_obj in obj.children:
+            self.__update_obj(c_obj)
+
+    def update(self):
+        self.scale_characteristics()
+        self.__update_rec(self)
+
