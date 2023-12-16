@@ -393,10 +393,8 @@ class Board(object):
                 return True
             return False
 
-    def mate_check(self, color):
+    def is_game_over(self, color):
         kingPos = self.whiteKingPos if color == 'white' else self.blackKingPos
-        if not self.is_checked_on_pos(kingPos, color):
-            return False
         for i in range(8):
             for j in range(8):
                 if not self.board[i][j].color == color:
@@ -454,7 +452,10 @@ class Board(object):
                             if 0 <= i + i_plus <= 7 and 0 <= j + j_plus <= 7 and \
                                     self.is_legal((i, j), (i + i_plus, j + j_plus)):
                                 return False
-                    return True
+        if not self.is_checked_on_pos(kingPos, color):
+            return 'stalemate'
+        else:
+            return 'checkmate'
 
     def returning_figure(self, frm):
         self.board[frm[0]][frm[1]] = self.board[frm[0]][frm[1]]
