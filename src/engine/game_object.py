@@ -113,9 +113,7 @@ class GameObject:
         pos = self.nonscaled_position
 
         self.scale: Vector2 = Vector2(scale.x * factor_x, scale.y * factor_y)
-        '''Коэффициент при размере ``GameObject``.'''
         self.position: Vector2 = Vector2(pos.x * factor_x, pos.y * factor_y)
-        '''Расположение ``GameObject`` на сцене.'''
 
     def get_component(self, type: Any) -> type:
         '''
