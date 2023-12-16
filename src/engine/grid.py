@@ -34,7 +34,7 @@ class Grid:
     различаться.
     '''
 
-    def init(self, go, size, capacity) -> None:
+    def init(self, go: game_object.GameObject, size: Vector2, capacity: Vector2) -> None:
         '''
         Инициализатор. Аналогичен __init__. 
         Все параметры соответствуют полям класса.
