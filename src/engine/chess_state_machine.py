@@ -1,6 +1,5 @@
 import pygame
-import typing
-from . import game, game_object, grab, board
+from . import game, game_object, grab, board, renderer, vector2
 
 
 class ChessStateMachine:
@@ -39,6 +38,17 @@ class ChessStateMachine:
         self.cur_state.update()
 
 
+def check_for_end(state_machine):
+    state = game.clnt.get_state()
+    print(state)
+    if state == 'neutral':
+        return
+
+    state_machine.end_state.game_res = state
+    state_machine.change_state(state_machine.end_state) 
+    
+
+
 class UserTurnState:
     '''
     Сущность состояния во время хода игрока. 
@@ -60,6 +70,7 @@ class UserTurnState:
         '''
         brd = game.clnt.get_board()
         self.brd_updater.update_board(brd, game.clnt.is_white, True)
+        check_for_end(self.machine)
 
     def handle_input(self) -> None:
         '''
@@ -113,6 +124,7 @@ class EnemyTurnState:
         '''
         brd = game.clnt.get_board()
         self.brd_updater.update_board(brd, game.clnt.is_white, False)
+        check_for_end(self.machine)
 
     def update(self) -> None:
         '''
@@ -136,10 +148,25 @@ class EnemyTurnState:
 class EndState:
     def __init__(self, brd_updater):
         self.brd_updater = brd_updater
+        self.game_res = ''
 
     def on_start(self):
         brd = game.clnt.get_board()
         self.brd_updater.update_board(brd, game.clnt.is_white, False)
+        self.create_end_title()
+
+    def create_end_title(self):
+        go = game_object.GameObject()
+        rend = renderer.Renderer()
+        font = pygame.font.Font(None, 32)
+
+        [result, color] = self.game_res[1:-1].split(', ')
+        text = result + '. Игра закончилась на ходе' + color
+        text_surf = font.render(text, None, (0, 0, 0))
+        rend.init(go, text_surf)
+        go.init(self.brd_updater.go.scene, pos=vector2.Vector2(900, 600), components=[rend])
+        self.brd_updater.go.scene.add_object(go)
+        
 
     def update(self):
         pass

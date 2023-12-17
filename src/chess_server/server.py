@@ -23,6 +23,7 @@ def init(address):
 
     is_init = True
     new_brd = Board()
+    new_brd.startPosition()
     server = Server(address, ReqauestHandler, new_brd)
 
     server_thr = threading.Thread(target=__start_server)
@@ -38,6 +39,7 @@ class Server(http.server.HTTPServer):
         self.connected = 0
         self.msg_black = None
         self.msg_white = None
+        self.state = 'neutral'
 
 
 class ReqauestHandler(http.server.BaseHTTPRequestHandler):
@@ -70,6 +72,8 @@ class ReqauestHandler(http.server.BaseHTTPRequestHandler):
             self.get_msg(True)
         elif self.path == '/msg/black':
             self.get_msg(False)
+        elif self.path == '/state':
+            self.wfile.write(str(self.server.state).encode())
 
     def post_conn(self):
         self.server.connected += 1
@@ -89,12 +93,13 @@ class ReqauestHandler(http.server.BaseHTTPRequestHandler):
 
         nums = list(map(int, move.split()))
         frm, to = (nums[0], nums[1]), (nums[2], nums[3])
-        moved = self.server.brd.try_move(frm, to)
-        if not moved:
+        state = self.server.brd.try_move(frm, to)
+        if not state:
             self.send_response(403)
             self.end_headers()
             return
 
+        self.server.state = state
         self.server.moves_cnt += 1
         self.send_response(200)
         self.end_headers()
@@ -107,7 +112,8 @@ class ReqauestHandler(http.server.BaseHTTPRequestHandler):
 
         is_illegal1 = data['response'] and (
             msg_sender == None or msg_sender['response'])
-        is_illegal2 = not data['response'] and (msg_sender != None and not msg_sender['response'])
+        is_illegal2 = not data['response'] and (
+            msg_sender != None and not msg_sender['response'])
         if is_illegal1 or is_illegal2:
             self.send_response(403)
             self.end_headers()

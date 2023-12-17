@@ -83,3 +83,11 @@ class Client:
 
         response = conn.getresponse()
         return response.getcode == 200 
+
+    def get_state(self):
+        host, port = self.address
+        conn = http.client.HTTPConnection(host, port)
+        conn.request('GET', '/state')
+        response = conn.getresponse()
+
+        return response.read().decode()
