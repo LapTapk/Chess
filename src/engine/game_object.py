@@ -141,13 +141,13 @@ class GameObject:
         :param obj: ``GameObject``, у которого нужно вызвать update.
         :type obj: GameObject
         '''
+        obj.scale_characteristics()
         for comp in obj.components:
             comp.update()
 
         for c_obj in obj.children:
-            self.__update_obj(c_obj)
+            self.__update_rec(c_obj)
 
     def update(self):
-        self.scale_characteristics()
         self.__update_rec(self)
 

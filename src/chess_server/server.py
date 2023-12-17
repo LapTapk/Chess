@@ -2,6 +2,7 @@ import http.server
 import threading
 from chessLogic.Board import Board
 import re
+import json
 
 server = None
 is_init = False
@@ -23,7 +24,6 @@ def init(address):
     is_init = True
     new_brd = Board()
     server = Server(address, ReqauestHandler, new_brd)
-    print(address)
 
     server_thr = threading.Thread(target=__start_server)
     server_thr.daemon = True
@@ -36,11 +36,22 @@ class Server(http.server.HTTPServer):
         self.brd = brd
         self.moves_cnt = 0
         self.connected = 0
+        self.msg_black = None
+        self.msg_white = None
 
 
 class ReqauestHandler(http.server.BaseHTTPRequestHandler):
     def check_for_new_con(self):
         self.server.connected.add(self.address_string)
+
+    def get_msg(self, for_white):
+        msg = self.server.msg_white if for_white else self.server.msg_black
+        data = None
+        if msg == None:
+            data = b''
+        else:
+            data = json.dumps(msg).encode()
+        self.wfile.write(data)
 
     def do_GET(self):
         self.send_response(200)
@@ -55,33 +66,68 @@ class ReqauestHandler(http.server.BaseHTTPRequestHandler):
             self.wfile.write('YES'.encode())
         elif self.path == '/conn':
             self.wfile.write(str(self.server.connected).encode())
+        elif self.path == '/msg/white':
+            self.get_msg(True)
+        elif self.path == '/msg/black':
+            self.get_msg(False)
+
+    def post_conn(self):
+        self.server.connected += 1
+        self.send_response(200)
+        self.end_headers()
+
+    def post_move(self):
+        length = int(self.headers['Content-Length'])
+        move = self.rfile.read(length).decode()
+
+        coords_pat = r'\d \d \d \d'
+        mtch = re.match(coords_pat, move)
+        if not mtch:
+            self.send_response(400, message="Bad format")
+            self.end_headers()
+            return
+
+        nums = list(map(int, move.split()))
+        frm, to = (nums[0], nums[1]), (nums[2], nums[3])
+        moved = self.server.brd.try_move(frm, to)
+        if not moved:
+            self.send_response(403)
+            self.end_headers()
+            return
+
+        self.server.moves_cnt += 1
+        self.send_response(200)
+        self.end_headers()
+
+    def post_msg(self, sender_is_white):
+        msg_sender = self.server.msg_white if sender_is_white else self.server.msg_black
+        length = int(self.headers['Content-Length'])
+        msg = self.rfile.read(length)
+        data = json.loads(msg)
+
+        is_illegal1 = data['response'] and (
+            msg_sender == None or msg_sender['response'])
+        is_illegal2 = not data['response'] and (msg_sender != None and not msg_sender['response'])
+        if is_illegal1 or is_illegal2:
+            self.send_response(403)
+            self.end_headers()
+            return
+
+        if sender_is_white:
+            self.server.msg_white = None
+            self.server.msg_black = data
+        else:
+            self.server.msg_black = None
+            self.server.msg_white = data
+        self.send_response(200)
+        self.end_headers()
 
     def do_POST(self):
         if self.path == '/conn':
-            self.server.connected += 1
-            self.send_response(200)
-            self.end_headers()
+            self.post_conn()
         elif self.path == '/move':
-            length = int(self.headers['Content-Length'])
-            move = self.rfile.read(length).decode()
-
-            coords_pat = r'\d \d \d \d'
-            mtch = re.match(coords_pat, move)
-            if not mtch:
-                print(400)
-                self.send_response(400, message="Bad format")
-                self.end_headers()
-                return
-
-            nums = list(map(int, move.split()))
-            frm, to = (nums[0], nums[1]), (nums[2], nums[3])
-            moved = self.server.brd.try_move(frm, to)
-            if not moved:
-                print(403)
-                self.send_response(403)
-                self.end_headers()
-                return
-
-            self.server.moves_cnt += 1
-            self.send_response(200)
-            self.end_headers()
+            self.post_move()
+        elif self.path == '/msg/black':
+            self.post_msg(True)
+        elif self.path == '/msg/white':
+            self.post_msg(False)

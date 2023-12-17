@@ -50,8 +50,11 @@ class Grabable:
         self.move_to_mouse()
 
     def move_to_mouse(self):
-        mpos = pygame.mouse.get_pos()
-        self.go.position = from_tuple(mpos)
+        factor_x = game.screen_size[0] / game.data['default-screen-size'][0]
+        factor_y = game.screen_size[1] / game.data['default-screen-size'][1]
+        m_pos = pygame.mouse.get_pos()
+        m_pos = Vector2(m_pos[0] / factor_x, m_pos[1] / factor_y)
+        self.go.nonscaled_position = m_pos
 
 
 class FigureGrabber(Grabber):
@@ -79,7 +82,10 @@ class FigureGrabber(Grabber):
         self.__unbind()
 
     def get_move(self):
-        m_pos = from_tuple(pygame.mouse.get_pos())
+        factor_x = game.screen_size[0] / game.data['default-screen-size'][0]
+        factor_y = game.screen_size[1] / game.data['default-screen-size'][1]
+        m_pos = pygame.mouse.get_pos()
+        m_pos = Vector2(m_pos[0] / factor_x, m_pos[1] / factor_y)
         to = find_closest(self.grd, m_pos)
         frm = self.grabbed_coord
 
