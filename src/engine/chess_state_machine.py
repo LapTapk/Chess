@@ -160,6 +160,9 @@ class EndState:
         rend = renderer.Renderer()
         font = pygame.font.Font(None, 32)
 
+        if self.game_res == '':
+            return
+
         [result, color] = self.game_res[1:-1].split(', ')
         text = result + '. Игра закончилась на ходе' + color
         text_surf = font.render(text, None, (0, 0, 0))
