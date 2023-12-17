@@ -38,7 +38,11 @@ class ChessStateMachine:
         self.cur_state.update()
 
 
-def check_for_end(state_machine):
+def check_for_end(state_machine) -> None:
+    '''Функция, проверяющая, была ли закончена игра.
+
+    :param state_machine: текущая машина состояний шахмат
+    '''
     state = game.clnt.get_state()
     print(state)
     if state == 'neutral':
@@ -146,16 +150,24 @@ class EnemyTurnState:
 
 
 class EndState:
-    def __init__(self, brd_updater):
+    '''Состояние конца игры.'''
+    def __init__(self, brd_updater: board.BoardUpdater) -> None:
         self.brd_updater = brd_updater
+        '''Средство обновления доски'''
         self.game_res = ''
+        '''Результат игры.'''
 
-    def on_start(self):
+    def on_start(self) -> None:
+        '''
+        Метод, вызываемый при обновлении состояния машиной.
+        Обновляет доску и создает уведомление об окончании игры.
+        '''
         brd = game.clnt.get_board()
         self.brd_updater.update_board(brd, game.clnt.is_white, False)
         self.create_end_title()
 
-    def create_end_title(self):
+    def create_end_title(self) -> None:
+        '''Метод, создающий уведомление о конце игры.'''
         go = game_object.GameObject()
         rend = renderer.Renderer()
         font = pygame.font.Font(None, 32)
@@ -171,5 +183,6 @@ class EndState:
         self.brd_updater.go.scene.add_object(go)
         
 
-    def update(self):
+    def update(self) -> None:
+        '''Пустой метод кадра состояния.'''
         pass
