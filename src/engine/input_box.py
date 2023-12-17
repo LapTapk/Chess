@@ -14,7 +14,7 @@ class InputBox:
     строку с приглашением к вводу.
     '''
 
-    def init(self, go: game_object.GameObject, font_size: int, invitation: LiteralString, is_valid: Callable[[Literal], bool]) -> None:
+    def init(self, go: game_object.GameObject, font_size: int, invitation: LiteralString, is_valid: Callable[[Literal], bool], rend) -> None:
         '''
         Инициализатор. Аналогичен __init__. 
         Все параметры соответствуют полям класса.
@@ -33,6 +33,7 @@ class InputBox:
         '''Функция проверки правильности вводимых символов.'''
         self.surface: pygame.surface.Surface = None
         '''``Surface``, используемая для вывода текста.'''
+        self.rend = rend
 
     def handle_text_input(self, event: pygame.event.Event) -> None:
         '''
@@ -59,8 +60,7 @@ class InputBox:
         Провеяет активацию через нажатие ПКМ.
         '''
         m_pos = pygame.mouse.get_pos()
-        go_pos = self.go.position
-        rect = self.surface.get_rect().move(go_pos.x, go_pos.y)
+        rect = self.rend.get_rect()
 
         self.active = rect.collidepoint(m_pos)
 
@@ -80,9 +80,8 @@ class InputBox:
         Выводит текст на экран.
         '''
         base_font = pygame.font.Font(None, self.font_size)
-        self.surface = base_font.render(self.text, True, (0, 0, 0))
-        gopos = self.go.position.to_tuple()
-        game.screen.blit(self.surface, gopos)
+        surface = base_font.render(self.text, True, (0, 0, 0))
+        self.rend.img = surface
 
     def update(self) -> None:
         '''Функция кадра компонента, выполняющая его функционал.'''

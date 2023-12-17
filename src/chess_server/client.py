@@ -69,7 +69,7 @@ class Client:
         if data == b'':
             return None
 
-        data = json.load(data)
+        data = json.loads(data)
         return data
 
     def send_msg(self, text, is_response):

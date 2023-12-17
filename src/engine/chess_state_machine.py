@@ -20,6 +20,7 @@ class ChessStateMachine:
         self.enemy_turn_state: EnemyTurnState = EnemyTurnState(
             self, brd_updater)
         '''Состояние хода противника'''
+        self.end_state: EndState = EndState(brd_updater)
         first_state = self.user_turn_state if game.clnt.is_white else self.enemy_turn_state
         self.change_state(first_state)
 
@@ -130,3 +131,15 @@ class EnemyTurnState:
             return
 
         self.machine.change_state(self.machine.user_turn_state)
+
+
+class EndState:
+    def __init__(self, brd_updater):
+        self.brd_updater = brd_updater
+
+    def on_start(self):
+        brd = game.clnt.get_board()
+        self.brd_updater.update_board(brd, game.clnt.is_white, False)
+
+    def update(self):
+        pass

@@ -109,4 +109,4 @@ class GridBinder:
         points = self.grd.get_points()
         x, y = self.coord.to_tuple()
 
-        self.go.position = points[x][y]
+        self.go.nonscaled_position = points[x][y]
