@@ -62,6 +62,29 @@ class Board(object):
                         self.board[j][i] = Figure.King("black", (j, i))
         return self.board
 
+    def createPosition(self, figures: [((int, int), str)]):
+        '''
+        Создаёт расстановку по массиву figures
+        :param figures: массив фигур, содержащий позиуию и имя фигуры
+        :return:
+        '''
+        for fig in figures:
+            i = fig[0][0]
+            j = fig[0][1]
+            name = fig[1]
+            if name == 'K': self.board[i][j] = Figure.King('white', (i, j))
+            if name == 'k': self.board[i][j] = Figure.King('black', (i, j))
+            if name == 'Q': self.board[i][j] = Figure.Queen('white', (i, j))
+            if name == 'q': self.board[i][j] = Figure.Queen('black', (i, j))
+            if name == 'N': self.board[i][j] = Figure.Knight('white', (i, j))
+            if name == 'n': self.board[i][j] = Figure.Knight('black', (i, j))
+            if name == 'B': self.board[i][j] = Figure.Bishop('white', (i, j))
+            if name == 'b': self.board[i][j] = Figure.Bishop('black', (i, j))
+            if name == 'R': self.board[i][j] = Figure.Rock('white', (i, j))
+            if name == 'r': self.board[i][j] = Figure.Rock('black', (i, j))
+            if name == 'P': self.board[i][j] = Figure.Pawn('white', (i, j))
+            if name == 'p': self.board[i][j] = Figure.Pawn('black', (i, j))
+
     def __init__(self):
         '''
         Создаёт объект шахматной доски
@@ -592,11 +615,10 @@ class Board(object):
         color = self.colorMove
         moveResult = self.is_game_over(color)
         if moveResult:
-            return (moveResult, color)
+            return moveResult, color
         else:
             return 'neutral'
 
-        return True
 
     def serialize(self):
         res = '{"board": ['
