@@ -1,5 +1,6 @@
 import json
 
+
 class Figure():
     '''Класс шахматные фигуры'''
 
@@ -14,7 +15,6 @@ class Figure():
         '''
         self.color: str = color
         self.position: tuple = position
-
 
     def showFigureConsole(self):
         '''
@@ -62,7 +62,6 @@ class King(Figure):
         super().__init__(color, position)
         self.name = self.registerFromColor()
         self.did_move = False
-
 
     def showFigureConsole(self):
         '''
