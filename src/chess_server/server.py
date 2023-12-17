@@ -143,14 +143,17 @@ class ReqauestHandler(http.server.BaseHTTPRequestHandler):
         nums = list(map(int, move.split()))
         frm, to = (nums[0], nums[1]), (nums[2], nums[3])
         state = self.server.brd.try_move(frm, to)
-        if not state:
+        if not state and frm != to:
             self.send_response(403)
             self.end_headers()
             return
 
-        self.server.state = state
-        self.server.moves_cnt += 1
-        self.send_response(200)
+        if frm != to:
+            self.server.moves_cnt += 1
+            self.server.state = state
+            self.send_response(200)
+        else:
+            self.send_response(202)
         self.end_headers()
 
     def post_msg(self, sender_is_white: bool) -> None:

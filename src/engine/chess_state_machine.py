@@ -92,8 +92,12 @@ class UserTurnState:
                 grabber.try_grab()
             else:
                 frm, to = map(lambda x: x.to_tuple(), grabber.get_move())
-                success = game.clnt.send_move(frm, to)
-                if success:
+                result = game.clnt.send_move(frm, to)
+                if result == 202:
+                    brd = game.clnt.get_board()
+                    self.brd_updater.update_board(brd, game.clnt.is_white, True)
+                    grabber.grabbed = None
+                elif result == 200:
                     self.machine.change_state(self.machine.enemy_turn_state)
                     grabber.grabbed = None
 

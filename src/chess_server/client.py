@@ -42,7 +42,7 @@ class Client:
                      headers={'Content-Type': 'text/plain', 'Content-Length': '7'})
 
         response = conn.getresponse()
-        return response.getcode() == 200
+        return response.getcode()
 
     def get_board(self) -> Board:
         '''Метод, отвечающий за получение актуального состояния доски с сервера.
