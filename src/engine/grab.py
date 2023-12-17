@@ -2,6 +2,7 @@ from .grid import GridBinder, find_closest, Grid
 import pygame
 from .vector2 import *
 from . import game, game_object
+from typing import *
 
 
 class Grabber:
