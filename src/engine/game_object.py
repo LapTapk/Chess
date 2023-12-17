@@ -53,6 +53,7 @@ class Scene:
         '''
         Метод, находящий все ``GameObject``, которые пересекают данную точку
         рисунком ``Renderer``.
+
         :return: список ``GameObject``, располагающихся под заданной точкой.
         '''
         res = []
@@ -85,14 +86,16 @@ class GameObject:
         '''
 
         self.nonscaled_scale = scale
+        '''Размер объекта без модификаций, произведенных в связи с изменненым размером экрана'''
         self.nonscaled_position = pos
+        '''Позиция объекта без модификация, произведенных в связи с измененным размером экрана'''
 
         self.rotation: int = rot
         '''Угол поворота ``GameObject`` в градусах.'''
         self.scale: Vector2 = scale
-        '''Коэффициент при размере ``GameObject``.'''
+        '''Коэффициент при размере ``GameObject``. Только для чтения'''
         self.position: Vector2 = pos
-        '''Расположение ``GameObject`` на сцене.'''
+        '''Расположение ``GameObject`` на сцене. Только для чтения'''
 
         self.components: List[Any] = components
         '''Компоненты, определяющие поведение ``GameObject``.'''
@@ -103,7 +106,11 @@ class GameObject:
         self.enabled: bool = True
         '''Принимает ли участие данный ``GameObject`` в сцене'''
 
-    def scale_characteristics(self):
+    def scale_characteristics(self) -> None:
+        '''
+        Процедура, отвечающая за изменение размера ``GameObject`` 
+        в зависимости от размеров экрана
+        '''
         factor_x = game.screen_size[0] / \
             game.data['default-screen-size'][0]
         factor_y = game.screen_size[1] / \
@@ -136,7 +143,8 @@ class GameObject:
 
     def __update_rec(self, obj) -> None:
         '''
-        Служебный метод, выполняющий ту же функцию, что и *update*.
+        Служебный метод, выполняющий ту же функцию, что и *update*, включая 
+        помимо самого объекта его дочерние объекты.
 
         :param obj: ``GameObject``, у которого нужно вызвать update.
         :type obj: GameObject
@@ -149,5 +157,6 @@ class GameObject:
             self.__update_rec(c_obj)
 
     def update(self):
+        '''Метод кадра для объекта.'''
         self.__update_rec(self)
 

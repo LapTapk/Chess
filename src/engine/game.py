@@ -64,7 +64,12 @@ def run() -> None:
     while running:
         __iteration()
 
-def change_screen_size(size):
+def change_screen_size(size: Tuple[int, int]) -> None:
+    '''
+    Процедура, изменяющая размер экрана.
+
+    :param size: новый размер экрана
+    '''
     global screen, screen_size
     screen_size = size
     screen = pygame.display.set_mode(size)
