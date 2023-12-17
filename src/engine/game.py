@@ -1,3 +1,5 @@
+'''Главный модуль движка. Ядро исполнения программы'''
+
 import json
 from . import game_object
 from chess_server import client
