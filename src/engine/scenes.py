@@ -1,3 +1,5 @@
+"Модуль со сконструированными сценами"
+
 from . import game_object
 from .grid import Grid
 from .scene_utils import *
@@ -5,7 +7,8 @@ from . import input_box
 from .board import BoardUpdater
 
 
-def create_settings_scene():
+def create_settings_scene() -> None:
+    '''Функция создания сцены параметров'''
     scene = game_object.Scene()
     bkg = create_mono_bkg(scene, pygame.color.THECOLORS['white'])
 
@@ -19,7 +22,8 @@ def create_settings_scene():
     return scene
 
 
-def create_start_scene():
+def create_start_scene() -> None:
+    '''Функция создания сцены запуска игры'''
     scene = game_object.Scene()
     bkg = create_mono_bkg(scene, pygame.color.THECOLORS['white'])
     inpb_go = create_input_box(
@@ -37,7 +41,8 @@ def create_start_scene():
     return scene
 
 
-def create_chess_scene():
+def create_chess_scene() -> None:
+    '''Функция создания сцены игры в шахматы'''
     scene = game_object.Scene()
 
     planes = create_planes(scene)

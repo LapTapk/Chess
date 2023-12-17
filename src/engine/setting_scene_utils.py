@@ -1,3 +1,5 @@
+'''Не предназначено для использования, сугубо вспомогательный в создании сцен модуль.'''
+
 from . import game
 
 def try_apply_resolution(resolution_ib):

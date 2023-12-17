@@ -1,3 +1,5 @@
+'''Не предназначено для использования, сугубо вспомогательный в создании сцен модуль.'''
+
 import pygame
 import socket
 from . import game_object, input_box, renderer, game, message_communication,\
