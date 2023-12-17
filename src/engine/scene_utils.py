@@ -24,7 +24,7 @@ def create_mono_bkg(scene, color):
     return go
 
 
-def create_button(scene, pos, img_name, *funcs):
+def create_button(scene, pos, img_name, *funcs, scale=Vector2(1, 1)):
     go = game_object.GameObject()
     rend = renderer.Renderer()
     btn = button.Button()
@@ -33,7 +33,7 @@ def create_button(scene, pos, img_name, *funcs):
     rend.init(go, img)
     btn.init(go, rend, *funcs)
 
-    go.init(scene, pos=pos, components=[rend, btn])
+    go.init(scene, pos=pos, scale=scale, components=[rend, btn])
     return go
 
 
@@ -167,14 +167,14 @@ def create_change_scene_button(scene, pos, img_name, create_scene):
     def change_scene():
         game.cur_scene = create_scene()
 
-    return create_button(scene, pos, img_name, change_scene)
+    return create_button(scene, pos, img_name, change_scene, scale=Vector2(1/2, 1/2))
 
 def create_settings_button(scene, create_scene):
-    pos = from_tuple(game.data['default-screen-size']) - Vector2(50, 50)
-    return create_change_scene_button(scene, pos, 'play-button', create_scene)
+    pos = from_tuple(game.data['default-screen-size']) - Vector2(100, 50)
+    return create_change_scene_button(scene, pos, 'settings-btn', create_scene)
 
 def create_start_menu_button(scene, create_scene):
-    pos = from_tuple(game.data['default-screen-size']) - Vector2(50, 50)
+    pos = from_tuple(game.data['default-screen-size']) - Vector2(100, 50)
     return create_change_scene_button(scene, pos, 'play-button', create_scene)
 
 
@@ -192,7 +192,7 @@ def create_apply_button(scene, resolution_ib):
     def apply():
         setting_scene_utils.apply(resolution_ib)
 
-    return create_button(scene, Vector2(640, 600), 'play-button', apply)
+    return create_button(scene, Vector2(640, 600), 'apply-btn', apply)
 
 def create_msg_comm(scene, chess_state_machine):
     go = game_object.GameObject()
