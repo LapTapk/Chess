@@ -6,7 +6,7 @@ class Figure():
 
     name = '.'
 
-    def __init__(self, color='white', position=(0, 0)):
+    def __init__(self, color='neutral', position=(0, 0)):
         self.color = color
         self.position = position
 
@@ -48,6 +48,7 @@ class King(Figure):
     def __init__(self, color, position):
         super().__init__(color, position)
         self.name = self.registerFromColor()
+        self.did_move = False
 
     def showFigureConsole(self):
         """вывод фигуры в консоль -
@@ -77,6 +78,7 @@ class Rock(Figure):
     def __init__(self, color, position):
         super().__init__(color, position)
         self.name = self.registerFromColor()
+        self.did_move = False
 
     def showFigureConsole(self):
         """вывод фигуры в консоль -
@@ -124,3 +126,17 @@ class Pawn(Figure):
         """вывод фигуры в консоль -
         белые в верхнем регистре, чёрные в нижнем"""
         return self.name
+
+    def transformation(self, board, figure='q'):
+        # пока всегда превращяется в ферзя
+        if figure in ('q', 'Q'):
+            board[self.position[0]][self.position[1]] = Queen(self.color, self.position)
+        if figure in ('k', 'K'):
+            board[self.position[0]][self.position[1]] = King(self.color, self.position)
+        if figure in ('b', 'B'):
+            board[self.position[0]][self.position[1]] = Bishop(self.color, self.position)
+        if figure in ('n', 'N'):
+            board[self.position[0]][self.position[1]] = Knight(self.color, self.position)
+        if figure in ('r', 'R'):
+            board[self.position[0]][self.position[1]] = Rock(self.color, self.position)
+
