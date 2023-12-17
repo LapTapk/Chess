@@ -599,9 +599,9 @@ class Board(object):
 
     def serialize(self):
         res = '{"board": ['
-        for i in range(Board.lenght):
+        for i in range(8):
             res += '['
-            for j in range(Board.lenght):
+            for j in range(8):
                 ser = self.board[i][j].serialize()
                 res += ser + (',' if j != 7 else '')
                 
@@ -613,8 +613,8 @@ class Board(object):
         board = data['board']
         res = Board()
 
-        for i in range(Board.lenght):
-            for j in range(Board.lenght):
+        for i in range(8):
+            for j in range(8):
                 figure = Figure.Figure.deserialize(board[i][j])
                 res.board[i][j] = figure
         

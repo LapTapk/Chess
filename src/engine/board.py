@@ -27,15 +27,15 @@ class BoardUpdater:
     def create_figures(self, board, is_white, is_user_free):
         user_color = 'white' if is_white else 'black'
         res = []
-        for i in range(Board.lenght):
-            for j in range(Board.lenght):
+        for i in range(8):
+            for j in range(8):
                 figure = board.board[i][j]
                 if figure.name == '.':
                     continue
 
                 coord = Vector2(i, j)
                 if user_color == 'white':
-                    coord = Vector2(Board.lenght - 1, Board.lenght - 1) - coord
+                    coord = Vector2(7, 7) - coord
 
                 scene = self.go.scene
                 owned_by_user = user_color == figure.color
