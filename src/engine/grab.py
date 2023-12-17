@@ -14,7 +14,7 @@ class Grabber:
         self.go: game_object.GameObject = go
         '''``GameObject``, которому принадлежит компонент'''
         self.grabbed: Grabable | None = None
-        '''``Захваченный объект'''
+        '''Захваченный объект'''
 
     def try_grab(self) -> None:
         '''Метод, осуществляющий попытку захвата объекта под курсором, 
@@ -78,6 +78,7 @@ class Grabable:
 
 class FigureGrabber(Grabber):
     '''Компонент, перемещающий фигуры. Дочерний класс ``Grabber``'''
+
     def init(self, go: game_object.GameObject, grd: Grid):
         self.grd: Grid = grd
         '''``Grid`` относительно которого осуществляется поиск ближайшей клетки, куда можно поставить фигуру'''
@@ -107,7 +108,7 @@ class FigureGrabber(Grabber):
 
     def get_move(self) -> Tuple[Vector2, Vector2]:
         '''Метод, возращающий потенциальный ход.
-        
+
         :return: потенциальный ход, координата откуда была взята фигура, и куда ее можно поставить'''
         factor_x = game.screen_size[0] / game.data['default-screen-size'][0]
         factor_y = game.screen_size[1] / game.data['default-screen-size'][1]
