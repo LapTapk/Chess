@@ -1,15 +1,23 @@
-from .grid import GridBinder, find_closest
+from .grid import GridBinder, find_closest, Grid
 import pygame
 from .vector2 import *
-from . import game
+from . import game, game_object
 
 
 class Grabber:
-    def init(self, go):
-        self.go = go
-        self.grabbed = None
+    '''Компонент, двигающий объекты за курсором, если на них нажали, 
+    и оставляющий их на месте после произведнных манипуляций.'''
 
-    def try_grab(self):
+    def init(self, go: game_object.GameObject) -> None:
+        '''Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса'''
+        self.go: game_object.GameObject = go
+        '''``GameObject``, которому принадлежит компонент'''
+        self.grabbed: Grabable | None = None
+        '''``Захваченный объект'''
+
+    def try_grab(self) -> None:
+        '''Метод, осуществляющий попытку захвата объекта под курсором, 
+        если такой имеется.'''
         if self.grabbed != None:
             return
 
@@ -29,7 +37,8 @@ class Grabber:
         grabable.moving = True
         self.grabbed = grabable
 
-    def try_drop(self):
+    def drop(self) -> None:
+        '''Метод, оставляющий захваченный объект на месте'''
         if self.grabbed == None:
             return
 
@@ -38,18 +47,27 @@ class Grabber:
 
 
 class Grabable:
-    def init(self, go, is_moveable=True):
-        self.is_moveable = is_moveable
-        self.moving = False
-        self.go = go
+    '''Компонент объекта, который может быть захвачен. 
+    Двигает объект, если необходимо.'''
+
+    def init(self, go: game_object.GameObject, is_moveable: bool = True):
+        '''Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса.'''
+        self.is_moveable: bool = is_moveable
+        '''Состояние, показывающее можно ли двигать объект'''
+        self.moving: bool = False
+        '''Состояние, показывающее необходимо ли двигать объект за курсором'''
+        self.go: game_object.GameObject = go
+        '''``GameObject``, которому принадлежит компонент'''
 
     def update(self):
+        '''Метод кадра компонента.'''
         if not self.moving or not self.is_moveable:
             return
 
         self.move_to_mouse()
 
     def move_to_mouse(self):
+        '''Метод, перемещающий объект к курсору'''
         factor_x = game.screen_size[0] / game.data['default-screen-size'][0]
         factor_y = game.screen_size[1] / game.data['default-screen-size'][1]
         m_pos = pygame.mouse.get_pos()
@@ -58,12 +76,16 @@ class Grabable:
 
 
 class FigureGrabber(Grabber):
-    def init(self, go, grd):
-        self.grd = grd
-        self.grabbed_coord = None
+    '''Компонент, перемещающий фигуры. Дочерний класс ``Grabber``'''
+    def init(self, go: game_object.GameObject, grd: Grid):
+        self.grd: Grid = grd
+        '''``Grid`` относительно которого осуществляется поиск ближайшей клетки, куда можно поставить фигуру'''
+        self.grabbed_coord: Vector2 = None
+        '''Относительная координата ``Grid`` размещения фигуры'''
         super().init(go)
 
-    def __unbind(self):
+    def __unbind(self) -> None:
+        '''Закрытый метод, открепляющий фигуру от сетки'''
         grabbed = self.grabbed
         if grabbed == None:
             return
@@ -71,7 +93,8 @@ class FigureGrabber(Grabber):
         binder = grabbed.go.get_component(GridBinder)
         binder.binded = False
 
-    def try_grab(self):
+    def try_grab(self) -> None:
+        '''Метод, осуществляющий попытку захватить фигуру'''
         super().try_grab()
 
         if self.grabbed == None:
@@ -81,7 +104,10 @@ class FigureGrabber(Grabber):
         self.grabbed_coord = binder.coord
         self.__unbind()
 
-    def get_move(self):
+    def get_move(self) -> Tuple[Vector2, Vector2]:
+        '''Метод, возращающий потенциальный ход.
+        
+        :return: потенциальный ход, координата откуда была взята фигура, и куда ее можно поставить'''
         factor_x = game.screen_size[0] / game.data['default-screen-size'][0]
         factor_y = game.screen_size[1] / game.data['default-screen-size'][1]
         m_pos = pygame.mouse.get_pos()
