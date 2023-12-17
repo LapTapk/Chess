@@ -7,19 +7,16 @@ class Board(object):
     Объект шахманой доски
     '''
 
-
-
-
     def startPosition(self):
         '''
-        Расппологает фигуры по начальным позициям
+        Располагает фигуры по начальным позициям
         Возвращает доску с начальной расстановкой шахматных фигур
         '''
 
-        #i - столбцы
-        #j - стороки
-        #0, 1 - белые фигуры
-        #6, 7 - чёрные фигуры
+        # i - столбцы
+        # j - стороки
+        # 0, 1 - белые фигуры
+        # 6, 7 - чёрные фигуры
         for i in range(self.lenght):
             for j in range(self.lenght):
                 """создание пешек"""
@@ -77,9 +74,9 @@ class Board(object):
         self.lastMoveto: tuple = (0, 0)
         '''координаты конечного положения фигуры, которая сделала последний ход'''
         self.board: [[Figure]] = [[Figure.Figure() for j in range(self.lenght)]
-                      for i in range(self.lenght)]
+                                  for i in range(self.lenght)]
         '''доска, каждая ячейка двумерного массива эквивалентна клетке доски'''
-        #self.board = self.startPosition()
+        # self.board = self.startPosition()
         self.colorMove: str = 'white'
         '''состояние, показывающее какой из игроков ходит (по цвету)'''
         self.whiteKingPos: tuple = (4, 0)
@@ -581,6 +578,10 @@ class Board(object):
         :return: если ход возможен, возвращает 'neutral' если партия не закончена, или ('checkmate'/'stalemate', color),
         где color - проигравшая сторона; возвращает False, если ход невозможен
         '''
+
+        if frm == to:
+            return True
+
         if not self.is_legal(frm, to):
             # print("ILLLEGAL MOVE")
             return False
@@ -604,11 +605,11 @@ class Board(object):
             for j in range(Board.lenght):
                 ser = self.board[i][j].serialize()
                 res += ser + (',' if j != 7 else '')
-                
+
             res += ']' + (',' if i != 7 else '')
         res += ']}'
         return res
-    
+
     def deserialize(data):
         board = data['board']
         res = Board()
@@ -617,5 +618,5 @@ class Board(object):
             for j in range(Board.lenght):
                 figure = Figure.Figure.deserialize(board[i][j])
                 res.board[i][j] = figure
-        
+
         return res
