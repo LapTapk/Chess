@@ -63,12 +63,6 @@ class King(Figure):
         self.name = self.registerFromColor()
         self.did_move = False
 
-    def showFigureConsole(self):
-        '''
-        Вывод фигуры в консоль - белые в верхнем регистре, чёрные в нижнем
-        '''
-        return self.name
-
 
 class Queen(Figure):
     '''Класс фигуры королева'''
@@ -84,13 +78,6 @@ class Queen(Figure):
         super().__init__(color, position)
         self.name = self.registerFromColor()
 
-    def showFigureConsole(self):
-        '''
-        Вывод фигуры в консоль -
-        белые в верхнем регистре, чёрные в нижнем
-        '''
-        return self.name
-
 
 class Rock(Figure):
     name = 'r'
@@ -105,13 +92,6 @@ class Rock(Figure):
         self.name = self.registerFromColor()
         self.did_move = False
 
-    def showFigureConsole(self):
-        '''
-        Вывод фигуры в консоль -
-        белые в верхнем регистре, чёрные в нижнем
-        '''
-        return self.name
-
 
 class Bishop(Figure):
     name = 'b'
@@ -124,13 +104,6 @@ class Bishop(Figure):
         '''
         super().__init__(color, position)
         self.name = self.registerFromColor()
-
-    def showFigureConsole(self):
-        '''
-        Вывод фигуры в консоль -
-        белые в верхнем регистре, чёрные в нижнем
-        '''
-        return self.name
 
 
 class Knight(Figure):
@@ -145,13 +118,6 @@ class Knight(Figure):
         super().__init__(color, position)
         self.name = self.registerFromColor()
 
-    def showFigureConsole(self):
-        '''
-        Вывод фигуры в консоль -
-        белые в верхнем регистре, чёрные в нижнем
-        '''
-        return self.name
-
 
 class Pawn(Figure):
     name = 'p'
@@ -160,18 +126,11 @@ class Pawn(Figure):
         super().__init__(color, position)
         self.name = self.registerFromColor()
 
-    def showFigureConsole(self):
-        '''
-        Вывод фигуры в консоль -
-        белые в верхнем регистре, чёрные в нижнем
-        '''
-        return self.name
-
     def transformation(self, board, figure='q'):
         '''
         Превращение пешки в другие фигуры, при достижении противоположного кра доски
         :param board: доска, на которой стоит пешка
-        :param figure: фигура,в которую должна превратиться пешка
+        :param figure: фигура, в которую должна превратиться пешка
         '''
         if figure in ('q', 'Q'):
             board[self.position[0]][self.position[1]] = Queen(self.color, self.position)
