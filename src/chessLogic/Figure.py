@@ -10,6 +10,7 @@ class Figure():
     def __init__(self, color: str = 'neutral', position: tuple = (0, 0)):
         '''
         Создание фигуры
+
         :param color: цвет фигуры
         :param position: позиция, на которой создаётся фигура
         '''
@@ -32,12 +33,19 @@ class Figure():
             return self.name.lower()
 
     def serialize(self):
+        '''Функция конвертации данного объекта в json.
+
+        :return: json строка фигуры'''
         res = json.dumps(self, default=lambda o: o.__dict__,
                          sort_keys=True, indent=4)
         res = f'{{"type": "{type(self).__name__}",\n' + res[1:]
         return res
 
     def deserialize(data):
+        '''Функция конвертации json строки в ``Figure``
+
+        :rtype: Figure
+        :return: ``Figure`` из json строки'''
         figure_types = {'Figure': Figure, 'Pawn': Pawn,
                         'Rock': Rock, 'Bishop': Bishop,
                         'Knight': Knight, 'Queen': Queen,
@@ -56,6 +64,7 @@ class King(Figure):
     def __init__(self, color: str, position: tuple):
         '''
         Создание фигуры король
+
         :param color: цвет короля
         :param position: позиция короля
         '''
@@ -63,6 +72,11 @@ class King(Figure):
         self.name = self.registerFromColor()
         self.did_move = False
 
+    def showFigureConsole(self):
+        '''
+        Вывод фигуры в консоль - белые в верхнем регистре, чёрные в нижнем
+        '''
+        return self.name
 
 class Queen(Figure):
     '''Класс фигуры королева'''
@@ -72,6 +86,7 @@ class Queen(Figure):
     def __init__(self, color, position):
         '''
         Создание фигуры ферзь
+
         :param color: цвет ферзя
         :param position: позиция ферзя
         '''
@@ -85,6 +100,7 @@ class Rock(Figure):
     def __init__(self, color, position):
         '''
         Создание фигуры ладья
+
         :param color: цвет ладьи
         :param position: позиция ладьи
         '''
@@ -99,6 +115,7 @@ class Bishop(Figure):
     def __init__(self, color, position):
         '''
         Создание фигуры слон
+
         :param color: цвет слона
         :param position: позиция слона
         '''
@@ -112,6 +129,7 @@ class Knight(Figure):
     def __init__(self, color, position):
         '''
         Создание фигуры конь
+
         :param color: цвет коня
         :param position: позиция коня
         '''
@@ -129,16 +147,22 @@ class Pawn(Figure):
     def transformation(self, board, figure='q'):
         '''
         Превращение пешки в другие фигуры, при достижении противоположного кра доски
+
         :param board: доска, на которой стоит пешка
         :param figure: фигура, в которую должна превратиться пешка
         '''
         if figure in ('q', 'Q'):
-            board[self.position[0]][self.position[1]] = Queen(self.color, self.position)
+            board[self.position[0]][self.position[1]
+                                    ] = Queen(self.color, self.position)
         if figure in ('k', 'K'):
-            board[self.position[0]][self.position[1]] = King(self.color, self.position)
+            board[self.position[0]][self.position[1]] = King(
+                self.color, self.position)
         if figure in ('b', 'B'):
-            board[self.position[0]][self.position[1]] = Bishop(self.color, self.position)
+            board[self.position[0]][self.position[1]
+                                    ] = Bishop(self.color, self.position)
         if figure in ('n', 'N'):
-            board[self.position[0]][self.position[1]] = Knight(self.color, self.position)
+            board[self.position[0]][self.position[1]
+                                    ] = Knight(self.color, self.position)
         if figure in ('r', 'R'):
-            board[self.position[0]][self.position[1]] = Rock(self.color, self.position)
+            board[self.position[0]][self.position[1]] = Rock(
+                self.color, self.position)

@@ -5,6 +5,8 @@
     "play-button": "assets/play_button.png",
     "connect-btn": "assets/connect-btn.png",
     "host-btn": "assets/host-btn.png",
+    "settings-btn": "assets/settings_btn.jpg",
+    "apply-btn": "assets/apply_btn.jpg",
     "board-screen-ratio": 0.5,
     "default-screen-size": [
         1280,

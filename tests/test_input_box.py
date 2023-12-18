@@ -5,12 +5,13 @@ from src.engine import game_object, input_box, game, vector2
 
 utils.game_pseudoinit()
 
+
 def test_activation():
     go = game_object.GameObject()
     ib = input_box.InputBox()
 
     ib.init(go, 32, 'INVITATION')
-    go.init(None, pos = vector2.Vector2(20, 60), components=[ib])
+    go.init(None, pos=vector2.Vector2(20, 60), components=[ib])
     ib.show_text()
 
     event = mock.Mock()
@@ -25,12 +26,13 @@ def test_activation():
     ib.update()
     assert ib.active == True
 
+
 def test_text_input():
     go = game_object.GameObject()
     ib = input_box.InputBox()
 
     ib.init(go, 32, 'INVITATION')
-    go.init(None, pos = vector2.Vector2(20, 60), components=[ib])
+    go.init(None, pos=vector2.Vector2(20, 60), components=[ib])
     ib.active = True
 
     event = mock.Mock()

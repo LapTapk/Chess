@@ -6,6 +6,7 @@ import utils
 
 utils.game_pseudoinit()
 
+
 def test_get_component_valid():
     go = GameObject()
     rend = Renderer()
@@ -16,6 +17,7 @@ def test_get_component_valid():
     go.init(None, components=[ib, rend])
     assert go.get_component(Renderer) == rend
 
+
 def test_get_component_nonvalid():
     go = GameObject()
     ib = InputBox()
@@ -23,6 +25,7 @@ def test_get_component_nonvalid():
     ib.init(go, None, None)
     go.init(None, components=[ib])
     assert go.get_component(Renderer) == None
+
 
 def test_add_component():
     go = GameObject()

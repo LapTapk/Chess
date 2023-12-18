@@ -1,61 +1,98 @@
+from typing import *
+
+
 class Vector2:
     '''
-    Class that implement basic functions over 2-dimensional vectors
-    like add, substract and others.
-
-    :param float x: sets x coordinate of a vector
-    :param float y: sets y coordinate of a vector
+    Класс, реализующий базовые операции над веторами, такие как сложение, вычитание,
+    умножение на число и др.
     '''
 
-    def __init__(self, x, y):
-        self.x = x
-        '''x coordinate'''
-        self.y = y
-        '''y coordinate'''
+    def __init__(self, x: float, y: float) -> None:
+        self.x: float = x
+        '''Координата x'''
+        self.y: float = y
+        '''Координата y'''
 
     def __add__(self, v):
+        '''Операция сложения двух векторов
+
+        :param v: второй слагаемый вектор
+        :type v: Vector2
+        :rtype: Vector2
+        :return: результат покомпонентного сложения векторов'''
         x = self.x + v.x
         y = self.y + v.y
         return Vector2(x, y)
 
     def __sub__(self, v):
+        '''Операция разности двух векторов
+
+        :param v: вычитаемый вектор
+        :type v: Vector2
+        :rtype: Vector2
+        :return: результат покомпонентного вычитания векторов'''
+
         x = self.x - v.x
         y = self.y - v.y
         return Vector2(x, y)
 
-    def __mul__(self, n):
+    def __mul__(self, n: float):
+        '''Операция умножения вектора на число
+
+        :param n: коэффициент умножения
+        :rtype: Vector2
+        :return: результат покомпонентного умножения вектора на число'''
         x = self.x * n
         y = self.y * n
         return Vector2(x, y)
 
     def __truediv__(self, n):
+        '''Операция деления вектора на число
+
+        :param n: делитель вектора
+        :rtype: Vector2
+        :return: результат покомпонентного деления вектора на число'''
         x = self.x / n
         y = self.y / n
         return Vector2(x, y)
 
     def __neg__(self):
+        '''Операция отрицания вектора
+
+        :rtype: Vector2
+        :return: результат покомпонентного отрицания вектора'''
         x = -self.x
         y = -self.y
         return Vector2(x, y)
 
-    def __str__(self):
+    def __str__(self) -> LiteralString:
+        '''Операция перевода типа ``Vector2`` в строку
+
+        :return: строка из ``Vector2``'''
         return f"Vector2({self.x}, {self.y})"
 
-    def length(self):
+    def __eq__(self, v) -> bool:
+        '''Операция покомпонентного сравнения двух векторов
+
+        :param v: вектор, с которым сравнивается данный
+        :type v: Vector2
+        :return: результат сравнения двух векторов'''
+        return self.x == v.x and self.y == v.y
+
+    def length(self) -> float:
+        '''Длинна данного вектора'''
         return (self.x ** 2 + self.y ** 2) ** (1/2)
 
-    def to_tuple(self):
+    def to_tuple(self) -> Tuple[float, float]:
         '''
-        :rtype: tuple[float, float]
-        :return: tuple that converted from Vector2
+        :return: ``Vector2``, переведенный в кортеж
         '''
         return (self.x, self.y)
 
 
-def from_tuple(t):
+def from_tuple(t: Tuple[float, float]) -> Vector2:
     '''
-    :param tuple[float, float] t: convertion tuple 
-    :rtype: Vector2
-    :return: Vector2 that converted from tuple
+    :param t: кортеж, который надо перевести в Vector2
+    :return: ``Vector2``, переведенный из данного кортежа
     '''
     return Vector2(t[0], t[1])
