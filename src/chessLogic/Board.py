@@ -8,19 +8,16 @@ class Board(object):
     Объект шахманой доски
     '''
 
-
-
-
     def startPosition(self):
         '''
         Расппологает фигуры по начальным позициям
         Возвращает доску с начальной расстановкой шахматных фигур
         '''
 
-        #i - столбцы
-        #j - стороки
-        #0, 1 - белые фигуры
-        #6, 7 - чёрные фигуры
+        # i - столбцы
+        # j - стороки
+        # 0, 1 - белые фигуры
+        # 6, 7 - чёрные фигуры
         for i in range(self.lenght):
             for j in range(self.lenght):
                 """создание пешек"""
@@ -78,9 +75,9 @@ class Board(object):
         self.lastMoveto: tuple = (0, 0)
         '''координаты конечного положения фигуры, которая сделала последний ход'''
         self.board: [[Figure]] = [[Figure.Figure() for j in range(self.lenght)]
-                      for i in range(self.lenght)]
+                                  for i in range(self.lenght)]
         '''доска, каждая ячейка двумерного массива эквивалентна клетке доски'''
-        #self.board = self.startPosition()
+        # self.board = self.startPosition()
         self.colorMove: str = 'white'
         '''состояние, показывающее какой из игроков ходит (по цвету)'''
         self.whiteKingPos: tuple = (4, 0)
@@ -322,7 +319,8 @@ class Board(object):
         '''
 
         '''проверка на короля противника, около клетки pos'''
-        around = [(0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1)]
+        around = [(0, -1), (1, -1), (1, 0), (1, 1),
+                  (0, 1), (-1, 1), (-1, 0), (-1, -1)]
         for i, j in around:
             if (0 <= pos[0] + i <= 7) and (0 <= pos[1] + j <= 7) and \
                     self.board[pos[0] + i][pos[1] + j].name in ('k', 'K') and \
@@ -403,7 +401,8 @@ class Board(object):
                         break
 
         '''проверка на шах от коней'''
-        directions = [(-2, -1), (-1, -2), (1, -2), (2, -1), (2, 1), (1, 2), (-1, 2), (-2, 1)]
+        directions = [(-2, -1), (-1, -2), (1, -2), (2, -1),
+                      (2, 1), (1, 2), (-1, 2), (-2, 1)]
         knight_name = 'n' if king_color == 'white' else 'N'
         for i, j in directions:
             if (0 <= pos[0] + i <= 7) and (0 <= pos[1] + j <= 7) and \
@@ -514,7 +513,8 @@ class Board(object):
                             return False
                     '''проверка коней на возможность ходить'''
                     if self.board[i][j].name in ('n', 'N'):
-                        directions = [(-2, -1), (-1, -2), (1, -2), (2, -1), (2, 1), (1, 2), (-1, 2), (-2, 1)]
+                        directions = [(-2, -1), (-1, -2), (1, -2),
+                                      (2, -1), (2, 1), (1, 2), (-1, 2), (-2, 1)]
                         for i_plus, j_plus in directions:
                             if 0 <= i + i_plus <= 7 and 0 <= j + j_plus <= 7 and \
                                     self.is_legal((i, j), (i + i_plus, j + j_plus)):
@@ -546,7 +546,8 @@ class Board(object):
                                 j_ += j_plus
                     '''проверка короля на возможность ходить'''
                     if self.board[i][j].name in ('k', 'K'):
-                        around = [(0, -1), (1, -1), (1, 0), (1, 1), (0, 1), (-1, 1), (-1, 0), (-1, -1)]
+                        around = [(0, -1), (1, -1), (1, 0), (1, 1),
+                                  (0, 1), (-1, 1), (-1, 0), (-1, -1)]
                         for i_plus, j_plus in around:
                             if 0 <= i + i_plus <= 7 and 0 <= j + j_plus <= 7 and \
                                     self.is_legal((i, j), (i + i_plus, j + j_plus)):
@@ -614,7 +615,7 @@ class Board(object):
     def serialize(self) -> LiteralString:
         '''Функция конвертации данного объекта в json.
         Всеми параметрами, кроме расположения шахмат, пренебрегает
-        
+
         :return: json строка доски'''
         res = '{"board": ['
         for i in range(8):
@@ -622,14 +623,14 @@ class Board(object):
             for j in range(8):
                 ser = self.board[i][j].serialize()
                 res += ser + (',' if j != 7 else '')
-                
+
             res += ']' + (',' if i != 7 else '')
         res += ']}'
         return res
-    
+
     def deserialize(data):
         '''Функция конвертации json строки в ``Board``
-        
+
         :rtype: Board
         :return: ``Board`` из json строки'''
         board = data['board']
@@ -639,5 +640,5 @@ class Board(object):
             for j in range(8):
                 figure = Figure.Figure.deserialize(board[i][j])
                 res.board[i][j] = figure
-        
+
         return res

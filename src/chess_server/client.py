@@ -3,8 +3,10 @@ import http.client
 import json
 from chessLogic.Board import Board
 
+
 class Client:
     '''Класс клиента, отвественный за запросы к серверу.'''
+
     def __init__(self, host: LiteralString, port: int, is_white: bool):
         '''
         При создании класса отправляет серверу запрос POST, 
@@ -27,7 +29,7 @@ class Client:
 
     def send_move(self, frm: Tuple[int, int], to: Tuple[int, int]) -> bool:
         '''Метод, отвечающий за отправку хода северу 
-        
+
         :param frm: откуда перенесена фигура.
         :param to: куда перенесена фигура.
         :return: был ли сделан ход'''
@@ -46,7 +48,7 @@ class Client:
 
     def get_board(self) -> Board:
         '''Метод, отвечающий за получение актуального состояния доски с сервера.
-        
+
         :return: версия поля с сервера.'''
         host, port = self.address
         conn = http.client.HTTPConnection(host, port)
@@ -72,14 +74,14 @@ class Client:
 
     def has_moved(self) -> bool:
         '''Метод, проверяющий был ли произведен ход
-        
+
         :return: был ли произведен ход'''
         server_moves_cnt = self.get_moves()
         return self.local_moves_cnt != server_moves_cnt
 
     def get_conn(self) -> int:
         '''Метод, возвращающий кол-во подключений к серверу.
-        
+
         :return: кол-во подключений к серверу.'''
         host, port = self.address
         conn = http.client.HTTPConnection(host, port)
@@ -89,7 +91,7 @@ class Client:
 
     def get_msg(self) -> Dict[LiteralString, LiteralString | bool]:
         '''Метод, получаеющий сообщение для цвета данного клиента.
-        
+
         :return: сообщение для цвета данного клиента.'''
         host, port = self.address
         conn = http.client.HTTPConnection(host, port)
@@ -106,7 +108,7 @@ class Client:
 
     def send_msg(self, text: LiteralString, is_response: bool) -> bool:
         '''Метод, отправляющий сообщение противоположному цвету.
-        
+
         :param text: текст сообщения
         :param is_response: обозначает, является ли отправляемое сообщение ответом на вопрос
         :return: было ли принято сообщение'''
@@ -119,7 +121,7 @@ class Client:
                      headers={'Content-Type': 'text/plain', 'Content-Length': str(len(data))})
 
         response = conn.getresponse()
-        return response.getcode == 200 
+        return response.getcode == 200
 
     def get_state(self) -> LiteralString | Tuple[LiteralString, LiteralString]:
         '''Метод, получающий состояние на текущий ход с сервера.

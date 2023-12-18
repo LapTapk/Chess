@@ -159,4 +159,3 @@ class GameObject:
     def update(self):
         '''Метод кадра для объекта.'''
         self.__update_rec(self)
-

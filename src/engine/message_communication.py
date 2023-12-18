@@ -6,6 +6,7 @@ from . import game, game_object, chess_state_machine, renderer
 class MessageCommunication:
     '''Компонент, отвечающий за восприятие сигналов отправки сообщений противнику 
     и вывод их на экран'''
+
     def init(self, go: game_object.GameObject, font_size: int, chess_machine: chess_state_machine.ChessStateMachine, rend: renderer.Renderer) -> None:
         '''Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса'''
         self.go: game_object.GameObject = go
@@ -25,7 +26,7 @@ class MessageCommunication:
 
     def show_msg(self, msg: Dict[LiteralString, LiteralString | bool]) -> None:
         '''Процедура, выводящая сообщение на экран
-        
+
         :param msg: сообщение, которое необходимо вывести'''
         base_font = pygame.font.Font(None, self.font_size)
         msg_surface = base_font.render(
@@ -83,7 +84,7 @@ class MessageCommunication:
     def handle_response(self, msg: Dict[LiteralString, LiteralString | bool]) -> None:
         '''Метод, обрабатывающий входящее сообщение.
         Если пришло сообщение с соглашением на ничью или с признанием поражения
-        
+
         :param msg: сообщение, которое нужно обработать'''
         if msg['text'] == 'Ок' or msg['text'] == 'Сдаюсь':
             self.chess_machine.change_state(self.chess_machine.end_state)

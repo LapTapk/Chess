@@ -2,7 +2,7 @@
 
 import pygame
 import socket
-from . import game_object, input_box, renderer, game, message_communication,\
+from . import game_object, input_box, renderer, game, message_communication, \
     button, grid, board, grab, connection_checker, setting_scene_utils
 from .vector2 import *
 from .chess_state_machine import *
@@ -148,7 +148,7 @@ def create_input_box(scene, font_size, invitation, is_valid):
     rend = renderer.Renderer()
     inpb = input_box.InputBox()
 
-    rend.init(go, pygame.surface.Surface((0,0)))
+    rend.init(go, pygame.surface.Surface((0, 0)))
     inpb.init(go, font_size, invitation, is_valid, rend)
 
     def_scr_size = game.data['default-screen-size']
@@ -171,9 +171,11 @@ def create_change_scene_button(scene, pos, img_name, create_scene):
 
     return create_button(scene, pos, img_name, change_scene, scale=Vector2(1/2, 1/2))
 
+
 def create_settings_button(scene, create_scene):
     pos = from_tuple(game.data['default-screen-size']) - Vector2(100, 50)
     return create_change_scene_button(scene, pos, 'settings-btn', create_scene)
+
 
 def create_start_menu_button(scene, create_scene):
     pos = from_tuple(game.data['default-screen-size']) - Vector2(100, 50)
@@ -186,15 +188,18 @@ def create_resolution_input_box(scene):
     rend = renderer.Renderer()
 
     rend.init(go, pygame.surface.Surface((0, 0)))
-    ib.init(go, 32, 'Input screen size', lambda x: x.isdigit() or x == ' ', rend)
+    ib.init(go, 32, 'Input screen size',
+            lambda x: x.isdigit() or x == ' ', rend)
     go.init(scene, pos=Vector2(640, 100), components=[ib, rend])
     return go
+
 
 def create_apply_button(scene, resolution_ib):
     def apply():
         setting_scene_utils.apply(resolution_ib)
 
     return create_button(scene, Vector2(640, 600), 'apply-btn', apply)
+
 
 def create_msg_comm(scene, chess_state_machine):
     go = game_object.GameObject()
@@ -207,12 +212,13 @@ def create_msg_comm(scene, chess_state_machine):
     go.init(scene, pos=pos, components=[msg_comm, rend])
     return go
 
+
 def create_hint(scene):
     go = game_object.GameObject()
     rend = renderer.Renderer()
     text = 's - сдаться/ок || d- ничья?/нет'
     font = pygame.font.Font(None, 32)
-    
+
     rend.init(go, font.render(text, False, (0, 0, 0)))
     pos = Vector2(900, 400)
     go.init(scene, pos=pos, components=[rend])

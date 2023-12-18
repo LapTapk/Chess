@@ -49,8 +49,7 @@ def check_for_end(state_machine) -> None:
         return
 
     state_machine.end_state.game_res = state
-    state_machine.change_state(state_machine.end_state) 
-    
+    state_machine.change_state(state_machine.end_state)
 
 
 class UserTurnState:
@@ -95,7 +94,8 @@ class UserTurnState:
                 result = game.clnt.send_move(frm, to)
                 if result == 202:
                     brd = game.clnt.get_board()
-                    self.brd_updater.update_board(brd, game.clnt.is_white, True)
+                    self.brd_updater.update_board(
+                        brd, game.clnt.is_white, True)
                     grabber.grabbed = None
                 elif result == 200:
                     self.machine.change_state(self.machine.enemy_turn_state)
@@ -155,6 +155,7 @@ class EnemyTurnState:
 
 class EndState:
     '''Состояние конца игры.'''
+
     def __init__(self, brd_updater: board.BoardUpdater) -> None:
         self.brd_updater = brd_updater
         '''Средство обновления доски'''
@@ -183,9 +184,9 @@ class EndState:
         text = result + '. Игра закончилась на ходе' + color
         text_surf = font.render(text, None, (0, 0, 0))
         rend.init(go, text_surf)
-        go.init(self.brd_updater.go.scene, pos=vector2.Vector2(900, 600), components=[rend])
+        go.init(self.brd_updater.go.scene, pos=vector2.Vector2(
+            900, 600), components=[rend])
         self.brd_updater.go.scene.add_object(go)
-        
 
     def update(self) -> None:
         '''Пустой метод кадра состояния.'''

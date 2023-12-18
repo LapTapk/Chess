@@ -53,6 +53,7 @@ def init(scr_size: Tuple[int, int], fps_in: int, data_json_path: LiteralString) 
     with open(data_json_path) as f:
         data = json.load(f)
 
+
 def run() -> None:
     '''
     Процедура запуска игры.
@@ -66,6 +67,7 @@ def run() -> None:
     while running:
         __iteration()
 
+
 def change_screen_size(size: Tuple[int, int]) -> None:
     '''
     Процедура, изменяющая размер экрана.
@@ -75,6 +77,7 @@ def change_screen_size(size: Tuple[int, int]) -> None:
     global screen, screen_size
     screen_size = size
     screen = pygame.display.set_mode(size)
+
 
 def check_for_exit() -> None:
     '''

@@ -5,6 +5,7 @@ from typing import *
 
 class Button:
     '''Компонент кнопки, выполняющей определенные действия при нажатии'''
+
     def init(self, go: game_object.GameObject, rend: renderer.Renderer, *funcs: Callable[[], None]):
         self.go: game_object.GameObject = go
         '''``GameObject`` к которому прикреплен компонент'''
@@ -15,7 +16,7 @@ class Button:
 
     def is_clicked(self) -> bool:
         '''Метод, проверяющий была ли нажата кнопка в данный кадр.
-        
+
         :return: была ли кнопка нажата'''
         rect = self.rend.get_rect()
 

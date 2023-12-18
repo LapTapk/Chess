@@ -1,5 +1,6 @@
 import json
 
+
 class Figure():
     '''Класс шахматные фигуры'''
 
@@ -15,7 +16,6 @@ class Figure():
         '''
         self.color: str = color
         self.position: tuple = position
-
 
     def showFigureConsole(self):
         '''
@@ -34,7 +34,7 @@ class Figure():
 
     def serialize(self):
         '''Функция конвертации данного объекта в json.
-        
+
         :return: json строка фигуры'''
         res = json.dumps(self, default=lambda o: o.__dict__,
                          sort_keys=True, indent=4)
@@ -43,7 +43,7 @@ class Figure():
 
     def deserialize(data):
         '''Функция конвертации json строки в ``Figure``
-        
+
         :rtype: Figure
         :return: ``Figure`` из json строки'''
         figure_types = {'Figure': Figure, 'Pawn': Pawn,
@@ -71,7 +71,6 @@ class King(Figure):
         super().__init__(color, position)
         self.name = self.registerFromColor()
         self.did_move = False
-
 
     def showFigureConsole(self):
         '''
@@ -189,12 +188,17 @@ class Pawn(Figure):
         :param figure: фигура,в которую должна превратиться пешка
         '''
         if figure in ('q', 'Q'):
-            board[self.position[0]][self.position[1]] = Queen(self.color, self.position)
+            board[self.position[0]][self.position[1]
+                                    ] = Queen(self.color, self.position)
         if figure in ('k', 'K'):
-            board[self.position[0]][self.position[1]] = King(self.color, self.position)
+            board[self.position[0]][self.position[1]] = King(
+                self.color, self.position)
         if figure in ('b', 'B'):
-            board[self.position[0]][self.position[1]] = Bishop(self.color, self.position)
+            board[self.position[0]][self.position[1]
+                                    ] = Bishop(self.color, self.position)
         if figure in ('n', 'N'):
-            board[self.position[0]][self.position[1]] = Knight(self.color, self.position)
+            board[self.position[0]][self.position[1]
+                                    ] = Knight(self.color, self.position)
         if figure in ('r', 'R'):
-            board[self.position[0]][self.position[1]] = Rock(self.color, self.position)
+            board[self.position[0]][self.position[1]] = Rock(
+                self.color, self.position)

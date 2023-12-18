@@ -82,11 +82,12 @@ class Grid:
 class GridBinder:
     '''Компонент, отвечающий за прикрепление ``GameObject`` к 
     определенной точке ``Grid``'''
-    def init(self, go: game_object.GameObject, grd: Grid, coord: Vector2, instant_bind: bool=True) -> None:
+
+    def init(self, go: game_object.GameObject, grd: Grid, coord: Vector2, instant_bind: bool = True) -> None:
         '''
         Инициализатор. Аналогичен __init__. Каждый параметр соответствует полю класса.
         '''
-        self.grd: Grid= grd
+        self.grd: Grid = grd
         '''``Grid``, относительно которого будет проводиться закрепление'''
         self.coord: Vector2 = coord
         '''Относительная точка ``Grid``, к которой будет прикреплен объект.'''

@@ -1,5 +1,6 @@
 from typing import *
 
+
 class Vector2:
     '''
     Класс, реализующий базовые операции над веторами, такие как сложение, вычитание,
@@ -14,7 +15,7 @@ class Vector2:
 
     def __add__(self, v):
         '''Операция сложения двух векторов
-        
+
         :param v: второй слагаемый вектор
         :type v: Vector2
         :rtype: Vector2
@@ -25,19 +26,19 @@ class Vector2:
 
     def __sub__(self, v):
         '''Операция разности двух векторов
-        
+
         :param v: вычитаемый вектор
         :type v: Vector2
         :rtype: Vector2
         :return: результат покомпонентного вычитания векторов'''
- 
+
         x = self.x - v.x
         y = self.y - v.y
         return Vector2(x, y)
 
     def __mul__(self, n: float):
         '''Операция умножения вектора на число
-        
+
         :param n: коэффициент умножения
         :rtype: Vector2
         :return: результат покомпонентного умножения вектора на число'''
@@ -47,7 +48,7 @@ class Vector2:
 
     def __truediv__(self, n):
         '''Операция деления вектора на число
-        
+
         :param n: делитель вектора
         :rtype: Vector2
         :return: результат покомпонентного деления вектора на число'''
@@ -57,7 +58,7 @@ class Vector2:
 
     def __neg__(self):
         '''Операция отрицания вектора
-        
+
         :rtype: Vector2
         :return: результат покомпонентного отрицания вектора'''
         x = -self.x
@@ -66,13 +67,13 @@ class Vector2:
 
     def __str__(self) -> LiteralString:
         '''Операция перевода типа ``Vector2`` в строку
-        
+
         :return: строка из ``Vector2``'''
         return f"Vector2({self.x}, {self.y})"
 
     def __eq__(self, v) -> bool:
         '''Операция покомпонентного сравнения двух векторов
-        
+
         :param v: вектор, с которым сравнивается данный
         :type v: Vector2
         :return: результат сравнения двух векторов'''

@@ -5,6 +5,7 @@ import pygame
 
 class Renderer:
     '''Компонент, отвечающий за прорисовку изображения на экране'''
+
     def init(self, go, img: pygame.surface.Surface) -> None:
         '''Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса
         :type go: game_object.GameObject'''
@@ -33,7 +34,7 @@ class Renderer:
     def get_rect(self) -> pygame.rect.Rect:
         '''Метод, обновляющий и возвращающий ``Rect`` 
         измененного изображения
-        
+
         :return: ``Rect`` измененного изображения'''
         self.__update_image()
 

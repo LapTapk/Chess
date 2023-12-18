@@ -76,10 +76,11 @@ class Server(http.server.HTTPServer):
 
 class ReqauestHandler(http.server.BaseHTTPRequestHandler):
     '''Класс обработчика запросов для сервера.'''
+
     def get_msg(self, for_white: bool) -> None:
         '''Метод, отвечающий за отправку сообщения для белых или черных
         клиенту.
-        
+
         :param for_white: состояние, указывающее на то, должно ли быть передано сообщение для белых или для черных
         '''
         msg = self.server.msg_white if for_white else self.server.msg_black
@@ -158,7 +159,7 @@ class ReqauestHandler(http.server.BaseHTTPRequestHandler):
 
     def post_msg(self, sender_is_white: bool) -> None:
         '''Метод, отвечающий за прием сообещния для белых|черных
-        
+
         :param sender_is_white: состояние, показывающее от кого было прислано сообщение'''
         msg_sender = self.server.msg_white if sender_is_white else self.server.msg_black
         length = int(self.headers['Content-Length'])

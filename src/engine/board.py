@@ -80,6 +80,7 @@ class BoardUpdater:
 
 class FigureData:
     '''Вспомогательный компонент, содержащий некоторые характеристики фигуры.'''
+
     def init(self, go: game_object.GameObject, binder: grid.GridBinder):
         '''Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса'''
         self.go: game_object.GameObject = go
