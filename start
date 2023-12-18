@@ -1,6 +1,11 @@
 cd $(dirname $0)
-python -m virtualenv .venv
-source .venv/bin/activate
-python setup.py install
+
+if ! test -f .venv/bin/activate; then
+    python -m virtualenv .venv
+    source .venv/bin/activate
+    pip install pygame
+    pip install setuptools
+    python setup.py install
+fi
  
 python src/main.py
