@@ -9,6 +9,7 @@ class Figure():
     def __init__(self, color: str = 'neutral', position: tuple = (0, 0)):
         '''
         Создание фигуры
+
         :param color: цвет фигуры
         :param position: позиция, на которой создаётся фигура
         '''
@@ -63,6 +64,7 @@ class King(Figure):
     def __init__(self, color: str, position: tuple):
         '''
         Создание фигуры король
+
         :param color: цвет короля
         :param position: позиция короля
         '''
@@ -86,6 +88,7 @@ class Queen(Figure):
     def __init__(self, color, position):
         '''
         Создание фигуры ферзь
+
         :param color: цвет ферзя
         :param position: позиция ферзя
         '''
@@ -106,6 +109,7 @@ class Rock(Figure):
     def __init__(self, color, position):
         '''
         Создание фигуры ладья
+
         :param color: цвет ладьи
         :param position: позиция ладьи
         '''
@@ -127,6 +131,7 @@ class Bishop(Figure):
     def __init__(self, color, position):
         '''
         Создание фигуры слон
+
         :param color: цвет слона
         :param position: позиция слона
         '''
@@ -147,6 +152,7 @@ class Knight(Figure):
     def __init__(self, color, position):
         '''
         Создание фигуры конь
+
         :param color: цвет коня
         :param position: позиция коня
         '''
@@ -178,6 +184,7 @@ class Pawn(Figure):
     def transformation(self, board, figure='q'):
         '''
         Превращение пешки в другие фигуры, при достижении противоположного кра доски
+
         :param board: доска, на которой стоит пешка
         :param figure: фигура,в которую должна превратиться пешка
         '''
