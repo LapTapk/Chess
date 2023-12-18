@@ -43,7 +43,7 @@ def create_connect_button(scene, inpb):
     def try_connect():
         host = inpb.text
         try:
-            game.clnt = client.Client(host, 1234, False)
+            game.clnt = client.Client(host, 80, False)
         except Exception as e:
             print(e)
             return
@@ -61,9 +61,9 @@ def create_host_button(scene, connect_btn, ip_ib):
             return
         name = socket.gethostname()
         address = socket.gethostbyname(name)
-        server.init((address, 1234))
+        server.init((address, 80))
 
-        game.clnt = client.Client(address, 1234, True)
+        game.clnt = client.Client(address, 80, True)
         connect_btn.enabled = False
         ip_ib.enabled = False
 
