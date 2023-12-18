@@ -593,8 +593,7 @@ class Board(object):
 
         :param frm: клетка, с которой ходит фигура
         :param to: клетка, на которую ходит фигура
-        :return: если ход возможен, возвращает 'neutral' если партия не закончена, или ('checkmate'/'stalemate', color),
-        где color - проигравшая сторона; возвращает False, если ход невозможен
+        :return: если ход возможен, возвращает 'neutral' если партия не закончена, или ('checkmate'/'stalemate', color), где color - проигравшая сторона; возвращает False, если ход невозможен
         '''
         if not self.is_legal(frm, to):
             # print("ILLLEGAL MOVE")
