@@ -3,4 +3,4 @@ python -m virtualenv .venv
 source .venv/bin/activate
 python setup.py install
  
-python src/testing_main.py
+python src/main.py
