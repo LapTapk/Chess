@@ -1,17 +1,18 @@
 from .vector2 import *
-from . import game, game_object
+from . import game
 import pygame
 
 
 class Renderer:
     '''Компонент, отвечающий за прорисовку изображения на экране'''
-    def init(self, go: game_object.GameObject, img: pygame.surface.Surface) -> None:
-        '''Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса'''
+    def init(self, go, img: pygame.surface.Surface) -> None:
+        '''Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса
+        :type go: game_object.GameObject'''
         self.img: pygame.surface.Surface = img
         '''Неизмененное изображение'''
         self.tmp_img: pygame.surface.Surface = img
         '''Изображение, измененное в соответствии с размерами экрана'''
-        self.go: game_object.GameObject = go
+        self.go = go
         '''``GameObject``, которому принадлежит компонент'''
 
     def update(self) -> None:
