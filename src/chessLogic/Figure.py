@@ -32,12 +32,19 @@ class Figure():
             return self.name.lower()
 
     def serialize(self):
+        '''Функция конвертации данного объекта в json.
+        
+        :return: json строка фигуры'''
         res = json.dumps(self, default=lambda o: o.__dict__,
                          sort_keys=True, indent=4)
         res = f'{{"type": "{type(self).__name__}",\n' + res[1:]
         return res
 
     def deserialize(data):
+        '''Функция конвертации json строки в ``Figure``
+        
+        :rtype: Figure
+        :return: ``Figure`` из json строки'''
         figure_types = {'Figure': Figure, 'Pawn': Pawn,
                         'Rock': Rock, 'Bishop': Bishop,
                         'Knight': Knight, 'Queen': Queen,

@@ -1,4 +1,5 @@
 from . import Figure
+from typing import *
 import copy
 
 
@@ -597,7 +598,11 @@ class Board(object):
 
         return True
 
-    def serialize(self):
+    def serialize(self) -> LiteralString:
+        '''Функция конвертации данного объекта в json.
+        Всеми параметрами, кроме расположения шахмат, пренебрегает
+        
+        :return: json строка доски'''
         res = '{"board": ['
         for i in range(8):
             res += '['
@@ -610,6 +615,10 @@ class Board(object):
         return res
     
     def deserialize(data):
+        '''Функция конвертации json строки в ``Board``
+        
+        :rtype: Board
+        :return: ``Board`` из json строки'''
         board = data['board']
         res = Board()
 
