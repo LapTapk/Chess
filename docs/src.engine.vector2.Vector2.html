@@ -382,24 +382,24 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p>Class that implement basic functions over 2-dimensional vectors
-like add, substract and others.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">float x</span></td><td class="fieldArgDesc">sets x coordinate of a vector</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">float y</span></td><td class="fieldArgDesc">sets y coordinate of a vector</td></tr></table></div>
+          <div><p>Класс, реализующий базовые операции над веторами, такие как сложение, вычитание,
+умножение на число и др.</p></div>
         </div>
 
         <div id="splitTables">
-          <table class="children sortable" id="id52">
+          <table class="children sortable" id="id60">
   
   
   <tr class="method">
     
     <td>Method</td>
     <td><code><a href="#__add__" class="internal-link" title="src.engine.vector2.Vector2.__add__">__add__</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Операция сложения двух векторов</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#__eq__" class="internal-link" title="src.engine.vector2.Vector2.__eq__">__eq__</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Операция покомпонентного сравнения двух векторов</td>
   </tr><tr class="method">
     
     <td>Method</td>
@@ -409,32 +409,32 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
     
     <td>Method</td>
     <td><code><a href="#__mul__" class="internal-link" title="src.engine.vector2.Vector2.__mul__">__mul__</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Операция умножения вектора на число</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#__neg__" class="internal-link" title="src.engine.vector2.Vector2.__neg__">__neg__</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Операция отрицания вектора</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#__str__" class="internal-link" title="src.engine.vector2.Vector2.__str__">__str__</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Операция перевода типа <tt class="rst-docutils literal">Vector2</tt> в строку</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#__sub__" class="internal-link" title="src.engine.vector2.Vector2.__sub__">__sub__</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Операция разности двух векторов</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#__truediv__" class="internal-link" title="src.engine.vector2.Vector2.__truediv__">__truediv__</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Операция деления вектора на число</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#length" class="internal-link" title="src.engine.vector2.Vector2.length">length</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Длинна данного вектора</td>
   </tr><tr class="method">
     
     <td>Method</td>
@@ -444,12 +444,12 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
     
     <td>Instance Variable</td>
     <td><code><a href="#x" class="internal-link" title="src.engine.vector2.Vector2.x">x</a></code></td>
-    <td>x coordinate</td>
+    <td>Координата x</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#y" class="internal-link" title="src.engine.vector2.Vector2.y">y</a></code></td>
-    <td>y coordinate</td>
+    <td>Координата y</td>
   </tr>
 </table>
           
@@ -480,7 +480,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Операция сложения двух векторов</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">v:</span>Vector2</td><td class="fieldArgDesc">второй слагаемый вектор</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">Vector2</td><td class="fieldArgDesc">результат покомпонентного сложения векторов</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -494,7 +494,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">__eq__</span><span class="function-signature">(self, v)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">__eq__</span><span class="function-signature">(self, v) -&gt; <code>bool</code></span>:
     
     <a class="headerLink" href="#__eq__" title="src.engine.vector2.Vector2.__eq__">
       
@@ -504,7 +504,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Операция покомпонентного сравнения двух векторов</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">v:</span>Vector2</td><td class="fieldArgDesc">вектор, с которым сравнивается данный</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc">результат сравнения двух векторов</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -518,7 +518,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span><span class="function-signature">(self, x, y)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span><span class="function-signature">(self, x: <code>float</code>, y: <code>float</code>)</span>:
     
     <a class="headerLink" href="#__init__" title="src.engine.vector2.Vector2.__init__">
       
@@ -542,7 +542,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">__mul__</span><span class="function-signature">(self, n)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">__mul__</span><span class="function-signature">(self, n: <code>float</code>)</span>:
     
     <a class="headerLink" href="#__mul__" title="src.engine.vector2.Vector2.__mul__">
       
@@ -552,7 +552,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Операция умножения вектора на число</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n:</span><code>float</code></td><td class="fieldArgDesc">коэффициент умножения</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">Vector2</td><td class="fieldArgDesc">результат покомпонентного умножения вектора на число</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -576,7 +576,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Операция отрицания вектора</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">Vector2</td><td class="fieldArgDesc">результат покомпонентного отрицания вектора</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -590,7 +590,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">__str__</span><span class="function-signature">(self)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">__str__</span><span class="function-signature">(self) -&gt; <code>LiteralString</code></span>:
     
     <a class="headerLink" href="#__str__" title="src.engine.vector2.Vector2.__str__">
       
@@ -600,7 +600,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Операция перевода типа <tt class="rst-docutils literal">Vector2</tt> в строку</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>LiteralString</code></td><td class="fieldArgDesc">строка из <tt class="rst-docutils literal">Vector2</tt></td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -624,7 +624,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Операция разности двух векторов</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">v:</span>Vector2</td><td class="fieldArgDesc">вычитаемый вектор</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">Vector2</td><td class="fieldArgDesc">результат покомпонентного вычитания векторов</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -648,7 +648,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Операция деления вектора на число</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">n</span></td><td class="fieldArgDesc">делитель вектора</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">Vector2</td><td class="fieldArgDesc">результат покомпонентного деления вектора на число</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -662,7 +662,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">length</span><span class="function-signature">(self)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">length</span><span class="function-signature">(self) -&gt; <code>float</code></span>:
     
     <a class="headerLink" href="#length" title="src.engine.vector2.Vector2.length">
       
@@ -672,7 +672,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Длинна данного вектора</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -686,7 +686,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">to_tuple</span><span class="function-signature">(self)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">to_tuple</span><span class="function-signature">(self) -&gt; <code>Tuple[<wbr></wbr>float, <wbr></wbr>float]</code></span>:
     
     <a class="headerLink" href="#to_tuple" title="src.engine.vector2.Vector2.to_tuple">
       
@@ -696,7 +696,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   </div>
   <div class="docstring functionBody">
     
-    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer">tuple[float, float]</td><td class="fieldArgDesc">tuple that converted from Vector2</td></tr></table></div>
+    <div><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr>float, <wbr></wbr>float]</code></td><td class="fieldArgDesc"><tt class="rst-docutils literal">Vector2</tt>, переведенный в кортеж</td></tr></table></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -709,7 +709,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">x</span> =
+    <span class="py-defname">x</span>: <code>float</code> =
     
     <a class="headerLink" href="#x" title="src.engine.vector2.Vector2.x">
       
@@ -719,7 +719,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   </div>
   <div class="functionBody">
     
-    <div><p>x coordinate</p></div>
+    <div><p>Координата x</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -733,7 +733,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">y</span> =
+    <span class="py-defname">y</span>: <code>float</code> =
     
     <a class="headerLink" href="#y" title="src.engine.vector2.Vector2.y">
       
@@ -743,7 +743,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   </div>
   <div class="functionBody">
     
-    <div><p>y coordinate</p></div>
+    <div><p>Координата y</p></div>
     
   </div>
 </div>
@@ -758,7 +758,7 @@ like add, substract and others.</p><table class="fieldTable"><tr class="fieldSta
   <div class="container">
     <a href="index.html">API Documentation</a> for src,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    23.9.0 at 2023-12-15 20:39:45.
+    23.9.0 at 2023-12-18 18:18:30.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

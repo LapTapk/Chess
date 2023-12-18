@@ -272,6 +272,26 @@
         
 
         
+            <div class="itemName"><code><a href="#is_valid" class="internal-link" title="src.engine.input_box.InputBox.is_valid">is<wbr></wbr>_valid</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#rend" class="internal-link" title="src.engine.input_box.InputBox.rend">rend</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
             <div class="itemName"><code><a href="#surface" class="internal-link" title="src.engine.input_box.InputBox.surface">surface</a></code>
             </div>
         
@@ -369,73 +389,88 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p class="undocumented">Undocumented</p></div>
+          <div><p>Компонент, отвечающий за ввод текстовых данных.
+Считывает и показывает введенные символы
+только тогда, когда пользователь активировал
+ввод нажатием пкм на текстовое окно.
+В случае, если вводимая строка пуста, выводит
+строку с приглашением к вводу.</p></div>
         </div>
 
         <div id="splitTables">
-          <table class="children sortable" id="id46">
+          <table class="children sortable" id="id51">
   
   
   <tr class="method">
     
     <td>Method</td>
     <td><code><a href="#handle_activation" class="internal-link" title="src.engine.input_box.InputBox.handle_activation">handle<wbr></wbr>_activation</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Провеяет активацию через нажатие ПКМ.</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#handle_input" class="internal-link" title="src.engine.input_box.InputBox.handle_input">handle<wbr></wbr>_input</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Совокупность <em>handle_activation</em> и <em>handle_text_input</em> c соответсвующии им событиями</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#handle_text_input" class="internal-link" title="src.engine.input_box.InputBox.handle_text_input">handle<wbr></wbr>_text<wbr></wbr>_input</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>В зависимости от введенного символа выполняет действия: 1. если K_BACKSPACE, то удаляет последний символ. 2. иначе проверяет легальность символа и вносит его в <em>self.text</em>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#init" class="internal-link" title="src.engine.input_box.InputBox.init">init</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса.</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#show_text" class="internal-link" title="src.engine.input_box.InputBox.show_text">show<wbr></wbr>_text</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Выводит текст на экран.</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#update" class="internal-link" title="src.engine.input_box.InputBox.update">update</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Функция кадра компонента, выполняющая его функционал.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#active" class="internal-link" title="src.engine.input_box.InputBox.active">active</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Состояние, показывающее, активна ли строка ввода.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#font_size" class="internal-link" title="src.engine.input_box.InputBox.font_size">font<wbr></wbr>_size</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Размер шрифта выводимого текста.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#go" class="internal-link" title="src.engine.input_box.InputBox.go">go</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><tt class="rst-docutils literal">GameObject</tt>, к которому прикреплен компонент.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#invitation" class="internal-link" title="src.engine.input_box.InputBox.invitation">invitation</a></code></td>
+    <td>Строка, приглашающая к написанию текста.</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#is_valid" class="internal-link" title="src.engine.input_box.InputBox.is_valid">is<wbr></wbr>_valid</a></code></td>
+    <td>Функция проверки правильности вводимых символов.</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#rend" class="internal-link" title="src.engine.input_box.InputBox.rend">rend</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#surface" class="internal-link" title="src.engine.input_box.InputBox.surface">surface</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><tt class="rst-docutils literal">Surface</tt>, используемая для вывода текста.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#text" class="internal-link" title="src.engine.input_box.InputBox.text">text</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Введенный текст.</td>
   </tr>
 </table>
           
@@ -466,7 +501,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Провеяет активацию через нажатие ПКМ.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -490,7 +525,8 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Совокупность <em>handle_activation</em> и <em>handle_text_input</em> c соответсвующии им
+событиями</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -504,7 +540,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">handle_text_input</span><span class="function-signature">(self, event)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">handle_text_input</span><span class="function-signature">(self, event: <code>pygame.event.Event</code>)</span>:
     
     <a class="headerLink" href="#handle_text_input" title="src.engine.input_box.InputBox.handle_text_input">
       
@@ -514,7 +550,9 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>В зависимости от введенного символа выполняет действия:
+1. если K_BACKSPACE, то удаляет последний символ.
+2. иначе проверяет легальность символа и вносит его в <em>self.text</em>.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">event:</span><code>pygame.event.Event</code></td><td class="fieldArgDesc">событие, которое необходимо обработать.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -528,7 +566,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go, font_size, invitation)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go: <code><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject">game_object.GameObject</a></code>, font_size: <code>int</code>, invitation: <code>LiteralString</code>, is_valid: <code>Callable[<wbr></wbr>[<wbr></wbr>Literal], <wbr></wbr>bool]</code>, rend)</span>:
     
     <a class="headerLink" href="#init" title="src.engine.input_box.InputBox.init">
       
@@ -538,7 +576,8 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Инициализатор. Аналогичен __init__.
+Все параметры соответствуют полям класса.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -562,7 +601,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Выводит текст на экран.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -586,7 +625,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Функция кадра компонента, выполняющая его функционал.</p></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -599,7 +638,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">active</span> =
+    <span class="py-defname">active</span>: <code>bool</code> =
     
     <a class="headerLink" href="#active" title="src.engine.input_box.InputBox.active">
       
@@ -609,7 +648,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Состояние, показывающее, активна ли строка ввода.</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -623,7 +662,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">font_size</span> =
+    <span class="py-defname">font_size</span>: <code>int</code> =
     
     <a class="headerLink" href="#font_size" title="src.engine.input_box.InputBox.font_size">
       
@@ -633,7 +672,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Размер шрифта выводимого текста.</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -647,7 +686,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">go</span> =
+    <span class="py-defname">go</span>: <code><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject">game_object.GameObject</a></code> =
     
     <a class="headerLink" href="#go" title="src.engine.input_box.InputBox.go">
       
@@ -657,7 +696,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p><tt class="rst-docutils literal">GameObject</tt>, к которому прикреплен компонент.</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -671,9 +710,57 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">invitation</span> =
+    <span class="py-defname">invitation</span>: <code>LiteralString</code> =
     
     <a class="headerLink" href="#invitation" title="src.engine.input_box.InputBox.invitation">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Строка, приглашающая к написанию текста.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.engine.input_box.InputBox.is_valid">
+    
+  </a>
+  <a name="is_valid">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">is_valid</span>: <code>Callable[<wbr></wbr>[<wbr></wbr>Literal], <wbr></wbr>bool]</code> =
+    
+    <a class="headerLink" href="#is_valid" title="src.engine.input_box.InputBox.is_valid">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Функция проверки правильности вводимых символов.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.engine.input_box.InputBox.rend">
+    
+  </a>
+  <a name="rend">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">rend</span> =
+    
+    <a class="headerLink" href="#rend" title="src.engine.input_box.InputBox.rend">
       
       
       ¶
@@ -695,7 +782,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">surface</span> =
+    <span class="py-defname">surface</span>: <code>pygame.surface.Surface</code> =
     
     <a class="headerLink" href="#surface" title="src.engine.input_box.InputBox.surface">
       
@@ -705,7 +792,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p><tt class="rst-docutils literal">Surface</tt>, используемая для вывода текста.</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -719,7 +806,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">text</span> =
+    <span class="py-defname">text</span>: <code>LiteralString</code> =
     
     <a class="headerLink" href="#text" title="src.engine.input_box.InputBox.text">
       
@@ -729,7 +816,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Введенный текст.</p></div>
     
   </div>
 </div>
@@ -744,7 +831,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for src,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    23.9.0 at 2023-12-15 20:39:45.
+    23.9.0 at 2023-12-18 18:18:30.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

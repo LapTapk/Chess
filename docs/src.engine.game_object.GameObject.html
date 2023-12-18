@@ -187,6 +187,36 @@
             </div>
         
 
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#scale_characteristics" class="internal-link" title="src.engine.game_object.GameObject.scale_characteristics">scale<wbr></wbr>_characteristics</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#update" class="internal-link" title="src.engine.game_object.GameObject.update">update</a></code>
+            </div>
+        
+
+    </li><li class="private">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#__update_rec" class="internal-link" title="src.engine.game_object.GameObject.__update_rec">__update<wbr></wbr>_rec</a></code>
+            </div>
+        
+
     </li>
 </ul> 
 
@@ -223,6 +253,26 @@
 
         
             <div class="itemName"><code><a href="#enabled" class="internal-link" title="src.engine.game_object.GameObject.enabled">enabled</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#nonscaled_position" class="internal-link" title="src.engine.game_object.GameObject.nonscaled_position">nonscaled<wbr></wbr>_position</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#nonscaled_scale" class="internal-link" title="src.engine.game_object.GameObject.nonscaled_scale">nonscaled<wbr></wbr>_scale</a></code>
             </div>
         
 
@@ -360,11 +410,11 @@
 
         <div class="moduleDocstring">
           <div><p>Элементарная сущность, хранящая характеристики и поведение,
-согласно которому она должна себя действовать на сцене.</p></div>
+согласно которому она должна действовать на сцене.</p></div>
         </div>
 
         <div id="splitTables">
-          <table class="children sortable" id="id36">
+          <table class="children sortable" id="id41">
   
   
   <tr class="method">
@@ -382,6 +432,16 @@
     <td>Method</td>
     <td><code><a href="#init" class="internal-link" title="src.engine.game_object.GameObject.init">init</a></code></td>
     <td>Инициализатор. Аналогична __init__. Каждый параметр функции соотносится с параметром класса.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#scale_characteristics" class="internal-link" title="src.engine.game_object.GameObject.scale_characteristics">scale<wbr></wbr>_characteristics</a></code></td>
+    <td>Процедура, отвечающая за изменение размера <tt class="rst-docutils literal">GameObject</tt> в зависимости от размеров экрана</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#update" class="internal-link" title="src.engine.game_object.GameObject.update">update</a></code></td>
+    <td>Метод кадра для объекта.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
@@ -400,8 +460,18 @@
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
+    <td><code><a href="#nonscaled_position" class="internal-link" title="src.engine.game_object.GameObject.nonscaled_position">nonscaled<wbr></wbr>_position</a></code></td>
+    <td>Позиция объекта без модификация, произведенных в связи с измененным размером экрана</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#nonscaled_scale" class="internal-link" title="src.engine.game_object.GameObject.nonscaled_scale">nonscaled<wbr></wbr>_scale</a></code></td>
+    <td>Размер объекта без модификаций, произведенных в связи с изменненым размером экрана</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
     <td><code><a href="#position" class="internal-link" title="src.engine.game_object.GameObject.position">position</a></code></td>
-    <td>Расположение <tt class="rst-docutils literal">GameObject</tt> на сцене.</td>
+    <td>Расположение <tt class="rst-docutils literal">GameObject</tt> на сцене. Только для чтения</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
@@ -411,12 +481,17 @@
     
     <td>Instance Variable</td>
     <td><code><a href="#scale" class="internal-link" title="src.engine.game_object.GameObject.scale">scale</a></code></td>
-    <td>Коэффициент при размере <tt class="rst-docutils literal">GameObject</tt>.</td>
+    <td>Коэффициент при размере <tt class="rst-docutils literal">GameObject</tt>. Только для чтения</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#scene" class="internal-link" title="src.engine.game_object.GameObject.scene">scene</a></code></td>
     <td>Cцена, в которой располагается этот <tt class="rst-docutils literal">GameObject</tt>.</td>
+  </tr><tr class="method private">
+    
+    <td>Method</td>
+    <td><code><a href="#__update_rec" class="internal-link" title="src.engine.game_object.GameObject.__update_rec">__update<wbr></wbr>_rec</a></code></td>
+    <td>Служебный метод, выполняющий ту же функцию, что и <em>update</em>, включая помимо самого объекта его дочерние объекты.</td>
   </tr>
 </table>
           
@@ -499,6 +574,55 @@
     <div><p>Инициализатор. Аналогична __init__. Каждый параметр функции
 соотносится с параметром класса.</p></div>
   </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.engine.game_object.GameObject.scale_characteristics">
+    
+  </a>
+  <a name="scale_characteristics">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">scale_characteristics</span><span class="function-signature">(self)</span>:
+    
+    <a class="headerLink" href="#scale_characteristics" title="src.engine.game_object.GameObject.scale_characteristics">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Процедура, отвечающая за изменение размера <tt class="rst-docutils literal">GameObject</tt>
+в зависимости от размеров экрана</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.engine.game_object.GameObject.update">
+    
+  </a>
+  <a name="update">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">update</span><span class="function-signature">(self)</span>:
+    
+    <a class="headerLink" href="#update" title="src.engine.game_object.GameObject.update">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Метод кадра для объекта.</p></div>
+  </div>
 </div><div class="baseinstancevariable">
   
   
@@ -574,6 +698,54 @@
 </div><div class="baseinstancevariable">
   
   
+  <a name="src.engine.game_object.GameObject.nonscaled_position">
+    
+  </a>
+  <a name="nonscaled_position">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">nonscaled_position</span> =
+    
+    <a class="headerLink" href="#nonscaled_position" title="src.engine.game_object.GameObject.nonscaled_position">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Позиция объекта без модификация, произведенных в связи с измененным размером экрана</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.engine.game_object.GameObject.nonscaled_scale">
+    
+  </a>
+  <a name="nonscaled_scale">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">nonscaled_scale</span> =
+    
+    <a class="headerLink" href="#nonscaled_scale" title="src.engine.game_object.GameObject.nonscaled_scale">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Размер объекта без модификаций, произведенных в связи с изменненым размером экрана</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
   <a name="src.engine.game_object.GameObject.position">
     
   </a>
@@ -592,7 +764,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p>Расположение <tt class="rst-docutils literal">GameObject</tt> на сцене.</p></div>
+    <div><p>Расположение <tt class="rst-docutils literal">GameObject</tt> на сцене. Только для чтения</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -640,7 +812,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p>Коэффициент при размере <tt class="rst-docutils literal">GameObject</tt>.</p></div>
+    <div><p>Коэффициент при размере <tt class="rst-docutils literal">GameObject</tt>. Только для чтения</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -667,6 +839,31 @@
     <div><p>Cцена, в которой располагается этот <tt class="rst-docutils literal">GameObject</tt>.</p></div>
     
   </div>
+</div><div class="basemethod private">
+  
+  
+  <a name="src.engine.game_object.GameObject.__update_rec">
+    
+  </a>
+  <a name="__update_rec">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">__update_rec</span><span class="function-signature">(self, obj)</span>:
+    
+    <a class="headerLink" href="#__update_rec" title="src.engine.game_object.GameObject.__update_rec">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Служебный метод, выполняющий ту же функцию, что и <em>update</em>, включая
+помимо самого объекта его дочерние объекты.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">obj:</span>GameObject</td><td class="fieldArgDesc"><tt class="rst-docutils literal">GameObject</tt>, у которого нужно вызвать update.</td></tr></table></div>
+  </div>
 </div>
         </div>
       
@@ -679,7 +876,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for src,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    23.9.0 at 2023-12-15 20:39:45.
+    23.9.0 at 2023-12-18 18:18:30.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

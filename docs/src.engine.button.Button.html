@@ -309,11 +309,11 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p class="undocumented">Undocumented</p></div>
+          <div><p>Компонент кнопки, выполняющей определенные действия при нажатии</p></div>
         </div>
 
         <div id="splitTables">
-          <table class="children sortable" id="id26">
+          <table class="children sortable" id="id30">
   
   
   <tr class="method">
@@ -325,27 +325,27 @@
     
     <td>Method</td>
     <td><code><a href="#is_clicked" class="internal-link" title="src.engine.button.Button.is_clicked">is<wbr></wbr>_clicked</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Метод, проверяющий была ли нажата кнопка в данный кадр.</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#update" class="internal-link" title="src.engine.button.Button.update">update</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Метод кадра компонента</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#funcs" class="internal-link" title="src.engine.button.Button.funcs">funcs</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>События, которын должны произойти при нажатии кнопки</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#go" class="internal-link" title="src.engine.button.Button.go">go</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><tt class="rst-docutils literal">GameObject</tt> к которому прикреплен компонент</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#rend" class="internal-link" title="src.engine.button.Button.rend">rend</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><tt class="rst-docutils literal">Renderer</tt> с помощью которого кнопка выведется на экран</td>
   </tr>
 </table>
           
@@ -366,7 +366,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go, rend, *funcs)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go: <code><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject">game_object.GameObject</a></code>, rend: <code><a href="src.engine.renderer.Renderer.html" class="internal-link" title="src.engine.renderer.Renderer">renderer.Renderer</a></code>, *funcs: <code>Callable[<wbr></wbr>[], <wbr></wbr>None]</code>)</span>:
     
     <a class="headerLink" href="#init" title="src.engine.button.Button.init">
       
@@ -390,7 +390,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">is_clicked</span><span class="function-signature">(self)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">is_clicked</span><span class="function-signature">(self) -&gt; <code>bool</code></span>:
     
     <a class="headerLink" href="#is_clicked" title="src.engine.button.Button.is_clicked">
       
@@ -400,7 +400,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Метод, проверяющий была ли нажата кнопка в данный кадр.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>bool</code></td><td class="fieldArgDesc">была ли кнопка нажата</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -424,7 +424,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Метод кадра компонента</p></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -437,7 +437,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">funcs</span> =
+    <span class="py-defname">funcs</span>: <code>Callable[<wbr></wbr>[], <wbr></wbr>None]</code> =
     
     <a class="headerLink" href="#funcs" title="src.engine.button.Button.funcs">
       
@@ -447,7 +447,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>События, которын должны произойти при нажатии кнопки</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -461,7 +461,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">go</span> =
+    <span class="py-defname">go</span>: <code><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject">game_object.GameObject</a></code> =
     
     <a class="headerLink" href="#go" title="src.engine.button.Button.go">
       
@@ -471,7 +471,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p><tt class="rst-docutils literal">GameObject</tt> к которому прикреплен компонент</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -485,7 +485,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">rend</span> =
+    <span class="py-defname">rend</span>: <code><a href="src.engine.renderer.Renderer.html" class="internal-link" title="src.engine.renderer.Renderer">renderer.Renderer</a></code> =
     
     <a class="headerLink" href="#rend" title="src.engine.button.Button.rend">
       
@@ -495,7 +495,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p><tt class="rst-docutils literal">Renderer</tt> с помощью которого кнопка выведется на экран</p></div>
     
   </div>
 </div>
@@ -510,7 +510,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for src,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    23.9.0 at 2023-12-15 20:39:45.
+    23.9.0 at 2023-12-18 18:18:30.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

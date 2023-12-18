@@ -170,6 +170,16 @@
         
 
         
+            <div class="itemName"><code><a href="src.engine.chess_state_machine.EndState.html" class="internal-link" title="src.engine.chess_state_machine.EndState"><wbr></wbr>End<wbr></wbr>State</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
             <div class="itemName"><code><a href="src.engine.chess_state_machine.EnemyTurnState.html" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState"><wbr></wbr>Enemy<wbr></wbr>Turn<wbr></wbr>State</a></code>
             </div>
         
@@ -187,8 +197,21 @@
     </li>
 </ul>
 
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
         
-         
+        
+        
+
+        
+            <div class="itemName"><code><a href="#check_for_end" class="internal-link" title="src.engine.chess_state_machine.check_for_end">check<wbr></wbr>_for<wbr></wbr>_end</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
 
         
          
@@ -309,6 +332,16 @@
         
 
         
+            <div class="itemName"><code><a href="src.engine.message_communication.html" class="internal-link" title="src.engine.message_communication">message<wbr></wbr>_communication</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
             <div class="itemName"><code><a href="src.engine.renderer.html" class="internal-link" title="src.engine.renderer">renderer</a></code>
             </div>
         
@@ -330,6 +363,16 @@
 
         
             <div class="itemName"><code><a href="src.engine.scenes.html" class="internal-link" title="src.engine.scenes">scenes</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.engine.setting_scene_utils.html" class="internal-link" title="src.engine.setting_scene_utils">setting<wbr></wbr>_scene<wbr></wbr>_utils</a></code>
             </div>
         
 
@@ -400,24 +443,34 @@
         </div>
 
         <div id="splitTables">
-          <table class="children sortable" id="id27">
+          <table class="children sortable" id="id31">
   
   
   <tr class="class">
     
     <td>Class</td>
     <td><code><a href="src.engine.chess_state_machine.ChessStateMachine.html" class="internal-link" title="src.engine.chess_state_machine.ChessStateMachine"><wbr></wbr>Chess<wbr></wbr>State<wbr></wbr>Machine</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Компонент, определяющий поведение в зависимости от текущего хода.</td>
+  </tr><tr class="class">
+    
+    <td>Class</td>
+    <td><code><a href="src.engine.chess_state_machine.EndState.html" class="internal-link" title="src.engine.chess_state_machine.EndState"><wbr></wbr>End<wbr></wbr>State</a></code></td>
+    <td>Состояние конца игры.</td>
   </tr><tr class="class">
     
     <td>Class</td>
     <td><code><a href="src.engine.chess_state_machine.EnemyTurnState.html" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState"><wbr></wbr>Enemy<wbr></wbr>Turn<wbr></wbr>State</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Сущность состояния хода противника. Ожидает, посылая время от времени запросы, пока противник на другом клиенте сходит, и передает ход пользователю.</td>
   </tr><tr class="class">
     
     <td>Class</td>
     <td><code><a href="src.engine.chess_state_machine.UserTurnState.html" class="internal-link" title="src.engine.chess_state_machine.UserTurnState"><wbr></wbr>User<wbr></wbr>Turn<wbr></wbr>State</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Сущность состояния во время хода игрока. Обрабатывает поднятие фигуры, обновление доски и передачу хода противнику.</td>
+  </tr><tr class="function">
+    
+    <td>Function</td>
+    <td><code><a href="#check_for_end" class="internal-link" title="src.engine.chess_state_machine.check_for_end">check<wbr></wbr>_for<wbr></wbr>_end</a></code></td>
+    <td>Функция, проверяющая, была ли закончена игра.</td>
   </tr>
 </table>
           
@@ -426,7 +479,31 @@
         </div>
 
         <div id="childList">
-          
+          <div class="basefunction">
+  
+  
+  <a name="src.engine.chess_state_machine.check_for_end">
+    
+  </a>
+  <a name="check_for_end">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">check_for_end</span><span class="function-signature">(state_machine)</span>:
+    
+    <a class="headerLink" href="#check_for_end" title="src.engine.chess_state_machine.check_for_end">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Функция, проверяющая, была ли закончена игра.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">state<wbr></wbr>_machine</span></td><td class="fieldArgDesc">текущая машина состояний шахмат</td></tr></table></div>
+  </div>
+</div>
         </div>
       
       </div>
@@ -438,7 +515,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for src,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    23.9.0 at 2023-12-15 20:39:45.
+    23.9.0 at 2023-12-18 18:18:30.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

@@ -342,48 +342,49 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p class="undocumented">Undocumented</p></div>
+          <div><p>Компонент, отвечающий за прикрепление <tt class="rst-docutils literal">GameObject</tt> к
+определенной точке <tt class="rst-docutils literal">Grid</tt></p></div>
         </div>
 
         <div id="splitTables">
-          <table class="children sortable" id="id44">
+          <table class="children sortable" id="id49">
   
   
   <tr class="method">
     
     <td>Method</td>
     <td><code><a href="#init" class="internal-link" title="src.engine.grid.GridBinder.init">init</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Инициализатор. Аналогичен __init__. Каждый параметр соответствует полю класса.</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#update" class="internal-link" title="src.engine.grid.GridBinder.update">update</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Метод кадра компонента.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#binded" class="internal-link" title="src.engine.grid.GridBinder.binded">binded</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Состояние, показывающее, должна ли быть закреплена точка в данный момент.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#coord" class="internal-link" title="src.engine.grid.GridBinder.coord">coord</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Относительная точка <tt class="rst-docutils literal">Grid</tt>, к которой будет прикреплен объект.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#go" class="internal-link" title="src.engine.grid.GridBinder.go">go</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><tt class="rst-docutils literal">GameObject</tt> к которому прикреплен компонент.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#grd" class="internal-link" title="src.engine.grid.GridBinder.grd">grd</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><tt class="rst-docutils literal">Grid</tt>, относительно которого будет проводиться закрепление</td>
   </tr><tr class="method private">
     
     <td>Method</td>
     <td><code><a href="#__bind" class="internal-link" title="src.engine.grid.GridBinder.__bind">__bind</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Закрытый метод класса, перемещающий объект к точке закрепления.</td>
   </tr>
 </table>
           
@@ -404,7 +405,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go, grd, coord, instant_bind=True)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go: <code><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject">game_object.GameObject</a></code>, grd: <code><a href="src.engine.grid.Grid.html" class="internal-link" title="src.engine.grid.Grid">Grid</a></code>, coord: <code><a href="src.engine.vector2.Vector2.html" class="internal-link" title="src.engine.vector2.Vector2">Vector2</a></code>, instant_bind: <code>bool</code> = True)</span>:
     
     <a class="headerLink" href="#init" title="src.engine.grid.GridBinder.init">
       
@@ -414,7 +415,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Инициализатор. Аналогичен __init__. Каждый параметр соответствует полю класса.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -438,7 +439,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Метод кадра компонента.</p></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -451,7 +452,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">binded</span> =
+    <span class="py-defname">binded</span>: <code>bool</code> =
     
     <a class="headerLink" href="#binded" title="src.engine.grid.GridBinder.binded">
       
@@ -461,7 +462,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Состояние, показывающее, должна ли быть закреплена точка в данный момент.</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -475,7 +476,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">coord</span> =
+    <span class="py-defname">coord</span>: <code><a href="src.engine.vector2.Vector2.html" class="internal-link" title="src.engine.vector2.Vector2">Vector2</a></code> =
     
     <a class="headerLink" href="#coord" title="src.engine.grid.GridBinder.coord">
       
@@ -485,7 +486,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Относительная точка <tt class="rst-docutils literal">Grid</tt>, к которой будет прикреплен объект.</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -499,7 +500,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">go</span> =
+    <span class="py-defname">go</span>: <code><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject">game_object.GameObject</a></code> =
     
     <a class="headerLink" href="#go" title="src.engine.grid.GridBinder.go">
       
@@ -509,7 +510,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p><tt class="rst-docutils literal">GameObject</tt> к которому прикреплен компонент.</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -523,7 +524,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">grd</span> =
+    <span class="py-defname">grd</span>: <code><a href="src.engine.grid.Grid.html" class="internal-link" title="src.engine.grid.Grid">Grid</a></code> =
     
     <a class="headerLink" href="#grd" title="src.engine.grid.GridBinder.grd">
       
@@ -533,7 +534,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p><tt class="rst-docutils literal">Grid</tt>, относительно которого будет проводиться закрепление</p></div>
     
   </div>
 </div><div class="basemethod private">
@@ -558,7 +559,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Закрытый метод класса, перемещающий объект к точке закрепления.</p></div>
   </div>
 </div>
         </div>
@@ -572,7 +573,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for src,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    23.9.0 at 2023-12-15 20:39:45.
+    23.9.0 at 2023-12-18 18:18:30.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

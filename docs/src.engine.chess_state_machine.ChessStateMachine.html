@@ -212,6 +212,16 @@
         
 
         
+            <div class="itemName"><code><a href="#end_state" class="internal-link" title="src.engine.chess_state_machine.ChessStateMachine.end_state">end<wbr></wbr>_state</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
             <div class="itemName"><code><a href="#enemy_turn_state" class="internal-link" title="src.engine.chess_state_machine.ChessStateMachine.enemy_turn_state">enemy<wbr></wbr>_turn<wbr></wbr>_state</a></code>
             </div>
         
@@ -275,6 +285,16 @@
         
 
         
+            <div class="itemName"><code><a href="src.engine.chess_state_machine.EndState.html" class="internal-link" title="src.engine.chess_state_machine.EndState"><wbr></wbr>End<wbr></wbr>State</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
             <div class="itemName"><code><a href="src.engine.chess_state_machine.EnemyTurnState.html" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState"><wbr></wbr>Enemy<wbr></wbr>Turn<wbr></wbr>State</a></code>
             </div>
         
@@ -292,8 +312,21 @@
     </li>
 </ul>
 
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
         
-         
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.engine.chess_state_machine.html#check_for_end" class="internal-link" title="src.engine.chess_state_machine.check_for_end">check<wbr></wbr>_for<wbr></wbr>_end</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
 
         
          
@@ -339,48 +372,53 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p class="undocumented">Undocumented</p></div>
+          <div><p>Компонент, определяющий поведение в зависимости от текущего хода.</p></div>
         </div>
 
         <div id="splitTables">
-          <table class="children sortable" id="id28">
+          <table class="children sortable" id="id32">
   
   
   <tr class="method">
     
     <td>Method</td>
     <td><code><a href="#change_state" class="internal-link" title="src.engine.chess_state_machine.ChessStateMachine.change_state">change<wbr></wbr>_state</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Процедура смены состояния.</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#init" class="internal-link" title="src.engine.chess_state_machine.ChessStateMachine.init">init</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса.</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#update" class="internal-link" title="src.engine.chess_state_machine.ChessStateMachine.update">update</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Процедура обновления компонента для каждого кадра.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#cur_state" class="internal-link" title="src.engine.chess_state_machine.ChessStateMachine.cur_state">cur<wbr></wbr>_state</a></code></td>
+    <td>Текущее состояние сущности.</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#end_state" class="internal-link" title="src.engine.chess_state_machine.ChessStateMachine.end_state">end<wbr></wbr>_state</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#enemy_turn_state" class="internal-link" title="src.engine.chess_state_machine.ChessStateMachine.enemy_turn_state">enemy<wbr></wbr>_turn<wbr></wbr>_state</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Состояние хода противника</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#go" class="internal-link" title="src.engine.chess_state_machine.ChessStateMachine.go">go</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><tt class="rst-docutils literal">GameObject</tt>, которому принадлежит текущий компонент.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#user_turn_state" class="internal-link" title="src.engine.chess_state_machine.ChessStateMachine.user_turn_state">user<wbr></wbr>_turn<wbr></wbr>_state</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Состояние хода пользователя.</td>
   </tr>
 </table>
           
@@ -411,7 +449,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Процедура смены состояния.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">new<wbr></wbr>_state:</span>[UserTurnState | EnemyTurnState]</td><td class="fieldArgDesc">новое состояние.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -425,7 +463,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go, grabber, brd_updater)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go: <code><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject">game_object.GameObject</a></code>, grabber: <code><a href="src.engine.grab.Grabber.html" class="internal-link" title="src.engine.grab.Grabber">grab.Grabber</a></code>, brd_updater: <code><a href="src.engine.board.BoardUpdater.html" class="internal-link" title="src.engine.board.BoardUpdater">board.BoardUpdater</a></code>)</span>:
     
     <a class="headerLink" href="#init" title="src.engine.chess_state_machine.ChessStateMachine.init">
       
@@ -435,7 +473,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -459,7 +497,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Процедура обновления компонента для каждого кадра.</p></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -472,9 +510,33 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">cur_state</span> =
+    <span class="py-defname">cur_state</span>: <code>[<wbr></wbr>(<a href="src.engine.chess_state_machine.UserTurnState.html" class="internal-link" title="src.engine.chess_state_machine.UserTurnState">UserTurnState</a>|<a href="src.engine.chess_state_machine.EnemyTurnState.html" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState">EnemyTurnState</a>)]</code> =
     
     <a class="headerLink" href="#cur_state" title="src.engine.chess_state_machine.ChessStateMachine.cur_state">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p>Текущее состояние сущности.</p></div>
+    
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.engine.chess_state_machine.ChessStateMachine.end_state">
+    
+  </a>
+  <a name="end_state">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">end_state</span>: <code><a href="src.engine.chess_state_machine.EndState.html" class="internal-link" title="src.engine.chess_state_machine.EndState">EndState</a></code> =
+    
+    <a class="headerLink" href="#end_state" title="src.engine.chess_state_machine.ChessStateMachine.end_state">
       
       
       ¶
@@ -496,7 +558,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">enemy_turn_state</span> =
+    <span class="py-defname">enemy_turn_state</span>: <code><a href="src.engine.chess_state_machine.EnemyTurnState.html" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState">EnemyTurnState</a></code> =
     
     <a class="headerLink" href="#enemy_turn_state" title="src.engine.chess_state_machine.ChessStateMachine.enemy_turn_state">
       
@@ -506,7 +568,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Состояние хода противника</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -520,7 +582,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">go</span> =
+    <span class="py-defname">go</span>: <code><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject">game_object.GameObject</a></code> =
     
     <a class="headerLink" href="#go" title="src.engine.chess_state_machine.ChessStateMachine.go">
       
@@ -530,7 +592,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p><tt class="rst-docutils literal">GameObject</tt>, которому принадлежит текущий компонент.</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -544,7 +606,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">user_turn_state</span> =
+    <span class="py-defname">user_turn_state</span>: <code><a href="src.engine.chess_state_machine.UserTurnState.html" class="internal-link" title="src.engine.chess_state_machine.UserTurnState">UserTurnState</a></code> =
     
     <a class="headerLink" href="#user_turn_state" title="src.engine.chess_state_machine.ChessStateMachine.user_turn_state">
       
@@ -554,7 +616,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Состояние хода пользователя.</p></div>
     
   </div>
 </div>
@@ -569,7 +631,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for src,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    23.9.0 at 2023-12-15 20:39:45.
+    23.9.0 at 2023-12-18 18:18:30.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

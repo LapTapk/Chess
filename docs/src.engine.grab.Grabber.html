@@ -163,7 +163,7 @@
         
 
         
-            <div class="itemName"><code><a href="#init" class="internal-link" title="src.engine.grab.Grabber.init">init</a></code>
+            <div class="itemName"><code><a href="#drop" class="internal-link" title="src.engine.grab.Grabber.drop">drop</a></code>
             </div>
         
 
@@ -173,7 +173,7 @@
         
 
         
-            <div class="itemName"><code><a href="#try_drop" class="internal-link" title="src.engine.grab.Grabber.try_drop">try<wbr></wbr>_drop</a></code>
+            <div class="itemName"><code><a href="#init" class="internal-link" title="src.engine.grab.Grabber.init">init</a></code>
             </div>
         
 
@@ -319,38 +319,39 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p class="undocumented">Undocumented</p></div>
+          <div><p>Компонент, двигающий объекты за курсором, если на них нажали,
+и оставляющий их на месте после произведнных манипуляций.</p></div>
         </div>
 
         <div id="splitTables">
-          <table class="children sortable" id="id38">
+          <table class="children sortable" id="id43">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#init" class="internal-link" title="src.engine.grab.Grabber.init">init</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><code><a href="#drop" class="internal-link" title="src.engine.grab.Grabber.drop">drop</a></code></td>
+    <td>Метод, оставляющий захваченный объект на месте</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#try_drop" class="internal-link" title="src.engine.grab.Grabber.try_drop">try<wbr></wbr>_drop</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><code><a href="#init" class="internal-link" title="src.engine.grab.Grabber.init">init</a></code></td>
+    <td>Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#try_grab" class="internal-link" title="src.engine.grab.Grabber.try_grab">try<wbr></wbr>_grab</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Метод, осуществляющий попытку захвата объекта под курсором, если такой имеется.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#go" class="internal-link" title="src.engine.grab.Grabber.go">go</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><tt class="rst-docutils literal">GameObject</tt>, которому принадлежит компонент</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#grabbed" class="internal-link" title="src.engine.grab.Grabber.grabbed">grabbed</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Захваченный объект</td>
   </tr>
 </table>
           
@@ -362,6 +363,30 @@
           <div class="basemethod">
   
   
+  <a name="src.engine.grab.Grabber.drop">
+    
+  </a>
+  <a name="drop">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">drop</span><span class="function-signature">(self)</span>:
+    
+    <a class="headerLink" href="#drop" title="src.engine.grab.Grabber.drop">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Метод, оставляющий захваченный объект на месте</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
   <a name="src.engine.grab.Grabber.init">
     
   </a>
@@ -371,7 +396,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go: <code><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject">game_object.GameObject</a></code>)</span>:
     
     <a class="headerLink" href="#init" title="src.engine.grab.Grabber.init">
       
@@ -381,31 +406,7 @@
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overridden in <code><a href="src.engine.grab.FigureGrabber.html" class="internal-link">src.engine.grab.FigureGrabber</a></code></div>
-    <div><p class="undocumented">Undocumented</p></div>
-  </div>
-</div><div class="basemethod">
-  
-  
-  <a name="src.engine.grab.Grabber.try_drop">
-    
-  </a>
-  <a name="try_drop">
-    
-  </a>
-  <div class="functionHeader">
-    
-    
-    <span class="py-keyword">def</span> <span class="py-defname">try_drop</span><span class="function-signature">(self)</span>:
-    
-    <a class="headerLink" href="#try_drop" title="src.engine.grab.Grabber.try_drop">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="docstring functionBody">
-    
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -429,7 +430,8 @@
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overridden in <code><a href="src.engine.grab.FigureGrabber.html" class="internal-link">src.engine.grab.FigureGrabber</a></code></div>
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Метод, осуществляющий попытку захвата объекта под курсором,
+если такой имеется.</p></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -442,7 +444,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">go</span> =
+    <span class="py-defname">go</span>: <code><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject">game_object.GameObject</a></code> =
     
     <a class="headerLink" href="#go" title="src.engine.grab.Grabber.go">
       
@@ -452,7 +454,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p><tt class="rst-docutils literal">GameObject</tt>, которому принадлежит компонент</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -466,7 +468,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">grabbed</span> =
+    <span class="py-defname">grabbed</span>: <code><a href="src.engine.grab.Grabable.html" class="internal-link" title="src.engine.grab.Grabable">Grabable</a>|None</code> =
     
     <a class="headerLink" href="#grabbed" title="src.engine.grab.Grabber.grabbed">
       
@@ -476,7 +478,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Захваченный объект</p></div>
     
   </div>
 </div>
@@ -491,7 +493,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for src,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    23.9.0 at 2023-12-15 20:39:45.
+    23.9.0 at 2023-12-18 18:18:30.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

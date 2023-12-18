@@ -225,6 +225,16 @@
         
 
         
+            <div class="itemName"><code><a href="#did_move" class="internal-link" title="src.chessLogic.Figure.King.did_move">did<wbr></wbr>_move</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
             <div class="itemName"><code><a href="#name" class="internal-link" title="src.chessLogic.Figure.King.name">name</a></code>
             </div>
         
@@ -395,7 +405,7 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p>класс фигуры король</p></div>
+          <div><p>Класс фигуры король</p></div>
         </div>
 
         <div id="splitTables">
@@ -406,12 +416,17 @@
     
     <td>Method</td>
     <td><code><a href="#__init__" class="internal-link" title="src.chessLogic.Figure.King.__init__">__init__</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Создание фигуры король</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#showFigureConsole" class="internal-link" title="src.chessLogic.Figure.King.showFigureConsole">show<wbr></wbr>Figure<wbr></wbr>Console</a></code></td>
-    <td>вывод фигуры в консоль - белые в верхнем регистре, чёрные в нижнем</td>
+    <td>Вывод фигуры в консоль - белые в верхнем регистре, чёрные в нижнем</td>
+  </tr><tr class="instancevariable">
+    
+    <td>Instance Variable</td>
+    <td><code><a href="#did_move" class="internal-link" title="src.chessLogic.Figure.King.did_move">did<wbr></wbr>_move</a></code></td>
+    <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
@@ -430,17 +445,17 @@
     
     <td>Method</td>
     <td><code><a href="src.chessLogic.Figure.Figure.html#deserialize" class="internal-link" title="src.chessLogic.Figure.Figure.deserialize">deserialize</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Функция конвертации json строки в <tt class="rst-docutils literal">Figure</tt></td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
     <td><code><a href="src.chessLogic.Figure.Figure.html#registerFromColor" class="internal-link" title="src.chessLogic.Figure.Figure.registerFromColor">register<wbr></wbr>From<wbr></wbr>Color</a></code></td>
-    <td>меняет регистр имени взависимости от цвета фигуры</td>
+    <td>Меняет регистр имени в зависимости от цвета фигуры</td>
   </tr><tr class="basemethod">
     
     <td>Method</td>
     <td><code><a href="src.chessLogic.Figure.Figure.html#serialize" class="internal-link" title="src.chessLogic.Figure.Figure.serialize">serialize</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Функция конвертации данного объекта в json.</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
@@ -471,7 +486,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span><span class="function-signature">(self, color, position)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span><span class="function-signature">(self, color: <code>str</code>, position: <code>tuple</code>)</span>:
     
     <a class="headerLink" href="#__init__" title="src.chessLogic.Figure.King.__init__">
       
@@ -481,7 +496,7 @@
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="src.chessLogic.Figure.Figure.html#__init__" class="internal-link">src.chessLogic.Figure.Figure.__init__</a></code></div>
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Создание фигуры король</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">color:</span><code>str</code></td><td class="fieldArgDesc">цвет короля</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">position:</span><code>tuple</code></td><td class="fieldArgDesc">позиция короля</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -505,8 +520,31 @@
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="src.chessLogic.Figure.Figure.html#showFigureConsole" class="internal-link">src.chessLogic.Figure.Figure.showFigureConsole</a></code></div>
-    <div><p>вывод фигуры в консоль -
-белые в верхнем регистре, чёрные в нижнем</p></div>
+    <div><p>Вывод фигуры в консоль - белые в верхнем регистре, чёрные в нижнем</p></div>
+  </div>
+</div><div class="baseinstancevariable">
+  
+  
+  <a name="src.chessLogic.Figure.King.did_move">
+    
+  </a>
+  <a name="did_move">
+    
+  </a>
+  <div class="functionHeader">
+    
+    <span class="py-defname">did_move</span>: <code>bool</code> =
+    
+    <a class="headerLink" href="#did_move" title="src.chessLogic.Figure.King.did_move">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="functionBody">
+    
+    <div><p class="undocumented">Undocumented</p></div>
+    
   </div>
 </div><div class="baseinstancevariable">
   
@@ -544,7 +582,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for src,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    23.9.0 at 2023-12-15 20:39:45.
+    23.9.0 at 2023-12-18 18:18:30.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

@@ -332,43 +332,45 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p class="undocumented">Undocumented</p></div>
+          <div><p>Компонент сетки. Располагает каждую собственную точку на
+равном расстоянии от соседних. По вертикали и по горизонтали расстояния могут
+различаться.</p></div>
         </div>
 
         <div id="splitTables">
-          <table class="children sortable" id="id43">
+          <table class="children sortable" id="id48">
   
   
   <tr class="method">
     
     <td>Method</td>
     <td><code><a href="#get_points" class="internal-link" title="src.engine.grid.Grid.get_points">get<wbr></wbr>_points</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Возвращает список абсолютных координат точек сетки.</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#init" class="internal-link" title="src.engine.grid.Grid.init">init</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса.</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#update" class="internal-link" title="src.engine.grid.Grid.update">update</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Пустой метод кадра компонента.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#capacity" class="internal-link" title="src.engine.grid.Grid.capacity">capacity</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Количество точек по горизонтали и по вертикали.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#go" class="internal-link" title="src.engine.grid.Grid.go">go</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><tt class="rst-docutils literal">GameObject</tt>, к которому прикреплен данный компонент.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#size" class="internal-link" title="src.engine.grid.Grid.size">size</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Размер сетки в пикселях.</td>
   </tr>
 </table>
           
@@ -389,7 +391,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">get_points</span><span class="function-signature">(self)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">get_points</span><span class="function-signature">(self) -&gt; <code>List[<wbr></wbr>List[<wbr></wbr><a href="src.engine.vector2.Vector2.html" class="internal-link" title="src.engine.vector2.Vector2">Vector2</a>]]</code></span>:
     
     <a class="headerLink" href="#get_points" title="src.engine.grid.Grid.get_points">
       
@@ -399,7 +401,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Возвращает список абсолютных координат точек сетки.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>List[<wbr></wbr><a href="src.engine.vector2.Vector2.html" class="internal-link" title="src.engine.vector2.Vector2">Vector2</a>]]</code></td><td class="fieldArgDesc">список абсолютных координат точек сетки.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -413,7 +415,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go, size, capacity)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go: <code><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject">game_object.GameObject</a></code>, size: <code><a href="src.engine.vector2.Vector2.html" class="internal-link" title="src.engine.vector2.Vector2">Vector2</a></code>, capacity: <code><a href="src.engine.vector2.Vector2.html" class="internal-link" title="src.engine.vector2.Vector2">Vector2</a></code>)</span>:
     
     <a class="headerLink" href="#init" title="src.engine.grid.Grid.init">
       
@@ -423,7 +425,8 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Инициализатор. Аналогичен __init__.
+Все параметры соответствуют полям класса.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Raises</td></tr><tr><td class="fieldArgContainer"><code>ValueError</code></td><td>если размеры сетки отрицательные значения</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -447,7 +450,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Пустой метод кадра компонента.</p></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -460,7 +463,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">capacity</span> =
+    <span class="py-defname">capacity</span>: <code><a href="src.engine.vector2.Vector2.html" class="internal-link" title="src.engine.vector2.Vector2">Vector2</a></code> =
     
     <a class="headerLink" href="#capacity" title="src.engine.grid.Grid.capacity">
       
@@ -470,7 +473,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Количество точек по горизонтали и по вертикали.</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -484,7 +487,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">go</span> =
+    <span class="py-defname">go</span>: <code><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject">game_object.GameObject</a></code> =
     
     <a class="headerLink" href="#go" title="src.engine.grid.Grid.go">
       
@@ -494,7 +497,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p><tt class="rst-docutils literal">GameObject</tt>, к которому прикреплен данный компонент.</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -508,7 +511,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">size</span> =
+    <span class="py-defname">size</span>: <code><a href="src.engine.vector2.Vector2.html" class="internal-link" title="src.engine.vector2.Vector2">Vector2</a></code> =
     
     <a class="headerLink" href="#size" title="src.engine.grid.Grid.size">
       
@@ -518,7 +521,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Размер сетки в пикселях.</p></div>
     
   </div>
 </div>
@@ -533,7 +536,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for src,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    23.9.0 at 2023-12-15 20:39:45.
+    23.9.0 at 2023-12-18 18:18:30.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

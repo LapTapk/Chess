@@ -6,7 +6,7 @@
 
   <head>
     
-    <title>src.engine.chess_state_machine.EnemyTurnState</title>
+    <title>src.engine.chess_state_machine.EndState</title>
     <meta name="generator" content="pydoctor 23.9.0"> 
         
     </meta>
@@ -142,7 +142,7 @@
 
       <div class="thingTitle">
         <span>Class</span>
-        <code class="thisobject"><a href="src.engine.chess_state_machine.EnemyTurnState.html" class="internal-link" title="This class"><wbr></wbr>Enemy<wbr></wbr>Turn<wbr></wbr>State</a></code> 
+        <code class="thisobject"><a href="src.engine.chess_state_machine.EndState.html" class="internal-link" title="This class"><wbr></wbr>End<wbr></wbr>State</a></code> 
       </div>
       
       <div>
@@ -163,7 +163,7 @@
         
 
         
-            <div class="itemName"><code><a href="#__init__" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.__init__">__init__</a></code>
+            <div class="itemName"><code><a href="#__init__" class="internal-link" title="src.engine.chess_state_machine.EndState.__init__">__init__</a></code>
             </div>
         
 
@@ -173,7 +173,7 @@
         
 
         
-            <div class="itemName"><code><a href="#on_start" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.on_start">on<wbr></wbr>_start</a></code>
+            <div class="itemName"><code><a href="#create_end_title" class="internal-link" title="src.engine.chess_state_machine.EndState.create_end_title">create<wbr></wbr>_end<wbr></wbr>_title</a></code>
             </div>
         
 
@@ -183,7 +183,17 @@
         
 
         
-            <div class="itemName"><code><a href="#update" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.update">update</a></code>
+            <div class="itemName"><code><a href="#on_start" class="internal-link" title="src.engine.chess_state_machine.EndState.on_start">on<wbr></wbr>_start</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
+            <div class="itemName"><code><a href="#update" class="internal-link" title="src.engine.chess_state_machine.EndState.update">update</a></code>
             </div>
         
 
@@ -202,7 +212,7 @@
         
 
         
-            <div class="itemName"><code><a href="#brd_updater" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.brd_updater">brd<wbr></wbr>_updater</a></code>
+            <div class="itemName"><code><a href="#brd_updater" class="internal-link" title="src.engine.chess_state_machine.EndState.brd_updater">brd<wbr></wbr>_updater</a></code>
             </div>
         
 
@@ -212,37 +222,7 @@
         
 
         
-            <div class="itemName"><code><a href="#clock" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.clock">clock</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="#last_check_time" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.last_check_time">last<wbr></wbr>_check<wbr></wbr>_time</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="#machine" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.machine">machine</a></code>
-            </div>
-        
-
-    </li><li class="">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="#request_interval" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.request_interval">request<wbr></wbr>_interval</a></code>
+            <div class="itemName"><code><a href="#game_res" class="internal-link" title="src.engine.chess_state_machine.EndState.game_res">game<wbr></wbr>_res</a></code>
             </div>
         
 
@@ -279,7 +259,7 @@
             </div>
         
 
-    </li><li class="">
+    </li><li class=" thisobject">
         
         
         
@@ -289,7 +269,7 @@
             </div>
         
 
-    </li><li class=" thisobject">
+    </li><li class="">
         
         
         
@@ -356,7 +336,7 @@
         
 
         <div class="page-header">
-          <h1 class="class"><code><code><a href="index.html" class="internal-link">src</a></code><wbr></wbr>.<code><a href="src.engine.html" class="internal-link" title="src.engine">engine</a></code><wbr></wbr>.<code><a href="src.engine.chess_state_machine.html" class="internal-link" title="src.engine.chess_state_machine">chess_state_machine</a></code><wbr></wbr>.<code><a href="src.engine.chess_state_machine.EnemyTurnState.html" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState">EnemyTurnState</a></code></code></h1>
+          <h1 class="class"><code><code><a href="index.html" class="internal-link">src</a></code><wbr></wbr>.<code><a href="src.engine.html" class="internal-link" title="src.engine">engine</a></code><wbr></wbr>.<code><a href="src.engine.chess_state_machine.html" class="internal-link" title="src.engine.chess_state_machine">chess_state_machine</a></code><wbr></wbr>.<code><a href="src.engine.chess_state_machine.EndState.html" class="internal-link" title="src.engine.chess_state_machine.EndState">EndState</a></code></code></h1>
           <div id="showPrivate">
             <button class="btn btn-link" onclick="togglePrivate()">Toggle Private API</button>
           </div>
@@ -367,60 +347,48 @@
         </div>
 
         <div class="extrasDocstring">
-          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">EnemyTurnState</span>:</code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.__init__">EnemyTurnState(machine, brd_updater)</a></code></p>
-          <p><a href="classIndex.html#src.engine.chess_state_machine.EnemyTurnState">View In Hierarchy</a></p>
+          <p class="class-signature"><code><span class="py-keyword">class</span> <span class="py-defname">EndState</span>:</code></p><p>Constructor: <code><a href="#__init__" class="internal-link" title="src.engine.chess_state_machine.EndState.__init__">EndState(brd_updater)</a></code></p>
+          <p><a href="classIndex.html#src.engine.chess_state_machine.EndState">View In Hierarchy</a></p>
         </div>
 
         <div class="moduleDocstring">
-          <div><p>Сущность состояния хода противника.
-Ожидает, посылая время от времени запросы, пока противник на другом клиенте сходит,
-и передает ход пользователю.</p></div>
+          <div><p>Состояние конца игры.</p></div>
         </div>
 
         <div id="splitTables">
-          <table class="children sortable" id="id34">
+          <table class="children sortable" id="id35">
   
   
   <tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#__init__" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.__init__">__init__</a></code></td>
+    <td><code><a href="#__init__" class="internal-link" title="src.engine.chess_state_machine.EndState.__init__">__init__</a></code></td>
     <td><span class="undocumented">Undocumented</span></td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#on_start" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.on_start">on<wbr></wbr>_start</a></code></td>
-    <td>Метод, вызываемый при обновлении состояния машиной. Обновляет доску.</td>
+    <td><code><a href="#create_end_title" class="internal-link" title="src.engine.chess_state_machine.EndState.create_end_title">create<wbr></wbr>_end<wbr></wbr>_title</a></code></td>
+    <td>Метод, создающий уведомление о конце игры.</td>
   </tr><tr class="method">
     
     <td>Method</td>
-    <td><code><a href="#update" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.update">update</a></code></td>
-    <td>Процедура кадра, вызываемая <tt class="rst-docutils literal">ChessStateMachine</tt>. Проверяет, когда был послан последний запрос, и если пришло время нового запроса, передает ход пользователю.</td>
+    <td><code><a href="#on_start" class="internal-link" title="src.engine.chess_state_machine.EndState.on_start">on<wbr></wbr>_start</a></code></td>
+    <td>Метод, вызываемый при обновлении состояния машиной. Обновляет доску и создает уведомление об окончании игры.</td>
+  </tr><tr class="method">
+    
+    <td>Method</td>
+    <td><code><a href="#update" class="internal-link" title="src.engine.chess_state_machine.EndState.update">update</a></code></td>
+    <td>Пустой метод кадра состояния.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#brd_updater" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.brd_updater">brd<wbr></wbr>_updater</a></code></td>
-    <td>Средство обновления выводимой доски.</td>
+    <td><code><a href="#brd_updater" class="internal-link" title="src.engine.chess_state_machine.EndState.brd_updater">brd<wbr></wbr>_updater</a></code></td>
+    <td>Средство обновления доски</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
-    <td><code><a href="#clock" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.clock">clock</a></code></td>
-    <td>Таймер для отсчета времени следующего запроса.</td>
-  </tr><tr class="instancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#last_check_time" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.last_check_time">last<wbr></wbr>_check<wbr></wbr>_time</a></code></td>
-    <td>Время последнего запросa</td>
-  </tr><tr class="instancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#machine" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.machine">machine</a></code></td>
-    <td><tt class="rst-docutils literal">ChessStateMachine</tt> в котором вызывается данное состояние.</td>
-  </tr><tr class="instancevariable">
-    
-    <td>Instance Variable</td>
-    <td><code><a href="#request_interval" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState.request_interval">request<wbr></wbr>_interval</a></code></td>
-    <td>Интервал запросa</td>
+    <td><code><a href="#game_res" class="internal-link" title="src.engine.chess_state_machine.EndState.game_res">game<wbr></wbr>_res</a></code></td>
+    <td>Результат игры.</td>
   </tr>
 </table>
           
@@ -432,7 +400,7 @@
           <div class="basemethod">
   
   
-  <a name="src.engine.chess_state_machine.EnemyTurnState.__init__">
+  <a name="src.engine.chess_state_machine.EndState.__init__">
     
   </a>
   <a name="__init__">
@@ -441,9 +409,9 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span><span class="function-signature">(self, machine: <code><a href="src.engine.chess_state_machine.ChessStateMachine.html" class="internal-link" title="src.engine.chess_state_machine.ChessStateMachine">ChessStateMachine</a></code>, brd_updater: <code><a href="src.engine.board.BoardUpdater.html" class="internal-link" title="src.engine.board.BoardUpdater">board.BoardUpdater</a></code>)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span><span class="function-signature">(self, brd_updater: <code><a href="src.engine.board.BoardUpdater.html" class="internal-link" title="src.engine.board.BoardUpdater">board.BoardUpdater</a></code>)</span>:
     
-    <a class="headerLink" href="#__init__" title="src.engine.chess_state_machine.EnemyTurnState.__init__">
+    <a class="headerLink" href="#__init__" title="src.engine.chess_state_machine.EndState.__init__">
       
       
       ¶
@@ -456,7 +424,31 @@
 </div><div class="basemethod">
   
   
-  <a name="src.engine.chess_state_machine.EnemyTurnState.on_start">
+  <a name="src.engine.chess_state_machine.EndState.create_end_title">
+    
+  </a>
+  <a name="create_end_title">
+    
+  </a>
+  <div class="functionHeader">
+    
+    
+    <span class="py-keyword">def</span> <span class="py-defname">create_end_title</span><span class="function-signature">(self)</span>:
+    
+    <a class="headerLink" href="#create_end_title" title="src.engine.chess_state_machine.EndState.create_end_title">
+      
+      
+      ¶
+    </a>
+  </div>
+  <div class="docstring functionBody">
+    
+    <div><p>Метод, создающий уведомление о конце игры.</p></div>
+  </div>
+</div><div class="basemethod">
+  
+  
+  <a name="src.engine.chess_state_machine.EndState.on_start">
     
   </a>
   <a name="on_start">
@@ -467,7 +459,7 @@
     
     <span class="py-keyword">def</span> <span class="py-defname">on_start</span><span class="function-signature">(self)</span>:
     
-    <a class="headerLink" href="#on_start" title="src.engine.chess_state_machine.EnemyTurnState.on_start">
+    <a class="headerLink" href="#on_start" title="src.engine.chess_state_machine.EndState.on_start">
       
       
       ¶
@@ -476,12 +468,12 @@
   <div class="docstring functionBody">
     
     <div><p>Метод, вызываемый при обновлении состояния машиной.
-Обновляет доску.</p></div>
+Обновляет доску и создает уведомление об окончании игры.</p></div>
   </div>
 </div><div class="basemethod">
   
   
-  <a name="src.engine.chess_state_machine.EnemyTurnState.update">
+  <a name="src.engine.chess_state_machine.EndState.update">
     
   </a>
   <a name="update">
@@ -492,7 +484,7 @@
     
     <span class="py-keyword">def</span> <span class="py-defname">update</span><span class="function-signature">(self)</span>:
     
-    <a class="headerLink" href="#update" title="src.engine.chess_state_machine.EnemyTurnState.update">
+    <a class="headerLink" href="#update" title="src.engine.chess_state_machine.EndState.update">
       
       
       ¶
@@ -500,14 +492,12 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p>Процедура кадра, вызываемая <tt class="rst-docutils literal">ChessStateMachine</tt>.
-Проверяет, когда был послан последний запрос, и если
-пришло время нового запроса, передает ход пользователю.</p></div>
+    <div><p>Пустой метод кадра состояния.</p></div>
   </div>
 </div><div class="baseinstancevariable">
   
   
-  <a name="src.engine.chess_state_machine.EnemyTurnState.brd_updater">
+  <a name="src.engine.chess_state_machine.EndState.brd_updater">
     
   </a>
   <a name="brd_updater">
@@ -515,9 +505,9 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">brd_updater</span>: <code><a href="src.engine.board.BoardUpdater.html" class="internal-link" title="src.engine.board.BoardUpdater">board.BoardUpdater</a></code> =
+    <span class="py-defname">brd_updater</span> =
     
-    <a class="headerLink" href="#brd_updater" title="src.engine.chess_state_machine.EnemyTurnState.brd_updater">
+    <a class="headerLink" href="#brd_updater" title="src.engine.chess_state_machine.EndState.brd_updater">
       
       
       ¶
@@ -525,23 +515,23 @@
   </div>
   <div class="functionBody">
     
-    <div><p>Средство обновления выводимой доски.</p></div>
+    <div><p>Средство обновления доски</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
   
   
-  <a name="src.engine.chess_state_machine.EnemyTurnState.clock">
+  <a name="src.engine.chess_state_machine.EndState.game_res">
     
   </a>
-  <a name="clock">
+  <a name="game_res">
     
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">clock</span>: <code>pygame.time.Clock()</code> =
+    <span class="py-defname">game_res</span>: <code>str</code> =
     
-    <a class="headerLink" href="#clock" title="src.engine.chess_state_machine.EnemyTurnState.clock">
+    <a class="headerLink" href="#game_res" title="src.engine.chess_state_machine.EndState.game_res">
       
       
       ¶
@@ -549,79 +539,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p>Таймер для отсчета времени следующего запроса.</p></div>
-    
-  </div>
-</div><div class="baseinstancevariable">
-  
-  
-  <a name="src.engine.chess_state_machine.EnemyTurnState.last_check_time">
-    
-  </a>
-  <a name="last_check_time">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">last_check_time</span>: <code>int</code> =
-    
-    <a class="headerLink" href="#last_check_time" title="src.engine.chess_state_machine.EnemyTurnState.last_check_time">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    <div><p>Время последнего запросa</p></div>
-    
-  </div>
-</div><div class="baseinstancevariable">
-  
-  
-  <a name="src.engine.chess_state_machine.EnemyTurnState.machine">
-    
-  </a>
-  <a name="machine">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">machine</span>: <code><a href="src.engine.chess_state_machine.ChessStateMachine.html" class="internal-link" title="src.engine.chess_state_machine.ChessStateMachine">ChessStateMachine</a></code> =
-    
-    <a class="headerLink" href="#machine" title="src.engine.chess_state_machine.EnemyTurnState.machine">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    <div><p><tt class="rst-docutils literal">ChessStateMachine</tt> в котором вызывается данное состояние.</p></div>
-    
-  </div>
-</div><div class="baseinstancevariable">
-  
-  
-  <a name="src.engine.chess_state_machine.EnemyTurnState.request_interval">
-    
-  </a>
-  <a name="request_interval">
-    
-  </a>
-  <div class="functionHeader">
-    
-    <span class="py-defname">request_interval</span>: <code>int</code> =
-    
-    <a class="headerLink" href="#request_interval" title="src.engine.chess_state_machine.EnemyTurnState.request_interval">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="functionBody">
-    
-    <div><p>Интервал запросa</p></div>
+    <div><p>Результат игры.</p></div>
     
   </div>
 </div>

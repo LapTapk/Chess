@@ -207,16 +207,6 @@
             </div>
         
 
-    </li><li class="private">
-        
-        
-        
-
-        
-            <div class="itemName"><code><a href="#__update_obj" class="internal-link" title="src.engine.game_object.Scene.__update_obj">__update<wbr></wbr>_obj</a></code>
-            </div>
-        
-
     </li>
 </ul> 
 
@@ -333,7 +323,7 @@
         </div>
 
         <div id="splitTables">
-          <table class="children sortable" id="id35">
+          <table class="children sortable" id="id40">
   
   
   <tr class="method">
@@ -345,7 +335,7 @@
     
     <td>Method</td>
     <td><code><a href="#at_point" class="internal-link" title="src.engine.game_object.Scene.at_point">at<wbr></wbr>_point</a></code></td>
-    <td>Метод, находящий все объекты, которые пересекают данную точку рисунком <tt class="rst-docutils literal">Renderer</tt>.</td>
+    <td>Метод, находящий все <tt class="rst-docutils literal">GameObject</tt>, которые пересекают данную точку рисунком <tt class="rst-docutils literal">Renderer</tt>.</td>
   </tr><tr class="method">
     
     <td>Method</td>
@@ -366,11 +356,6 @@
     <td>Method</td>
     <td><code><a href="#__at_point_rec" class="internal-link" title="src.engine.game_object.Scene.__at_point_rec">__at<wbr></wbr>_point<wbr></wbr>_rec</a></code></td>
     <td>Служебный метод, выполняющий ту же функцию, что и <em>at_point</em>.</td>
-  </tr><tr class="method private">
-    
-    <td>Method</td>
-    <td><code><a href="#__update_obj" class="internal-link" title="src.engine.game_object.Scene.__update_obj">__update<wbr></wbr>_obj</a></code></td>
-    <td>Служебный метод, выполняющий ту же функцию, что и <em>update</em>.</td>
   </tr>
 </table>
           
@@ -401,7 +386,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p>Метод, добавляющий <tt class="rst-docutils literal">GameObject</tt> в <tt class="rst-docutils literal">Scene</tt>.</p></div>
+    <div><p>Метод, добавляющий <tt class="rst-docutils literal">GameObject</tt> в <tt class="rst-docutils literal">Scene</tt>.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">go:</span>GameObject</td><td class="fieldArgDesc">добавляемый <tt class="rst-docutils literal">GameObject</tt>.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -425,8 +410,8 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p>Метод, находящий все объекты, которые пересекают данную точку
-рисунком <tt class="rst-docutils literal">Renderer</tt>.</p></div>
+    <div><p>Метод, находящий все <tt class="rst-docutils literal">GameObject</tt>, которые пересекают данную точку
+рисунком <tt class="rst-docutils literal">Renderer</tt>.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>Any]</code></td><td class="fieldArgDesc">список <tt class="rst-docutils literal">GameObject</tt>, располагающихся под заданной точкой.</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -524,31 +509,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p>Служебный метод, выполняющий ту же функцию, что и <em>at_point</em>.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">obj</span></td><td class="fieldArgDesc"><tt class="rst-docutils literal">GameObject</tt>, для которого необходимо выполнить проверку на пересечение с точкой <em>point</em>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">point:</span><code>Tuple[<wbr></wbr>int, <wbr></wbr>int]</code></td><td class="fieldArgDesc">точка, в которой осуществляется поиск <tt class="rst-docutils literal">GameObject</tt>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>Any]</code></td><td class="fieldArgDesc"><span class="undocumented">Undocumented</span></td></tr></table></div>
-  </div>
-</div><div class="basemethod private">
-  
-  
-  <a name="src.engine.game_object.Scene.__update_obj">
-    
-  </a>
-  <a name="__update_obj">
-    
-  </a>
-  <div class="functionHeader">
-    
-    
-    <span class="py-keyword">def</span> <span class="py-defname">__update_obj</span><span class="function-signature">(self, obj)</span>:
-    
-    <a class="headerLink" href="#__update_obj" title="src.engine.game_object.Scene.__update_obj">
-      
-      
-      ¶
-    </a>
-  </div>
-  <div class="docstring functionBody">
-    
-    <div><p>Служебный метод, выполняющий ту же функцию, что и <em>update</em>.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">obj</span></td><td class="fieldArgDesc"><tt class="rst-docutils literal">GameObject</tt>, у которого нужно вызвать update.</td></tr></table></div>
+    <div><p>Служебный метод, выполняющий ту же функцию, что и <em>at_point</em>.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Parameters</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">obj:</span>GameObject</td><td class="fieldArgDesc"><tt class="rst-docutils literal">GameObject</tt>, для которого необходимо выполнить проверку на пересечение с точкой <em>point</em>.</td></tr><tr><td class="fieldArgContainer"><span class="fieldArg">point:</span><code>Tuple[<wbr></wbr>int, <wbr></wbr>int]</code></td><td class="fieldArgDesc">точка, в которой осуществляется поиск <tt class="rst-docutils literal">GameObject</tt>.</td></tr><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>List[<wbr></wbr>Any]</code></td><td class="fieldArgDesc">список <tt class="rst-docutils literal">GameObject</tt>, располагающихся под заданной точкой.</td></tr></table></div>
   </div>
 </div>
         </div>
@@ -562,7 +523,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for src,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    23.9.0 at 2023-12-15 20:39:45.
+    23.9.0 at 2023-12-18 18:18:30.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

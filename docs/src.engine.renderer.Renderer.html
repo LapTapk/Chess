@@ -319,48 +319,48 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p class="undocumented">Undocumented</p></div>
+          <div><p>Компонент, отвечающий за прорисовку изображения на экране</p></div>
         </div>
 
         <div id="splitTables">
-          <table class="children sortable" id="id48">
+          <table class="children sortable" id="id55">
   
   
   <tr class="method">
     
     <td>Method</td>
     <td><code><a href="#get_rect" class="internal-link" title="src.engine.renderer.Renderer.get_rect">get<wbr></wbr>_rect</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Метод, обновляющий и возвращающий <tt class="rst-docutils literal">Rect</tt> измененного изображения</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#init" class="internal-link" title="src.engine.renderer.Renderer.init">init</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса :type go: game_object.GameObject</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#update" class="internal-link" title="src.engine.renderer.Renderer.update">update</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Метод кадра компонента</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#go" class="internal-link" title="src.engine.renderer.Renderer.go">go</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><tt class="rst-docutils literal">GameObject</tt>, которому принадлежит компонент</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#img" class="internal-link" title="src.engine.renderer.Renderer.img">img</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Неизмененное изображение</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#tmp_img" class="internal-link" title="src.engine.renderer.Renderer.tmp_img">tmp<wbr></wbr>_img</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Изображение, измененное в соответствии с размерами экрана</td>
   </tr><tr class="method private">
     
     <td>Method</td>
     <td><code><a href="#__update_image" class="internal-link" title="src.engine.renderer.Renderer.__update_image">__update<wbr></wbr>_image</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Закрытый метод обновлния изображения в соответствии с размерами экрана</td>
   </tr>
 </table>
           
@@ -381,7 +381,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">get_rect</span><span class="function-signature">(self)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">get_rect</span><span class="function-signature">(self) -&gt; <code>pygame.rect.Rect</code></span>:
     
     <a class="headerLink" href="#get_rect" title="src.engine.renderer.Renderer.get_rect">
       
@@ -391,7 +391,8 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Метод, обновляющий и возвращающий <tt class="rst-docutils literal">Rect</tt>
+измененного изображения</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>pygame.rect.Rect</code></td><td class="fieldArgDesc"><tt class="rst-docutils literal">Rect</tt> измененного изображения</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -405,7 +406,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go, img)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go, img: <code>pygame.surface.Surface</code>)</span>:
     
     <a class="headerLink" href="#init" title="src.engine.renderer.Renderer.init">
       
@@ -415,7 +416,8 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса
+:type go: game_object.GameObject</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -439,7 +441,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Метод кадра компонента</p></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -462,7 +464,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p><tt class="rst-docutils literal">GameObject</tt>, которому принадлежит компонент</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -476,7 +478,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">img</span> =
+    <span class="py-defname">img</span>: <code>pygame.surface.Surface</code> =
     
     <a class="headerLink" href="#img" title="src.engine.renderer.Renderer.img">
       
@@ -486,7 +488,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Неизмененное изображение</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -500,7 +502,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">tmp_img</span> =
+    <span class="py-defname">tmp_img</span>: <code>pygame.surface.Surface</code> =
     
     <a class="headerLink" href="#tmp_img" title="src.engine.renderer.Renderer.tmp_img">
       
@@ -510,7 +512,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Изображение, измененное в соответствии с размерами экрана</p></div>
     
   </div>
 </div><div class="basemethod private">
@@ -535,7 +537,8 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Закрытый метод обновлния изображения в соответствии
+с размерами экрана</p></div>
   </div>
 </div>
         </div>
@@ -549,7 +552,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for src,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    23.9.0 at 2023-12-15 20:39:45.
+    23.9.0 at 2023-12-18 18:18:30.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

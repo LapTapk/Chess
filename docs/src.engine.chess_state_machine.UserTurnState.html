@@ -275,6 +275,16 @@
         
 
         
+            <div class="itemName"><code><a href="src.engine.chess_state_machine.EndState.html" class="internal-link" title="src.engine.chess_state_machine.EndState"><wbr></wbr>End<wbr></wbr>State</a></code>
+            </div>
+        
+
+    </li><li class="">
+        
+        
+        
+
+        
             <div class="itemName"><code><a href="src.engine.chess_state_machine.EnemyTurnState.html" class="internal-link" title="src.engine.chess_state_machine.EnemyTurnState"><wbr></wbr>Enemy<wbr></wbr>Turn<wbr></wbr>State</a></code>
             </div>
         
@@ -292,8 +302,21 @@
     </li>
 </ul>
 
+        <div class="childrenKindTitle">Functions</div>
+        <ul>
+    
+    <li class="">
         
-         
+        
+        
+
+        
+            <div class="itemName"><code><a href="src.engine.chess_state_machine.html#check_for_end" class="internal-link" title="src.engine.chess_state_machine.check_for_end">check<wbr></wbr>_for<wbr></wbr>_end</a></code>
+            </div>
+        
+
+    </li>
+</ul> 
 
         
          
@@ -339,11 +362,12 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p class="undocumented">Undocumented</p></div>
+          <div><p>Сущность состояния во время хода игрока.
+Обрабатывает поднятие фигуры, обновление доски и передачу хода противнику.</p></div>
         </div>
 
         <div id="splitTables">
-          <table class="children sortable" id="id29">
+          <table class="children sortable" id="id33">
   
   
   <tr class="method">
@@ -355,32 +379,32 @@
     
     <td>Method</td>
     <td><code><a href="#handle_input" class="internal-link" title="src.engine.chess_state_machine.UserTurnState.handle_input">handle<wbr></wbr>_input</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Метод, обрабатывающий входные <em>event</em>. Если ни одна фигура не поднята, то пытается поднять. Если фигура ставится на стол, спрашивает у сервера легальность хода.</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#on_start" class="internal-link" title="src.engine.chess_state_machine.UserTurnState.on_start">on<wbr></wbr>_start</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Метод, вызываемый при обновлении состояния машиной. Для <tt class="rst-docutils literal">UserTurnState</tt> обновляет доску.</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#update" class="internal-link" title="src.engine.chess_state_machine.UserTurnState.update">update</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Процедура кадра, вызываемая <tt class="rst-docutils literal">ChessStateMachine</tt></td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#brd_updater" class="internal-link" title="src.engine.chess_state_machine.UserTurnState.brd_updater">brd<wbr></wbr>_updater</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Средство обновления выводимой доски.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#grabber" class="internal-link" title="src.engine.chess_state_machine.UserTurnState.grabber">grabber</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><tt class="rst-docutils literal">Grabber</tt>, ответственный за поднятие фигур с доски.</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#machine" class="internal-link" title="src.engine.chess_state_machine.UserTurnState.machine">machine</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><tt class="rst-docutils literal">ChessStateMachine</tt> в котором вызывается данное состояние.</td>
   </tr>
 </table>
           
@@ -401,7 +425,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">__init__</span><span class="function-signature">(self, machine, grabber, brd_updater)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">__init__</span><span class="function-signature">(self, machine: <code><a href="src.engine.chess_state_machine.ChessStateMachine.html" class="internal-link" title="src.engine.chess_state_machine.ChessStateMachine">ChessStateMachine</a></code>, grabber: <code><a href="src.engine.grab.Grabber.html" class="internal-link" title="src.engine.grab.Grabber">grab.Grabber</a></code>, brd_updater: <code><a href="src.engine.board.BoardUpdater.html" class="internal-link" title="src.engine.board.BoardUpdater">board.BoardUpdater</a></code>)</span>:
     
     <a class="headerLink" href="#__init__" title="src.engine.chess_state_machine.UserTurnState.__init__">
       
@@ -435,7 +459,10 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Метод, обрабатывающий входные <em>event</em>.
+Если ни одна фигура не поднята, то пытается поднять.
+Если фигура ставится на стол, спрашивает у сервера легальность
+хода.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -459,7 +486,8 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Метод, вызываемый при обновлении состояния машиной.
+Для <tt class="rst-docutils literal">UserTurnState</tt> обновляет доску.</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -483,7 +511,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Процедура кадра, вызываемая <tt class="rst-docutils literal">ChessStateMachine</tt></p></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -506,7 +534,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Средство обновления выводимой доски.</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -530,7 +558,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p><tt class="rst-docutils literal">Grabber</tt>, ответственный за поднятие фигур с доски.</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -554,7 +582,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p><tt class="rst-docutils literal">ChessStateMachine</tt> в котором вызывается данное состояние.</p></div>
     
   </div>
 </div>
@@ -569,7 +597,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for src,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    23.9.0 at 2023-12-15 20:39:45.
+    23.9.0 at 2023-12-18 18:18:30.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 

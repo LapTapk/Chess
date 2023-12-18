@@ -209,7 +209,7 @@
         
 
         
-            <div class="itemName"><code><a href="src.engine.grab.Grabber.html#try_drop" class="internal-link" title="src.engine.grab.Grabber.try_drop">try<wbr></wbr>_drop</a></code>
+            <div class="itemName"><code><a href="src.engine.grab.Grabber.html#drop" class="internal-link" title="src.engine.grab.Grabber.drop">drop</a></code>
             </div>
         
 
@@ -365,67 +365,67 @@
         </div>
 
         <div class="moduleDocstring">
-          <div><p class="undocumented">Undocumented</p></div>
+          <div><p>Компонент, перемещающий фигуры. Дочерний класс <tt class="rst-docutils literal">Grabber</tt></p></div>
         </div>
 
         <div id="splitTables">
-          <table class="children sortable" id="id40">
+          <table class="children sortable" id="id45">
   
   
   <tr class="method">
     
     <td>Method</td>
     <td><code><a href="#get_move" class="internal-link" title="src.engine.grab.FigureGrabber.get_move">get<wbr></wbr>_move</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Метод, возращающий потенциальный ход.</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#init" class="internal-link" title="src.engine.grab.FigureGrabber.init">init</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса</td>
   </tr><tr class="method">
     
     <td>Method</td>
     <td><code><a href="#try_grab" class="internal-link" title="src.engine.grab.FigureGrabber.try_grab">try<wbr></wbr>_grab</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Метод, осуществляющий попытку захватить фигуру</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#grabbed_coord" class="internal-link" title="src.engine.grab.FigureGrabber.grabbed_coord">grabbed<wbr></wbr>_coord</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Относительная координата <tt class="rst-docutils literal">Grid</tt> размещения фигуры</td>
   </tr><tr class="instancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="#grd" class="internal-link" title="src.engine.grab.FigureGrabber.grd">grd</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><tt class="rst-docutils literal">Grid</tt> относительно которого осуществляется поиск ближайшей клетки, куда можно поставить фигуру</td>
   </tr><tr class="method private">
     
     <td>Method</td>
     <td><code><a href="#__unbind" class="internal-link" title="src.engine.grab.FigureGrabber.__unbind">__unbind</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Закрытый метод, открепляющий фигуру от сетки</td>
   </tr>
 </table>
           
             <p class="inheritedFrom">
               Inherited from <code><a href="src.engine.grab.Grabber.html" class="internal-link" title="src.engine.grab.Grabber">Grabber</a></code>:
             </p>
-            <table class="children sortable" id="id41">
+            <table class="children sortable" id="id46">
   
   
   <tr class="basemethod">
     
     <td>Method</td>
-    <td><code><a href="src.engine.grab.Grabber.html#try_drop" class="internal-link" title="src.engine.grab.Grabber.try_drop">try<wbr></wbr>_drop</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><code><a href="src.engine.grab.Grabber.html#drop" class="internal-link" title="src.engine.grab.Grabber.drop">drop</a></code></td>
+    <td>Метод, оставляющий захваченный объект на месте</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="src.engine.grab.Grabber.html#go" class="internal-link" title="src.engine.grab.Grabber.go">go</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td><tt class="rst-docutils literal">GameObject</tt>, которому принадлежит компонент</td>
   </tr><tr class="baseinstancevariable">
     
     <td>Instance Variable</td>
     <td><code><a href="src.engine.grab.Grabber.html#grabbed" class="internal-link" title="src.engine.grab.Grabber.grabbed">grabbed</a></code></td>
-    <td><span class="undocumented">Undocumented</span></td>
+    <td>Захваченный объект</td>
   </tr>
 </table>
             
@@ -446,7 +446,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">get_move</span><span class="function-signature">(self)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">get_move</span><span class="function-signature">(self) -&gt; <code>Tuple[<wbr></wbr><a href="src.engine.vector2.Vector2.html" class="internal-link" title="src.engine.vector2.Vector2">Vector2</a>, <wbr></wbr><a href="src.engine.vector2.Vector2.html" class="internal-link" title="src.engine.vector2.Vector2">Vector2</a>]</code></span>:
     
     <a class="headerLink" href="#get_move" title="src.engine.grab.FigureGrabber.get_move">
       
@@ -456,7 +456,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Метод, возращающий потенциальный ход.</p><table class="fieldTable"><tr class="fieldStart"><td class="fieldName" colspan="2">Returns</td></tr><tr><td class="fieldArgContainer"><code>Tuple[<wbr></wbr><a href="src.engine.vector2.Vector2.html" class="internal-link" title="src.engine.vector2.Vector2">Vector2</a>, <wbr></wbr><a href="src.engine.vector2.Vector2.html" class="internal-link" title="src.engine.vector2.Vector2">Vector2</a>]</code></td><td class="fieldArgDesc">потенциальный ход, координата откуда была взята фигура, и куда ее можно поставить</td></tr></table></div>
   </div>
 </div><div class="basemethod">
   
@@ -470,7 +470,7 @@
   <div class="functionHeader">
     
     
-    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go, grd)</span>:
+    <span class="py-keyword">def</span> <span class="py-defname">init</span><span class="function-signature">(self, go: <code><a href="src.engine.game_object.GameObject.html" class="internal-link" title="src.engine.game_object.GameObject">game_object.GameObject</a></code>, grd: <code><a href="src.engine.grid.Grid.html" class="internal-link" title="src.engine.grid.Grid">Grid</a></code>)</span>:
     
     <a class="headerLink" href="#init" title="src.engine.grab.FigureGrabber.init">
       
@@ -480,7 +480,7 @@
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="src.engine.grab.Grabber.html#init" class="internal-link">src.engine.grab.Grabber.init</a></code></div>
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Инициализатор. Аналогичен __init__. Все параметры соответствуют полям класса</p></div>
   </div>
 </div><div class="basemethod">
   
@@ -504,7 +504,7 @@
   </div>
   <div class="docstring functionBody">
     <div class="interfaceinfo">overrides <code><a href="src.engine.grab.Grabber.html#try_grab" class="internal-link">src.engine.grab.Grabber.try_grab</a></code></div>
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Метод, осуществляющий попытку захватить фигуру</p></div>
   </div>
 </div><div class="baseinstancevariable">
   
@@ -517,7 +517,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">grabbed_coord</span> =
+    <span class="py-defname">grabbed_coord</span>: <code><a href="src.engine.vector2.Vector2.html" class="internal-link" title="src.engine.vector2.Vector2">Vector2</a></code> =
     
     <a class="headerLink" href="#grabbed_coord" title="src.engine.grab.FigureGrabber.grabbed_coord">
       
@@ -527,7 +527,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Относительная координата <tt class="rst-docutils literal">Grid</tt> размещения фигуры</p></div>
     
   </div>
 </div><div class="baseinstancevariable">
@@ -541,7 +541,7 @@
   </a>
   <div class="functionHeader">
     
-    <span class="py-defname">grd</span> =
+    <span class="py-defname">grd</span>: <code><a href="src.engine.grid.Grid.html" class="internal-link" title="src.engine.grid.Grid">Grid</a></code> =
     
     <a class="headerLink" href="#grd" title="src.engine.grab.FigureGrabber.grd">
       
@@ -551,7 +551,7 @@
   </div>
   <div class="functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p><tt class="rst-docutils literal">Grid</tt> относительно которого осуществляется поиск ближайшей клетки, куда можно поставить фигуру</p></div>
     
   </div>
 </div><div class="basemethod private">
@@ -576,7 +576,7 @@
   </div>
   <div class="docstring functionBody">
     
-    <div><p class="undocumented">Undocumented</p></div>
+    <div><p>Закрытый метод, открепляющий фигуру от сетки</p></div>
   </div>
 </div>
         </div>
@@ -590,7 +590,7 @@
   <div class="container">
     <a href="index.html">API Documentation</a> for src,
   generated by <a href="https://github.com/twisted/pydoctor/">pydoctor</a>
-    23.9.0 at 2023-12-15 20:39:45.
+    23.9.0 at 2023-12-18 18:18:30.
   </div>
 
   <!-- Search related scripts needs to be loaded at the end of HTML 
