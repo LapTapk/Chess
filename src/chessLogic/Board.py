@@ -101,6 +101,7 @@ class Board(object):
     def is_legal(self, frm: tuple, to: tuple):
         '''
         Проверяет возможность хода фигуры с позиции frm на позицию to
+
         :param frm: клетка, с которой пытается пойти фигура
         :param to: клетка, на которую пытается попасть фигура
         :return: True - если ход возможен, False - если ход невозможен
@@ -171,6 +172,7 @@ class Board(object):
     def is_legal_p(self, frm: tuple, to: tuple):
         '''
         Проверяет возможность хода пешки с позиции frm на позицию to
+
         :param frm: клетка, с которой пытается пойти пешка
         :param to: клетка, на которую пытается попасть пешка
         :return: True - если ход возможен, False - если ход невозможен
@@ -221,6 +223,7 @@ class Board(object):
     def is_legal_n(self, frm: tuple, to: tuple):
         '''
         Проверяет возможность хода коня с позиции frm на позицию to
+
         :param frm: клетка, с которой пытается пойти коня
         :param to: клетка, на которую пытается попасть коня
         :return: True - если ход возможен, False - если ход невозможен
@@ -234,6 +237,7 @@ class Board(object):
     def is_legal_b(self, frm: tuple, to: tuple):
         '''
         Проверяет возможность хода слона с позиции frm на позицию to
+
         :param frm: клетка, с которой пытается пойти слона
         :param to: клетка, на которую пытается попасть слона
         :return: True - если ход возможен, False - если ход невозможен
@@ -254,6 +258,7 @@ class Board(object):
     def is_legal_r(self, frm: tuple, to: tuple):
         '''
         Проверяет возможность хода ладья с позиции frm на позицию to
+
         :param frm: клетка, с которой пытается пойти ладья
         :param to: клетка, на которую пытается попасть ладья
         :return: True - если ход возможен, False - если ход невозможен
@@ -275,6 +280,7 @@ class Board(object):
         '''
         Проверяет возможность хода ферзя с позиции frm на позицию to
         (состоит из проверки возможности хода ладьи и слона)
+
         :param frm: клетка, с которой пытается пойти ферзя
         :param to: клетка, на которую пытается попасть ферзя
         :return: True - если ход возможен, False - если ход невозможен
@@ -289,6 +295,7 @@ class Board(object):
     def is_legal_k(self, frm: tuple, to: tuple):
         '''
         Проверяет возможность хода короля с позиции frm на позицию to
+
         :param frm: клетка, с которой пытается пойти короля
         :param to: клетка, на которую пытается попасть короля
         :return: True - если ход возможен, False - если ход невозможен
@@ -308,6 +315,7 @@ class Board(object):
     def is_checked_on_pos(self, pos: tuple, king_color: str):
         '''
         Проверка на шах в позиции pos, если бы в ней стоял король цвета king_color
+
         :param pos: клетка, которую проверяют на шах
         :param king_color: цвет короля, которого проверяют на шах в позиции pos
         :return: True - если шах есть, False - если шаха нет
@@ -408,6 +416,7 @@ class Board(object):
     def is_opened_check(self, frm: tuple, to: tuple, color: str):
         '''
         Проверка на шах, который может возникнуть после хода какой-либо фигурой
+
         :param frm: позиция, с которой происходит ход фигурой
         :param to: позиция, на которую происходит ход фигурой
         :param color: цвет короля, который проверяется на шах
@@ -424,6 +433,7 @@ class Board(object):
     def is_castling_legal(self, frm: tuple, to: tuple):
         '''
         Проверка возможности рокировки, при ходе короля с позиции from в позицию to
+
         :param frm: клетка, с которой король хочет сделать рокировку
         :param to: клетка, на которую король хочет попасть после рокировки
         :return: True - если рокировка возможна, False - если рокировка невозможна
@@ -479,6 +489,7 @@ class Board(object):
     def is_game_over(self, color: str):
         '''
         Проверка на возможность хода для игрока, играющего за фигуры цвета color
+
         :param color: цвет стороны, которую проверяют на возможность хода
         :return: False - если партия может продолжаться, 'checkmate' - если сторона color получила мат, 'stalemate' - если на доске стоит пат
         '''
@@ -548,6 +559,7 @@ class Board(object):
     def returning_figure(self, frm):
         '''
         Возвращает фигуру на место
+
         :param frm: клетка, с которой взяли фигуру, и на которую её хотят поставить
         '''
         self.board[frm[0]][frm[1]] = self.board[frm[0]][frm[1]]
@@ -555,6 +567,7 @@ class Board(object):
     def move(self, frm: tuple, to: tuple):
         '''
         Перемещение фигуры с позиции frm, на позицию to
+
         :param frm: клетка, с которой ходит фигура
         :param to: клетка, на которую ходит фигура
         '''
@@ -577,6 +590,7 @@ class Board(object):
     def try_move(self, frm: tuple, to: tuple):
         '''
         Попытка сделать ход фигурой с поля frm, на поле to, если это возможно, ход делается функцией move
+
         :param frm: клетка, с которой ходит фигура
         :param to: клетка, на которую ходит фигура
         :return: если ход возможен, возвращает 'neutral' если партия не закончена, или ('checkmate'/'stalemate', color),
