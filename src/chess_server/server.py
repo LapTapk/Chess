@@ -37,7 +37,6 @@ def init(address: Tuple[LiteralString, int]) -> None:
     if is_init:
         raise Exception('Server s already initialized')
 
-    is_init = True
     new_brd = Board()
     new_brd.startPosition()
     server = Server(address, ReqauestHandler, new_brd)
@@ -45,6 +44,7 @@ def init(address: Tuple[LiteralString, int]) -> None:
     server_thr = threading.Thread(target=__start_server)
     server_thr.daemon = True
     server_thr.start()
+    is_init = True
 
 
 class Server(http.server.HTTPServer):

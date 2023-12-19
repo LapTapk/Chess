@@ -57,19 +57,20 @@ def create_connect_button(scene, inpb):
 
 def create_host_button(scene, connect_btn, ip_ib):
     def host():
-        if server.is_init:
-            return
-        name = socket.gethostname()
-        address = socket.gethostbyname(name)
-        server.init((address, 80))
+        try: 
+            if server.is_init:
+                return
+            address = ip_ib.text
+            server.init((address, 80))
 
-        game.clnt = client.Client(address, 80, True)
-        connect_btn.enabled = False
-        ip_ib.enabled = False
+            game.clnt = client.Client(address, 80, True)
+            connect_btn.enabled = False
+            ip_ib.enabled = False
+        except Exception as e:
+            print(e)
 
     if server.is_init:
         connect_btn.enabled = False
-        ip_ib.enabled = False
 
     def_scr_size = game.data['default-screen-size']
     pos = from_tuple(def_scr_size) / 2 + Vector2(200, 0)

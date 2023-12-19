@@ -31,7 +31,7 @@ def create_start_scene() -> None:
     inpb = inpb_go.get_component(input_box.InputBox)
 
     con_button = create_connect_button(scene, inpb)
-    host_button = create_host_button(scene, con_button, inpb_go)
+    host_button = create_host_button(scene, con_button, inpb)
     con_checker = create_con_checker(scene)
 
     setting_button = create_settings_button(scene, create_settings_scene)
