@@ -55,7 +55,13 @@ class BoardUpdater:
 
                 coord = Vector2(i, j)
                 if user_color == 'white':
-                    coord = Vector2(7, 7) - coord
+                    if figure.name not in 'kqKQ':
+                        coord = Vector2(7, 7) - coord
+                    else:
+                        coord = Vector2(coord.x, 7 - coord.y)
+                else:
+                    if figure.name in 'kqKQ':
+                        coord = Vector2(7 - coord.x, coord.y)
 
                 scene = self.go.scene
                 owned_by_user = user_color == figure.color
