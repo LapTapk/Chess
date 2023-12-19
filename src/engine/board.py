@@ -53,7 +53,7 @@ class BoardUpdater:
                 if figure.name == '.':
                     continue
 
-                coord = Vector2(i, j)
+                coord = Vector2(7 - i, j)
                 if user_color == 'white':
                     coord = Vector2(7, 7) - coord
 

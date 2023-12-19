@@ -91,6 +91,8 @@ class UserTurnState:
                 grabber.try_grab()
             else:
                 frm, to = map(lambda x: x.to_tuple(), grabber.get_move())
+                frm = (7 - frm[0], frm[1])
+                to = (7 - to[0], to[1])
                 result = game.clnt.send_move(frm, to)
                 if result == 202:
                     brd = game.clnt.get_board()
